@@ -1,4 +1,4 @@
-# The Judge Ladder
+# The Judge Ladder™
 
 **A conceptual framework for how your role changes as you hand more of a task to AI.**
 
@@ -87,3 +87,7 @@ Each rung directory follows the same shape:
 - `vocabulary.md` — the terms that first *matter* at this rung
 
 Terminology in this framework is placed at the rung where you first hit the wall it solves — never dumped up front. The [glossary](reference/glossary.md) is the one place everything appears together.
+
+## License and trademark
+
+© 2026 Matthew Judge ([Matthew@cyberexperts.org](mailto:Matthew@cyberexperts.org)). This work is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/): you may share it with attribution, but commercial use and derivative works are reserved — see [LICENSE](LICENSE). *The Judge Ladder*™ is a trademark of Matthew Judge; the license does not grant rights to the name.

@@ -1,4 +1,4 @@
-# The Judge Ladder — one page
+# The Judge Ladder™ — one page
 
 **Five rungs, one moving part: where the human sits relative to the loop. At every rung, the remaining human job is judgment; each rung moves where judgment is applied.**
 
@@ -44,3 +44,7 @@ The model is stateless and its attention rots — so at every rung, your job inc
 ## Applying it
 
 Pick one recurring task from your own work. Rebuild the second table for it, rung by rung — [the worksheet](../worksheet.md) is the blank. Climb only when a rung's gate is true of you, and remember that every gate is a restraint: verify, reuse, account, review, audit. Capability and judgment climb together, or the ladder tips.
+
+---
+
+*The Judge Ladder™ is a trademark of Matthew Judge. © 2026 Matthew Judge — [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).*
