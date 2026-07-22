@@ -24,7 +24,7 @@
 | 4 | Same tools | "Every Friday, compile the summary" — runs its own searches, reads last week's notes, drafts | The AI; you set the goal, review before send |
 | 5 | Same tools | Runs Friday alone — gather, fact-check, format/send agents; you see it after, or on a guardrail trip | The AI runs the loop; you set boundaries, audit |
 
-**Read the table vertically:** rungs 1–2 have zero tools (a sealed box). The same tools appear at rung 3 and never change through rung 5. The only column that keeps moving is the last one — *whose hand is on the trigger*. That is the entire framework.
+**Read the table vertically:** rungs 1–2 have zero tools (a sealed box). The same tools appear at rung 3 and never change through rung 5. The only column that keeps moving is the last one — *whose hand is on the trigger*. That is the entire framework. (The same table, transposed into eight industries: [industry examples](industry-examples.md).)
 
 ## Three structural facts
 
