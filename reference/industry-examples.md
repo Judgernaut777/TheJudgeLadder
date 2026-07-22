@@ -1,6 +1,6 @@
-# The ladder in five industries
+# The ladder in eight industries
 
-The running example — a weekly field summary, climbed rung by rung — is deliberately generic. Here is the same table transposed into five industries, each with one recurring task of the same shape: real inputs, a judgment call, and an output that actually goes somewhere.
+The running example — a weekly field summary, climbed rung by rung — is deliberately generic. Here is the same table transposed into eight industries, each with one recurring task of the same shape: real inputs, a judgment call, and an output that actually goes somewhere.
 
 Read any table **vertically** and the same three structural facts appear every time:
 
@@ -85,6 +85,52 @@ Tools are named as categories, not products — the framework doesn't care which
 | 5 | Same tools | Runs Friday alone — progress agent, tone-check agent, send agent; guardrails: only enrolled families as recipients, and any concerning pattern goes to you, not to a template | The AI runs the loop; you set boundaries, audit |
 
 *Trust-track note:* student records are classified data in every school system — the rung-3 gate question ("where does this data go?") must have an answer of *approved school systems only* before this task crosses rung 3 at all.
+
+---
+
+## Legal
+
+*Task: a weekly regulatory-watch memo for the practice group.*
+
+| Rung | Tools | What it looks like | Who fires each action |
+|---|---|---|---|
+| 1 | None | Paste new rulings and regulatory updates into the chat, get a plain-language memo draft; you find every development and circulate the memo yourself | You — every real-world step |
+| 2 | None | Saved templates: *summarize each development → assess relevance to our matters → format as the weekly memo* — chained by hand | You — you are the wiring between steps |
+| 3 | Legal research database, document management, email | AI searches the week's developments → you approve the list → drafts the memo with every point cited to its authority → offers to file it and send → you approve | You, each action |
+| 4 | Same tools | "Every Monday, compile the watch memo" — it runs the searches, remembers which topics the group flagged as priorities, drafts; the memo waits at your review before filing and sending | The AI; you set the goal, review before send |
+| 5 | Same tools | Runs Monday alone — research agent, cite-check agent, format/send agent; guardrail: any development touching an active matter is escalated to a human, never just summarized | The AI runs the loop; you set boundaries, audit |
+
+*Trust-track note:* privileged and client-confidential material makes "which tool may hold which data" as sharp as it gets — and the cite-check agent exists because the framework's citation rule applies with professional force here: a cited authority is a claim, not proof, until someone (or something whose job it is) has read it.
+
+---
+
+## Marketing
+
+*Task: a weekly campaign performance report for stakeholders.*
+
+| Rung | Tools | What it looks like | Who fires each action |
+|---|---|---|---|
+| 1 | None | Export the week's campaign numbers, paste them into the chat, get a narrative report; you pull every metric and send the report yourself | You — every real-world step |
+| 2 | None | Saved templates: *summarize performance vs. goals → pull notable audience reactions → format for stakeholders* — you carry the numbers between steps | You — you are the wiring between steps |
+| 3 | Campaign analytics, social listening, email | AI pulls the week's metrics → you approve → scans audience response for signal worth reporting → drafts the report → offers to send → you approve | You, each action |
+| 4 | Same tools | "Every Monday, prep the performance report" — it pulls metrics, remembers which numbers stakeholders actually asked about, drafts; you review before it goes out | The AI; you set the goal, review before send |
+| 5 | Same tools | Runs Monday alone — metrics agent, audience-signal agent, format/send agent; guardrail: a metric moving beyond a set threshold pauses the run for a human read before anything is reported | The AI runs the loop; you set boundaries, audit |
+
+---
+
+## Human resources
+
+*Task: a weekly recruiting-pipeline summary for hiring managers.*
+
+| Rung | Tools | What it looks like | Who fires each action |
+|---|---|---|---|
+| 1 | None | Paste pipeline counts and interview notes into the chat, get a tidy summary; you gather every number and send each manager their update yourself | You — every real-world step |
+| 2 | None | Saved templates: *summarize pipeline movement per role → flag stalled candidates → format per hiring manager* — run by hand each week | You — you are the wiring between steps |
+| 3 | Applicant tracking system, calendar, email | AI reads the week's pipeline activity → you approve → checks the calendar for scheduled interviews → drafts per-manager summaries → you approve each send | You, each action |
+| 4 | Same tools | "Every Friday, draft the pipeline summaries" — it reads the tracker and calendar, remembers each manager's format preferences, drafts; nothing sends until you review | The AI; you set the goal, review before send |
+| 5 | Same tools | Runs Friday alone — pipeline agent, stalled-candidate flag agent, send agent; guardrails: recipients limited to each role's hiring manager, and anything touching an individual's sensitive circumstances goes to you, not into a summary | The AI runs the loop; you set boundaries, audit |
+
+*Trust-track note:* candidate and employee information is personal data with a narrow need-to-know — the recipient guardrail (each summary reaches only its own hiring manager) is the rung-5 expression of the same classification discipline the rung-3 gate asks for.
 
 ---
 
