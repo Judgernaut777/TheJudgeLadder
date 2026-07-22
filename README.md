@@ -1,92 +1,62 @@
 # The Judge Ladder™
 
-**A conceptual framework for how your role changes as you hand more of a task to AI.**
+**A map for learning to work with AI — starting from zero.**
 
-Most explanations of AI adoption are organized around what the *model* can do. The Judge Ladder is organized around the only thing that actually changes for *you*: where you sit relative to the loop of work. It is a framework for individual practice — one person, one task, five distinct positions — not a maturity model for organizations and not a forecast of AI capability.
+Maybe you've never used an AI chatbot. Maybe you've tried one once and weren't sure what the fuss was about. Maybe you use one daily but suspect there's more. Wherever you're starting, this repo is a map of the whole journey — from your first conversation with an AI to confidently overseeing AI that does real work for you.
 
-The name states the thesis. At every rung of the ladder, the part of your job that remains is **judgment**. Climbing the ladder never eliminates judgment; it moves the place where judgment is applied — from every sentence, to every action, to every goal, to the boundaries of the system itself.
+No coding. Nothing to install. Everything here works with tools you already have or your workplace provides.
 
-## The ladder
+## The one idea behind everything
 
-| Rung | Name | Your role |
+Working with AI is a ladder with five rungs. What changes at each rung is **not the AI — it's you**: how much of the work you hand over, and where you apply your judgment. That's why it's called the Judge Ladder: at every rung, your job is judgment. Climbing just changes *where* you apply it.
+
+| Rung | Name | Your role, in plain words |
 |---|---|---|
-| 1 | **Chat** | You drive every turn |
-| 2 | **Prompt workflows** | You chain the steps by hand |
-| 3 | **Supervised action** | You approve each action |
-| 4 | **Single-purpose agent** | You set the goal, review the result |
-| 5 | **Autonomous / multi-agent** | You set guardrails, audit after |
+| 1 | **Chat** | You talk with an AI; it answers. You steer every exchange. |
+| 2 | **Prompt workflows** | You save and reuse your best instructions instead of starting fresh each time. |
+| 3 | **Supervised action** | The AI can *do* things — search the web, draft emails — but each action waits for your OK. |
+| 4 | **Single-purpose agent** | You give the AI a goal ("every Friday, prepare X") and review its finished work. |
+| 5 | **Autonomous / multi-agent** | AI systems run on their own inside limits you set; you check the record afterward. |
 
-## One moving part
+If you're at "rung 0" — you haven't started — that's exactly what this repo is built for. Rung 1 assumes nothing.
 
-The ladder is a story about a single moving part: **where the human sits relative to the loop.** Everything else is scenery.
+## Start here
 
-Three structural facts hold the whole framework together:
+Read these in order. The first two take about twenty minutes together.
 
-1. **Rungs 1 and 2 are a sealed box.** No tools, no reach into the world. The model works only with what is in the chat. You are the model's only connection to reality — you paste things in, you carry things out.
+1. **[Foundations](00-foundations/README.md)** — the nine terms you need before anything else, in plain English.
+2. **[The Context pillar](00-foundations/the-context-pillar.md)** — the one big idea about how AI "remembers" (and doesn't). Ten minutes that will save you months of confusion.
+3. **[Rung 1: Chat](01-chat/README.md)** — open a free AI chat tool and actually begin.
+4. **[The worksheet](worksheet.md)** — pick one recurring task from your own work. You'll carry it up the ladder with you; it's how the framework becomes real.
 
-2. **The box opens at rung 3, and the tools never leave.** Web search, email, file access — whatever tools appear at rung 3 are the *same* tools used at rungs 4 and 5. Nothing new is bolted on above rung 3.
+Then climb: [rung 2](02-prompt-workflows/README.md) → [rung 3](03-supervised-action/README.md) → [rung 4](04-single-purpose-agent/README.md) → [rung 5](05-autonomous-multi-agent/README.md). Rungs 1–3 are where most of the value is for most people — don't rush past them. Each rung ends with a "gate": a short test of whether you're truly ready for the next one.
 
-3. **What changes from rung 3 upward is whose hand is on the trigger.** At rung 3, you approve every individual action. At rung 4, you approve the goal and review the result. At rung 5, you approve the boundaries and audit the record. Same tools, different hand on the trigger.
+## How each rung folder works
 
-Fact 3 dissolves the most common confusion in this space: *"Isn't tool use just what an agent does?"* Yes — same mechanism. An agent is not a different kind of AI; it is the same tool-using AI with a different hand on the trigger. That is why rung 3 is named **supervised action** and not "tool use": tools are not what distinguishes the rung. Supervision is.
+Every rung directory contains the same four files, so you always know where you are:
 
-## Two contrast pairs worth memorizing
+- **`README.md`** — the idea: what's new at this rung and why it exists
+- **`in-practice.md`** — a running example (a weekly team summary) showing exactly what this rung looks like, narrated
+- **`competencies.md`** — what you should be able to do here, and the gate for climbing
+- **`vocabulary.md`** — new terms, introduced only when you actually need them
 
-If you retain nothing else from this framework, retain these two pairs — they are the spine:
+## Finding your way
 
-- **Human-*in*-the-loop vs. human-*on*-the-loop.** In the loop (rung 3): nothing happens without your approval. On the loop (rung 5): things happen, and you watch the record. The entire autonomy story fits in those two prepositions.
-- **Grounding vs. hallucination.** A model with no tools can only sound right. A model with tools can *check*. Grounding — tying output to retrieved, citable sources — is the reason tools exist at all.
+| If you want… | Go to |
+|---|---|
+| The whole framework on one page | [`reference/ladder-one-pager.md`](reference/ladder-one-pager.md) |
+| Your industry's version of the ladder (healthcare, finance, retail, legal, HR, and more) | [`reference/industry-examples.md`](reference/industry-examples.md) |
+| A word you don't recognize | [`reference/glossary.md`](reference/glossary.md) — every term, defined in full |
+| The safety and trust side (where your data goes, what can go wrong) | [`tracks/infrastructure-and-trust.md`](tracks/infrastructure-and-trust.md) — becomes essential at rung 3 |
+| Using AI at a workplace with approved tools and policies | [`tracks/managed-workplaces.md`](tracks/managed-workplaces.md) |
+| How this compares to other AI frameworks you've heard of | [`reference/framework-comparison.md`](reference/framework-comparison.md) |
+| To apply the ladder to your own job | [`worksheet.md`](worksheet.md) |
 
-## Judgment climbs with capability
+## Three promises, kept throughout
 
-Each rung has a gate: the sign that you actually operate at that rung rather than merely using its tools. The gates are deliberately about **restraint**:
-
-- Rung 1: you *instinctively verify* factual output.
-- Rung 2: you *reuse* instead of rewriting — and notice the friction of being the wiring.
-- Rung 3: you act on the real world safely *and can state where your data goes*.
-- Rung 4: you hand over the goal, trust the approval gate enough not to watch every step — *but still review*.
-- Rung 5: you can *recognize and govern* an autonomous system: read its guardrails, read its audit trail, catch drift.
-
-Capability and judgment must climb together. That is the Judge in Judge Ladder.
-
-## One task, five rungs
-
-The framework is best understood by carrying **one real task** up the ladder and watching only the human's position change. Throughout this repo, the running example is:
-
-> *"Produce a weekly summary of what's happening in our field and send it to the team."*
-
-Each rung's `in-practice.md` shows this task at that rung. To apply the framework to your own work, pick one recurring task of your own and rebuild the same table for it — [`worksheet.md`](worksheet.md) is the blank instrument.
-
-## How to read this repo
-
-Start with the foundations, then walk the rungs in order. Rungs 1–3 are where most of the value is for most people; rungs 4–5 make full sense only after you have felt the friction and the trust questions the lower rungs produce.
-
-```
-00-foundations/         Terms you need before rung 1, and the Context pillar
-01-chat/                Rung 1
-02-prompt-workflows/    Rung 2
-03-supervised-action/   Rung 3 — the box opens; the infrastructure & trust track switches on
-04-single-purpose-agent/  Rung 4
-05-autonomous-multi-agent/ Rung 5 — framed as "recognize and govern," not "build"
-tracks/
-  infrastructure-and-trust.md   The parallel track that activates at rung 3
-  managed-workplaces.md         Reading the ladder inside an organization with approved tools
-reference/
-  glossary.md           Every term, all rungs — the full reference, never abridged
-  ladder-one-pager.md   The whole framework on one page
-  framework-comparison.md  How the ladder relates to other public frameworks
-  industry-examples.md  The running-example table transposed to eight industries
-worksheet.md            Your task through five rungs (blank)
-```
-
-Each rung directory follows the same shape:
-
-- `README.md` — the concept: what is new at this rung and why it exists
-- `in-practice.md` — the running example, lived at this rung
-- `competencies.md` — what operating at this rung looks like, and the gate for climbing
-- `vocabulary.md` — the terms that first *matter* at this rung
-
-Terminology in this framework is placed at the rung where you first hit the wall it solves — never dumped up front. The [glossary](reference/glossary.md) is the one place everything appears together.
+- **No jargon dumps.** Every term arrives at the moment you hit the problem it solves — never before. When in doubt, the glossary has everything.
+- **One example, threaded through everything.** The same task — a weekly summary sent to a team — is shown at all five rungs, so you can watch exactly what changes (spoiler: only your role).
+- **Judgment is never optional.** Each rung's gate tests restraint, not just skill: verifying, reviewing, auditing. Getting better with AI and staying accountable for it climb together here.
 
 ## License and trademark
 
