@@ -75,6 +75,7 @@ reference/
   glossary.md           Every term, all rungs — the full reference, never abridged
   ladder-one-pager.md   The whole framework on one page
   framework-comparison.md  How the ladder relates to other public frameworks
+  industry-examples.md  The running-example table transposed to five industries
 worksheet.md            Your task through five rungs (blank)
 ```
 

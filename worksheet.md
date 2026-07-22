@@ -10,7 +10,7 @@ Good candidates share three properties:
 2. **Has real inputs and outputs** — information comes from somewhere (documents, sites, messages) and the result goes somewhere (an email, a report, a decision). A task that never touches the world can't cross rung 3.
 3. **Yours** — you know what good output looks like, so your judgment has something to grip at every gate.
 
-Examples of the right shape: a weekly status report, a recurring competitive scan, a monthly data summary for another team, triaging a shared inbox, preparing a standing meeting's brief.
+Examples of the right shape: a weekly status report, a recurring competitive scan, a monthly data summary for another team, triaging a shared inbox, preparing a standing meeting's brief. Five worked tables from major industries — healthcare, financial services, retail, manufacturing, education — are in [industry examples](reference/industry-examples.md); the nearest one is a legitimate starting template.
 
 **My task:**
 
