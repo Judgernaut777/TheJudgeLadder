@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" aria-current="page" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="padding: 72px 24px 56px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; border-bottom: 1px solid var(--color-divider);">
+<div style="width: 190px; border-top: 1px solid var(--color-text); padding-top: 3px;"><div style="border-top: 1px solid var(--color-text);"></div></div>
+<svg width="44" height="98" viewBox="0 0 34 76" fill="none" aria-label="ladder mark" style="margin-top: 10px; color: var(--color-text);"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="1.5"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="1.5"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="2.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="1.5"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="1.5"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="1.5"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="1.5"></line></svg>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 13px; letter-spacing: 0.42em; text-indent: 0.42em; color: var(--color-accent-700); margin-top: 6px;">THE</div>
+<h1 style="font-weight: 400; font-size: clamp(52px, 8vw, 76px); line-height: 1.02; margin: 0;">Judge Ladder<span style="font-size: 24px; vertical-align: super; letter-spacing: 0;">™</span></h1>
+<div style="font-family: var(--font-body); font-style: italic; font-size: 16px; color: var(--color-neutral-600);">judgment climbs</div>
+<p style="max-width: 560px; font-size: 17px; line-height: 1.7; margin: 14px 0 0;">A map for learning to work with AI — starting from zero. From your first conversation with a chatbot to confidently overseeing AI that does real work for you.</p>
+<div style="display: flex; gap: 12px; margin-top: 10px;">
+<a class="btn btn-primary" href="foundations.html">Start at rung 0</a>
+<a class="btn btn-ghost" href="reference.html">The whole framework on one page</a>
+</div>
+<div style="width: 190px; border-top: 1px solid var(--color-text); margin-top: 18px;"></div>
+</header>
+
+<section data-screen-label="Start here" style="border-bottom: 1px solid var(--color-divider); background: var(--color-surface);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: minmax(240px, 340px) 1fr; gap: 48px;">
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Start here</div>
+<h2 style="font-weight: 400; font-size: 34px; margin: 10px 0 12px;">Read these in order.</h2>
+<p style="font-size: 14px; line-height: 1.65; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">The first two take about twenty minutes together. Then climb — and don't rush: rungs 1–3 are where most of the value is for most people. Each rung ends with a gate, a short test of whether you're truly ready for the next one.</p>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+<li style="border-top: 1px solid var(--color-divider); padding: 16px 0; display: flex; gap: 18px; align-items: baseline;">
+<span style="font-family: var(--font-heading); font-size: 22px; color: var(--color-accent-700); font-feature-settings: 'tnum'; width: 24px;">1</span>
+<span style="font-size: 15px; line-height: 1.6;"><a href="foundations.html" style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">Rung 0: Foundations</a> — the nine terms you need before anything else, in plain English.</span>
+</li>
+<li style="border-top: 1px solid var(--color-divider); padding: 16px 0; display: flex; gap: 18px; align-items: baseline;">
+<span style="font-family: var(--font-heading); font-size: 22px; color: var(--color-accent-700); font-feature-settings: 'tnum'; width: 24px;">2</span>
+<span style="font-size: 15px; line-height: 1.6;"><a href="foundations.html#context-pillar" style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">The Context pillar</a> — the one big idea about how AI "remembers" (and doesn't). Ten minutes that will save you months of confusion.</span>
+</li>
+<li style="border-top: 1px solid var(--color-divider); padding: 16px 0; display: flex; gap: 18px; align-items: baseline;">
+<span style="font-family: var(--font-heading); font-size: 22px; color: var(--color-accent-700); font-feature-settings: 'tnum'; width: 24px;">3</span>
+<span style="font-size: 15px; line-height: 1.6;"><a href="rung-1.html" style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">Rung 1: Chat</a> — open a free AI chat tool and actually begin.</span>
+</li>
+<li style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 16px 0; display: flex; gap: 18px; align-items: baseline;">
+<span style="font-family: var(--font-heading); font-size: 22px; color: var(--color-accent-700); font-feature-settings: 'tnum'; width: 24px;">4</span>
+<span style="font-size: 15px; line-height: 1.6;"><a href="worksheet.html" style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">The worksheet</a> — pick one recurring task from your own work and carry it up the ladder with you. It's how the framework becomes real.</span>
+</li>
+</ol>
+</div>
+</section>
+
+<section data-screen-label="The ladder" style="max-width: 1060px; margin: 0 auto; padding: 64px 24px;">
+<div style="display: grid; grid-template-columns: minmax(260px, 400px) 1fr; gap: 56px; align-items: start;">
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">The one idea behind everything</div>
+<h2 style="font-weight: 400; font-size: 38px; margin: 10px 0 14px;">Five rungs. One moving part: you.</h2>
+<p style="text-align: justify; hyphens: auto; font-size: 15.5px; line-height: 1.7;">Working with AI is a ladder with five rungs. What changes at each rung is <strong>not the AI — it's you</strong>: how much of the work you hand over, and where you apply your judgment. That's why it's called the Judge Ladder: at every rung, your job is judgment. Climbing just changes <em>where</em> you apply it.</p>
+<p style="font-size: 14px; color: var(--color-neutral-600);">Click a rung to read it.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<a href="rung-5.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-family: var(--font-body);" style-hover="border-color: var(--color-accent);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-neutral-400); font-feature-settings: 'tnum'; width: 26px; text-align: center;">5</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Autonomous / multi-agent</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">AI runs inside limits you set; you check the record after.</span>
+</span>
+</a>
+<a href="rung-4.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-family: var(--font-body);" style-hover="border-color: var(--color-accent);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-neutral-400); font-feature-settings: 'tnum'; width: 26px; text-align: center;">4</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Single-purpose agent</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">You give the AI a goal and review its finished work.</span>
+</span>
+</a>
+<a href="rung-3.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-family: var(--font-body);" style-hover="border-color: var(--color-accent);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-neutral-400); font-feature-settings: 'tnum'; width: 26px; text-align: center;">3</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Supervised action</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">The AI can do things — each action waits for your OK.</span>
+</span>
+</a>
+<a href="rung-2.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-family: var(--font-body);" style-hover="border-color: var(--color-accent);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-neutral-400); font-feature-settings: 'tnum'; width: 26px; text-align: center;">2</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Prompt workflows</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">You save and reuse your best instructions.</span>
+</span>
+</a>
+<a href="rung-1.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-family: var(--font-body);" style-hover="border-color: var(--color-accent);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-neutral-400); font-feature-settings: 'tnum'; width: 26px; text-align: center;">1</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Chat</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">You talk with an AI; it answers. You steer every exchange.</span>
+</span>
+</a>
+<a href="foundations.html" style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-family: var(--font-body); background: color-mix(in srgb, var(--color-accent) 7%, transparent);" style-hover="border-color: var(--color-accent-600);">
+<span style="font-family: var(--font-heading); font-weight: 400; font-size: 30px; line-height: 1; color: var(--color-accent); font-feature-settings: 'tnum'; width: 26px; text-align: center;">0</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text);">Foundations</span>
+<span style="font-size: 12px; color: var(--color-neutral-600);">Haven't started? This rung assumes nothing. Begin here.</span>
+</span>
+</a>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Finding your way" style="border-top: 1px solid var(--color-divider); max-width: 1060px; margin: 0 auto; padding: 48px 24px 72px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 16px;">Finding your way</div>
+<table class="table" style="max-width: 860px;">
+<thead><tr><th style="width: 55%;">If you want…</th><th>Go to</th></tr></thead>
+<tbody>
+<tr><td>The whole framework on one page</td><td><a href="reference.html">The one-pager</a></td></tr>
+<tr><td>A word you don't recognize</td><td><a href="reference.html#glossary">The glossary</a> — every term, defined in full</td></tr>
+<tr><td>The safety and trust side — where your data goes, what can go wrong</td><td><a href="tracks.html">Infrastructure &amp; trust</a> — essential from rung 3</td></tr>
+<tr><td>Using AI at a workplace with approved tools and policies</td><td><a href="tracks.html#managed">Managed workplaces</a></td></tr>
+<tr><td>How this compares to frameworks you've heard of</td><td><a href="reference.html#comparison">Framework comparison</a></td></tr>
+<tr><td>To apply the ladder to your own job</td><td><a href="worksheet.html">The worksheet</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

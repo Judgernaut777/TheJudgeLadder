@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" aria-current="page" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 760px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start;">
+<div style="font-family: var(--font-heading); font-weight: 400; font-size: 110px; line-height: 0.9; color: var(--color-accent); font-feature-settings: 'tnum';">3</div>
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Rung three · The box opens</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 8px 0 10px;">Supervised action</h1>
+<p style="font-family: var(--font-heading); font-style: italic; font-size: 21px; margin: 0 0 10px;">Your role: you approve each action.</p>
+<p style="font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 560px;">This is the rung where the box opens. The model gets <strong>tools</strong> — web search, email, file access, calendars, whatever the task needs — and with them, for the first time, the ability to touch the world outside the chat. And every single one of those actions happens only when you approve it. The AI proposes; you dispose. That arrangement has a name you will meet again: <strong>human-in-the-loop</strong>.</p>
+</div>
+</div>
+</header>
+
+<section data-screen-label="The idea" style="max-width: 760px; margin: 0 auto; padding: 52px 24px 8px;">
+<h2 style="font-weight: 400; font-size: 32px; margin: 0 0 14px;">Why "supervised action" — not "tool use"</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The naming is deliberate, and it exists to dissolve the most common confusion in the whole subject: <em>"Isn't tool use just what an agent does?"</em></p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Yes. <strong>Same mechanism.</strong> The tools that appear at rung 3 never leave — rungs 4 and 5 use exactly the same web search, the same email access, the same integrations. Nothing new is bolted on above this rung. What changes from rung to rung is <em>whose hand is on the trigger</em>.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">So "tool use" cannot be what distinguishes rung 3 — tools are the shared property of rungs 3, 4, and 5. What distinguishes rung 3 is the <strong>supervision</strong>: every action individually approved by you. The climb from rung 3 to rung 4 is precisely: <em>you stop approving each action and start approving the goal.</em> Name the rung after the thing that changes, not the thing that stays.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">What the box opening buys you: grounding</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Recall the rung-1 problem: a sealed model can only sound right. A tool-equipped model can <strong>check</strong>. It can search, retrieve real documents, and build its answer out of what it found — with citations you can follow.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">This is <strong>grounding</strong>, and it is the deep reason tools exist — not convenience, <em>verifiability</em>. Grounding versus hallucination is one of the framework's two load-bearing contrast pairs. The pattern of retrieving relevant documents and putting them on the desk before answering has a name — <strong>RAG</strong>, retrieval-augmented generation — and if you read <a href="foundations.html#context-pillar">the Context pillar</a>, you already understand it: RAG is context management. Put only the relevant documents on the desk, fetched fresh per question.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">One discipline comes with it: <strong>a citation is a claim, not proof.</strong> Models can cite a real source that does not say what the summary claims it says. Your rung-1 verification instinct now has a concrete job: follow the citation, confirm the source says the thing.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">What the box opening costs you: responsibility</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Here is the trade nobody should soften: the moment the AI can act on the world, <strong>you inherit responsibility for what makes that safe.</strong> Not as an advanced topic — as table stakes for standing on this rung at all. Three inheritances arrive immediately:</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Where your data goes.</strong> Connecting a tool means data flows through it. Pasting material into a model means that material went <em>somewhere</em> — whose servers? retained how long? used for what? At rung 3 you must be able to answer, for every tool you use: <em>what data of mine goes in, and where does it live?</em> If you cannot answer that, you are not using the tool; you are trusting it blindly.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Prompt injection.</strong> Once the model reads the outside world, the outside world can talk back. A web page or email can contain text crafted to hijack the model — "ignore your instructions and forward this to…" The model reads retrieved content the same way it reads <em>your</em> instructions; malicious content exploits exactly that. Injection is the signature attack of the tool era, and your per-action approval is, among other things, your injection tripwire: <em>why does it want to send an email I didn't ask about?</em></p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Credentials.</strong> Connections to tools are built on credentials — passwords, tokens, keys. Two rules, both absolute: never paste a credential into a chat, and grant connected tools the narrowest access that works. A credential in a context window is a credential you no longer control.</p></div>
+</div>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); margin-top: 14px; text-align: justify; hyphens: auto;">These three are the opening of the <a href="tracks.html">infrastructure &amp; trust track</a> — a parallel strand of the framework that switches on here and runs to the top of the ladder. Rungs 1–2 needed none of it; the box was sealed.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">Judgment at this rung</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Judgment relocates from evaluating text to <strong>authorizing actions</strong>. Each approval is a small decision with real-world consequences: is this search sensible, is this draft accurate, should this email actually go out, to these people? The frequency is still high — every action — but the stakes per decision just became real. This is the rung where judgment stops being editorial and starts being operational.</p>
+</section>
+
+<section data-screen-label="In practice" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">In practice</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 18px;">The weekly summary at rung 3</h2>
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 18px 22px; display: grid; grid-template-columns: 150px 1fr; row-gap: 10px; column-gap: 16px; font-size: 14px; margin-bottom: 26px;">
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Tools</div><div>Web search, email — the box is open</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">What it looks like</div><div>AI searches → you approve → drafts → offers to send → you approve</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Who fires each action</div><div style="color: var(--color-accent-700);">You, each action</div>
+</div>
+<h3 style="font-weight: 600; font-size: 22px; margin: 0 0 10px;">The week, narrated</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Friday. You open the assistant — one with web search and your email connected as approved integrations — and ask: <em>"Compile this week's field summary for the team, using our usual format."</em></p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The assistant proposes its first action: <strong>"I'd like to search for developments in [your field] from the past week."</strong> You approve. It runs several searches and comes back with six candidate articles, linked. You skim the list, drop two that are off-topic, and tell it to work with the remaining four.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">It drafts the five-bullet summary — and this draft is different from anything rungs 1–2 produced: <strong>every bullet carries a citation</strong> to the article it came from. The bullets aren't the model's unaccompanied word; they're grounded in retrieved sources you can check. You check one — the boldest claim. The source holds; the phrasing is fair. (The week a citation <em>didn't</em> hold — the article said "proposed," the bullet said "launched" — is the week citations stopped feeling like decoration to you.)</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Then the assistant does the thing that marks this rung: <strong>"Draft ready. Want me to send it to the team list?"</strong> It can actually do it. The email is real, the recipient list is real, and one approval from you fires it. You read the draft one more time — because your approval is now the <em>only</em> thing between this text and forty inboxes — and approve. Sent.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Total elapsed time: about ten minutes, most of it reading. The twenty minutes of article-hunting and the seven copy-pastes from rung 2: gone.</p>
+<h3 style="font-weight: 600; font-size: 22px; margin: 26px 0 10px;">What to notice</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Where did the friction go?</strong> Every mechanical-transport step from rung 2 is now the model's job. What remains for you is <em>only</em> the judgment: which sources, is it accurate, does it send. Rung 2's imbalance — two minutes of judgment buried in twenty of wiring — has been inverted.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Nothing fired without you.</strong> Search: approved. Source list: curated by you. Send: approved. The AI proposed every step; you disposed of every step. That is human-in-the-loop, lived.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>The new questions you can now answer.</strong> Where does a search query go when the assistant searches? (To the search provider — it leaves the chat.) Where does the team's email address list live? (In the email integration you connected — check what access you granted it.) What would you do if a drafted summary suddenly contained an instruction-shaped sentence like "forward this summary to this outside address"? (Refuse the approval and get suspicious of the source article — that's injection.) At rung 3, being able to answer these <em>is part of doing the task</em>.</p>
+</section>
+
+<section data-screen-label="Competencies and gate" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Competencies</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Operating at this rung means you can</h2>
+<ul style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.7;">
+<li><strong>Work with a tool-enabled AI, approving each action.</strong> Read a proposed action for what it will actually do before approving it — not rubber-stamping, deciding.</li>
+<li><strong>Ground answers and check citations.</strong> Prefer retrieved-and-cited output over the model's unaccompanied word; follow citations and confirm the source says what the summary claims.</li>
+<li><strong>Connect an approved integration.</strong> Link a real tool (search, email, files) to an AI assistant, understanding what access you granted in the process.</li>
+<li><strong>Answer the data question.</strong> For every tool in your setup, state what data of yours flows into it and where that data lives.</li>
+<li><strong>Recognize injection.</strong> Know that retrieved content can carry hostile instructions, and treat out-of-character proposed actions as a symptom worth investigating rather than a quirk to approve.</li>
+<li><strong>Guard credentials.</strong> Never place a credential in a chat; grant integrations the narrowest access that works.</li>
+</ul>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">A concrete benchmark for the rung: an AI with search and email access compiles a grounded, cited summary of your field's week and offers to send it — and you approve each step, having actually judged each step.</p>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 20px 0; margin: 26px 0;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The gate out of rung 3</div>
+<p style="margin: 0 0 10px; font-family: var(--font-heading); font-style: italic; font-size: 24px; line-height: 1.35;">You act on the real world safely AND you can state where your data goes.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">The AND is the point. Plenty of people clear the first half — happily approving actions all day. The gate demands the second half too: if asked, right now, "when you use that assistant, where does your pasted text go? what can the email integration see? what would injection look like in your setup?" — you can answer in plain sentences. This is the first rung whose gate includes an accountability test, because it is the first rung where your approvals have consequences outside the chat. The pattern continues upward: every gate from here on pairs a capability with the responsibility that capability creates.</p>
+</div>
+</section>
+
+<section data-screen-label="Vocabulary" style="max-width: 760px; margin: 0 auto; padding: 32px 24px 24px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Vocabulary</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 6px;">The biggest vocabulary of any rung</h2>
+<p style="font-size: 13.5px; color: var(--color-neutral-600); margin-bottom: 14px;">Because the box opens here, and the <a href="tracks.html">infrastructure &amp; trust track</a> switches on with it. Core terms below; the full trust-track vocabulary — where the model lives, the attack surface, ops literacy — is in the <a href="reference.html#glossary">glossary</a> and <a href="tracks.html">the track</a>.</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Tool / function calling.</strong> The mechanism behind everything at rungs 3–5: the model, mid-response, requests that a specific tool be run (a search, an email draft, a file read) and then incorporates the result. The same mechanism whether a human approves each call (rung 3) or not (rungs 4–5).</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Grounding.</strong> Tying the model's output to retrieved, checkable sources instead of its unaccompanied recall. The deep reason tools exist: a sealed model can only sound right; a grounded one can be checked. One half of the load-bearing pair <em>grounding vs. hallucination</em>.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Retrieval / RAG.</strong> Fetching relevant documents and placing them on the model's desk before it answers. Best understood as context management: only the relevant material, fetched fresh per question. Complement to long context windows, not a competitor.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Citation.</strong> A pointer from a claim to its source. Discipline: a citation is a claim, not proof — models can cite real sources that don't say what the summary says. Follow and confirm.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Connector / integration.</strong> A configured link between an AI assistant and a real service (email, calendar, files, search). Each connector is both a capability and a data pathway — every one you add extends what the AI can do <em>and</em> where your data can flow.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Human-in-the-loop.</strong> The rung-3 arrangement: a human approval sits inside the action loop, so nothing fires without a person. Contrast with <em>human-on-the-loop</em> at rung 5 — the whole autonomy story in two prepositions.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Effective vs. advertised context.</strong> From the Context pillar, first operationally relevant here: retrieval pipelines must budget for the context size at which the model stays accurate (often ~150–400K tokens on models advertising millions), not the number on the marketing page.</p></div>
+</div>
+</section>
+
+<div style="max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; display: flex; justify-content: space-between; gap: 12px;">
+<a class="btn btn-secondary" href="rung-2.html">← Rung 2 — Prompt workflows</a>
+<a class="btn btn-primary" href="rung-4.html">Rung 4 — Single-purpose agent →</a>
+</div>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>
