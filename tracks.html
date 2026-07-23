@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html" aria-current="page">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 820px; margin: 0 auto;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Parallel spines of the framework</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 10px 0 14px;">The tracks</h1>
+<p style="font-size: 15.5px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 640px;">Two strands run alongside the rungs: <a href="#trust">infrastructure &amp; trust</a> — dormant at rungs 1–2, switched on at rung 3, running to the top — and <a href="#managed">the managed workplace</a> — how the whole framework lands when you climb it inside an organization.</p>
+</div>
+</header>
+
+<section id="trust" data-screen-label="Infrastructure and trust" style="max-width: 820px; margin: 0 auto; padding: 56px 24px 24px; scroll-margin-top: 70px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Track one</div>
+<h2 style="font-weight: 400; font-size: 40px; margin: 10px 0 14px;">Infrastructure &amp; trust</h2>
+<h3 style="font-weight: 600; font-size: 23px; margin: 24px 0 10px;">Why this track exists</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Rungs 1 and 2 are a sealed box: the model touches nothing, so questions about servers, credentials, and attack surfaces simply do not arise. You can live at rung 2 forever knowing none of this.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Crossing into rung 3 changes that in one stroke. The moment the AI acts outside the chat, <strong>you inherit responsibility for what makes that safe</strong> — not as an optional enrichment, but as part of what standing on rung 3 means. This track is that inheritance, organized. The half-joking summary: <strong>everyone becomes a little bit devops.</strong> Not everyone becomes an engineer — but everyone using tool-connected AI ends up needing a working vocabulary for where software runs, where data flows, and what can go wrong in between.</p>
+<h3 style="font-weight: 600; font-size: 23px; margin: 28px 0 10px;">The three clusters</h3>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;">
+<p style="margin: 0 0 8px; font-family: var(--font-heading); font-weight: 600; font-size: 18px;">1. Where the model lives</p>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;">A model is software running somewhere, and <em>where</em> is a decision with consequences: <strong>closed weights, cloud/API</strong> (the model is a service you call; your data makes a round trip to the provider's machines) · <strong>open weights</strong> (published for anyone to download and run — open weights ≠ open source) · <strong>cloud/SaaS vs. on-prem/self-hosted</strong> (consume someone's hosted service, or run it on machines you control) · <strong>local inference</strong> (run the model on your own device; data never leaves — <strong>quantization</strong> is what makes this practical) · <strong>data residency / sovereignty</strong> (where data physically and legally lives, and whose law applies — the question that forces all the above choices to be made deliberately).</p>
+</div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;">
+<p style="margin: 0 0 8px; font-family: var(--font-heading); font-weight: 600; font-size: 18px;">2. Data, trust, and the attack surface</p>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;">What can go wrong once an AI reads the world and acts on it: <strong>prompt injection</strong> (rung 3) escalating to <strong>indirect prompt injection</strong> (rung 4, when an autonomous agent reads content with no human watching) · <strong>data poisoning</strong> · <strong>jailbreaks</strong> (a <em>user</em> pushing the model past its rules — distinct from injection, which is <em>third-party content</em> subverting it against the user) · <strong>data exfiltration / leakage</strong> · <strong>least privilege</strong> (rung 4) · <strong>sandboxing</strong> (rung 4) · <strong>credentials/secrets</strong> — never in a chat window, ever; minimal grants everywhere.</p>
+</div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 16px 0;">
+<p style="margin: 0 0 8px; font-family: var(--font-heading); font-weight: 600; font-size: 18px;">3. Ops literacy</p>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;">The recognition-level vocabulary of running software, because tool-connected AI lives in that world: <strong>deployment</strong> and <strong>rollback</strong>, <strong>environments</strong> (dev/staging/prod), <strong>containers</strong>, <strong>endpoints</strong>, <strong>version control (Git)</strong>, <strong>logging/monitoring</strong>. All defined in <a href="reference.html#glossary">the glossary</a>.</p>
+</div>
+</div>
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">The two ideas this track is actually about</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Everything above is inventory. These two are the point:</p>
+<h4 style="font-weight: 600; font-size: 19px; margin: 20px 0 10px;">Ops burden = rung × hosting</h4>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">How much of this track you personally carry is <strong>not fixed by how high you climb</strong>. It is the product of two dials: your rung, and your hosting choice.</p>
+<table class="table" style="max-width: 680px; margin: 14px 0;">
+<thead><tr><th></th><th>Managed cloud service</th><th>Self-hosted / local</th></tr></thead>
+<tbody>
+<tr><td><strong>Rung 3</strong></td><td>Very little ops: connect approved integrations, mind your data and credentials</td><td>Substantial ops: you run the model, the connectors, the logs</td></tr>
+<tr><td><strong>Rungs 4–5</strong></td><td>Still modest: the provider runs the machinery; you own goals, gates, and audits</td><td>The full stack: deployment, sandboxing, monitoring, rollback — all yours</td></tr>
+</tbody>
+</table>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">A rung-4 user on a managed platform may carry <em>less</em> operational burden than a rung-3 user self-hosting. <strong>Devops is a dial you choose, not a wall you hit.</strong> Nobody should stay off rung 4 out of fear of servers; choosing managed hosting is choosing to rent that burden out.</p>
+<h4 style="font-weight: 600; font-size: 19px; margin: 20px 0 10px;">One decision wearing two hats — and it's a trust decision</h4>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Open-vs-closed weights and cloud-vs-on-prem look like two separate technical choices. In practice they are <strong>one decision wearing two hats</strong>, and the decision is about <strong>trust</strong>, not technology. <strong>Closed weights in the cloud:</strong> maximum capability, minimum operational work, minimum control — your data leaves, and you trust the provider's handling of it. <strong>Open weights on your own machines:</strong> maximum control — data never leaves — bought with operational work and, typically, some capability. Every configuration between the poles is a point on the same axis: <em>how much do you need to control, and what are you willing to trust others with?</em> Answer the trust question first — what data is in play, what happens if it leaks, whose rules govern it — and the technical configuration usually picks itself.</p>
+</section>
+
+<section id="managed" data-screen-label="Managed workplaces" style="border-top: 1px solid var(--color-divider); background: var(--color-surface); scroll-margin-top: 70px; margin-top: 40px;">
+<div style="max-width: 820px; margin: 0 auto; padding: 56px 24px 64px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Track two</div>
+<h2 style="font-weight: 400; font-size: 40px; margin: 10px 0 14px;">Reading the ladder in a managed workplace</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The ladder itself does not change: five rungs, one moving part, judgment at every level. What changes is <strong>how the infrastructure &amp; trust track lands on you</strong>. If you work somewhere with an IT department, approved tools, and acceptable-use policies, a large share of that track has already been carried by someone else — and a different share has quietly become <em>more</em> important, not less.</p>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 18px 0; margin: 22px 0;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The reallocation rule, in one sentence</div>
+<p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 21px; line-height: 1.4;">Anything you would have had to build or run, the organization has absorbed. Anything about what data moves where, you still own — and own harder.</p>
+</div>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The individual thesis shifts accordingly: less "everyone becomes a little devops," more <strong>ops-aware, governance-fluent</strong>.</p>
+<h3 style="font-weight: 600; font-size: 23px; margin: 28px 0 10px;">What you can hold at recognition-only</h3>
+<ul style="margin: 0 0 16px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 14.5px; line-height: 1.7;">
+<li><strong>Open vs. closed weights, cloud vs. on-prem.</strong> Someone above you already made this call when they chose the approved tools. Your one operational question: <em>which tool is approved for which kind of work?</em> — because that answer dictates everything below.</li>
+<li><strong>Quantization, containers, endpoints, environments, deployment, rollback, Git.</strong> The machinery of running software — run, in a managed workplace, by people whose job that is. Recognize the words; don't carry the pager.</li>
+<li><strong>Logging infrastructure</strong> — with one important inversion. You will never set up logging. But <strong>know that you are logged</strong>: prompts, connected-tool activity, and AI interactions on workplace systems are typically recorded. This isn't a threat; it's the flip side of rung 5's observability story. Behave, and paste, accordingly.</li>
+<li><strong>Secrets infrastructure.</strong> You won't run a vault. The personal rule survives at full strength: <strong>never paste a credential into an AI tool.</strong> No approved tool changes this rule.</li>
+<li><strong>Sandboxing.</strong> If agents run in your workplace, someone sandboxed them. Recognition is enough.</li>
+</ul>
+<h3 style="font-weight: 600; font-size: 23px; margin: 28px 0 10px;">What you own harder than the general reader</h3>
+<ul style="margin: 0 0 16px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 14.5px; line-height: 1.7;">
+<li><strong>The data question, promoted to the whole game.</strong> Rung 3's gate asked "can you state where your data goes?" In a workplace this becomes the central skill: for every approved tool, know <strong>what classification of data may enter it</strong>. Personal information, unreleased figures, contract terms, anything under NDA — each has an answer to "may this be pasted here?", and knowing those answers <em>is</em> workplace AI competence. When you don't know, the answer is "not yet — ask."</li>
+<li><strong>Exfiltration.</strong> The workplace version is mundane and constant: convenient-but-unapproved tools. The shadow-AI pattern — pasting work material into a personal account because the approved tool is clunkier — is a data-leaving-the-building event, however innocent it feels.</li>
+<li><strong>Injection, both kinds.</strong> Being in a managed environment protects you from none of this: you still read email, your tools still read documents, and rung-4 agents in your workplace still read the web. Recognizing injection-shaped anomalies stays a front-line skill at every desk.</li>
+<li><strong>Human-in-the-loop, reframed as policy.</strong> For some categories of work, per-action human approval isn't a rung you're passing through — it's a <strong>mandated stopping point</strong>. Where policy says a human approves, that approval gate is a load-bearing control someone placed deliberately. Treat "the AI could just do this part too" as a thought to raise, not a workaround to take.</li>
+<li><strong>Least privilege, from the other side.</strong> As an individual you learned to <em>grant</em> minimal access. As an employee you also <em>live under</em> it: your accounts and tools are scoped to your role. The fluency is understanding that limited access is design, not distrust — and that <strong>routing around it is the violation</strong>, even in service of getting work done faster.</li>
+<li><strong>Escalation.</strong> Every autonomy policy has a "must escalate" column; in a workplace, so do you. Knowing which decisions are yours and which must go to a person with the authority to make them — and treating handing-up as competence rather than failure — is the human half of rung 5's escalation machinery.</li>
+</ul>
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 18px 22px; background: var(--color-bg);">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">One caveat</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; text-align: justify; hyphens: auto;">This reallocation is <strong>role-dependent</strong>. If you build or operate systems for your organization, the full infrastructure track is yours at full weight — nothing here is abbreviated for you. The recognition-only compression applies to the majority whose job is to <em>use</em> AI inside the environment others maintain. And compression applies to attention, never to the reference: every term stays in <a href="reference.html#glossary">the glossary</a> at full definition.</p>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

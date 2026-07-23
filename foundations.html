@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" aria-current="page" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 760px; margin: 0 auto;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Rung 0 · Before the climb</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 10px 0 14px;">Foundations</h1>
+<p style="font-size: 16.5px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 640px;">Nine terms and one big idea. This is everything you need before rung 1 — and deliberately nothing more. Every other term in the framework is introduced at the rung where you first hit the wall it solves.</p>
+<p style="font-size: 14.5px; line-height: 1.7; color: var(--color-neutral-700); max-width: 640px;">The big idea — how a model's "memory" actually works, and why it is your problem at every rung — gets its own section below: <a href="#context-pillar">the Context pillar</a>. Do not skip it. It is the single most load-bearing piece of background in the framework.</p>
+</div>
+</header>
+
+<section data-screen-label="Nine terms" style="max-width: 760px; margin: 0 auto; padding: 56px 24px;">
+<h2 style="font-weight: 400; font-size: 34px; margin: 0 0 18px;">The nine terms</h2>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">LLM (large language model).</strong> The kind of AI system this framework is about: a model trained on enormous amounts of text that produces text in response to text. Chatbots, assistants, and agents are all interfaces wrapped around an LLM.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Model.</strong> The trained artifact itself — the thing that turns input text into output text. Different models have different sizes, strengths, and costs. When people say "the model got it wrong," they mean this component, not the app around it.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Inference.</strong> What happens when a model runs: it takes your input and generates output. Training happened months earlier, once, at enormous expense; inference happens every time you press enter. This distinction matters later, when you meet questions like "where does inference run — someone's cloud, or a machine you control?"</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Prompt.</strong> Everything you send the model in a turn. Not just your question — the instructions, the examples, the pasted material, all of it. The prompt is the whole input, and the quality of the output tracks the quality of the prompt more closely than newcomers expect.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Token.</strong> The unit models actually read and write — chunks of a few characters, roughly three-quarters of a word in English. Tokens are how context sizes are measured and how usage is billed. You never handle tokens directly, but every limit you will ever hit is denominated in them.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Context window.</strong> The model's fixed-size working area, measured in tokens. Everything the model can consider in a turn — instructions, conversation so far, pasted documents — must fit inside it. The Context pillar is about what this really implies; the short version: the window is not a nice-to-have detail, it is the model's <em>entire reality</em>.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">System prompt.</strong> Standing instructions the model receives before your message — invisible to you in most products. It is why the same underlying model behaves differently in different apps, and why an assistant "knows" its name and rules.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Hallucination.</strong> Confident, fluent, <em>wrong</em> output. Not a glitch — a structural property of how these models work. A model with no tools cannot check anything; it can only produce plausible text. Some of that plausible text is false, and it arrives wearing the same confident tone as the true parts.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 16px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Verification.</strong> The habit that answers hallucination: checking factual output against something outside the model before you rely on it or pass it on. Verification is the first judgment skill of the ladder, and it never goes away — at higher rungs it changes form (checking citations, reviewing an agent's work, reading audit logs), but it is the same muscle. The gate out of rung 1 is not prompting skill; it is that verification has become instinct.</p></div>
+</div>
+</section>
+
+<section id="context-pillar" data-screen-label="Context pillar" style="border-top: 1px solid var(--color-divider); background: var(--color-surface); scroll-margin-top: 70px;">
+<div style="max-width: 760px; margin: 0 auto; padding: 64px 24px 72px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">The one big idea</div>
+<h2 style="font-weight: 400; font-size: 42px; margin: 10px 0 20px;">The Context pillar</h2>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 22px 0; margin-bottom: 28px;">
+<p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 24px; line-height: 1.4;">The model is stateless and its attention rots — so your job, at every rung, is deciding what deserves to be on the desk.</p>
+</div>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">That sentence is the anchor for everything here, and this section is the anchor for half the framework. Context management shows up at every single rung — it just wears different names (prompting, templates, retrieval, memory, compaction). Learn the pillar once and every later term becomes a variation you already understand.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">The stateless model</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The foundational reframe, and the one most worth internalizing: <strong>the model has no memory.</strong> None. Every turn, it wakes up with amnesia and re-reads everything — the instructions, the whole conversation so far, whatever documents are attached — and only then produces its answer. What looks like a continuous conversation is a stack of independent awakenings, each handed a transcript.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The practical consequence: the model's context window <strong>is its entire reality for that turn</strong>. If something is not in the window, the model does not know it — not "forgot it," never knew it. Every technique in this framework for making AI useful is, underneath, a technique for getting the right things into that window.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">The desk</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Think of the context window as a <strong>desk</strong>. It has a fixed size, measured in tokens. Everything the model works with must physically fit on the desk: your instructions, the conversation, the pasted articles, the retrieved documents. The naive intuition is that a bigger desk is simply better, and that the right move is to pile everything on it. Both halves of that intuition are wrong — here is why.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 26px 0;">
+<div class="card" style="background: var(--color-bg);">
+<div class="card-kicker">Context rot</div>
+<div class="card-title">A fuller desk is a worse desk.</div>
+<p class="card-body" style="text-align: justify; hyphens: auto;">Performance degrades as context grows — well before the window is full. A Chroma technical report (Hong, Troynikov &amp; Huber, July 2025) tested 18 frontier models — GPT-4.1, Claude Opus 4, and Gemini 2.5 among them — and found all of them degrade non-uniformly as input grows, sometimes by 30–50%, far below their advertised limits.</p>
+</div>
+<div class="card" style="background: var(--color-bg);">
+<div class="card-kicker">Lost in the middle</div>
+<div class="card-title">Attention is U-shaped.</div>
+<p class="card-body" style="text-align: justify; hyphens: auto;">Strong at the beginning of the context, strong at the end, weak in the middle. Liu et al. (Stanford, TACL 2024) showed accuracy drops of 30%+ when the key fact sits mid-context. The model skims the middle like a bored reader — put what matters at the edges.</p>
+</div>
+<div class="card" style="background: var(--color-bg);">
+<div class="card-kicker">Distractor interference</div>
+<div class="card-title">Near-misses are poison.</div>
+<p class="card-body" style="text-align: justify; hyphens: auto;">Worse than being ignored: similar-but-irrelevant content actively misleads. A document that <em>almost</em> answers the question pulls the model toward wrong answers more effectively than obvious junk would. This is the specific reason "just dump everything in" backfires.</p>
+</div>
+</div>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">Effective ≠ advertised context</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Put the three effects together and you get a rule of thumb: the context size at which a model stays reliably accurate is far below the number on the marketing page. Models advertising multi-million-token windows tend to hold high accuracy in the low hundreds of thousands — think ~150–400K effective on a 2M-window model, task-dependent. Plan around the effective number, not the advertised one.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">Context engineering</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Context engineering</strong> is the discipline all of this implies: deliberately curating what goes on the desk — what gets included, what gets summarized, what gets left out, what sits at the edges. It is the successor discipline to "prompt engineering": as the work gets more serious, wordsmithing the request matters less and curating the desk matters more. You will meet this term formally at <a href="rung-2.html">rung 2</a>, because rung 2 is where you start doing it on purpose.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 12px;">Management strategies, mapped to the ladder</h3>
+<table class="table">
+<thead><tr><th style="width: 26%;">Strategy</th><th>What it is</th><th style="width: 20%;">Where it appears</th></tr></thead>
+<tbody>
+<tr><td><strong>Truncation / eviction</strong></td><td>When the conversation outgrows the desk, the oldest material silently falls off. This is why long chats "forget" their beginnings.</td><td>Felt at rung 1, understood here</td></tr>
+<tr><td><strong>RAG</strong> (retrieval-augmented generation)</td><td>Instead of dumping every document on the desk, retrieve and place only the relevant ones, per question.</td><td><a href="rung-3.html">Rung 3</a></td></tr>
+<tr><td><strong>Summarization / compaction</strong></td><td>Replace bulky history with a dense summary to reclaim desk space. What well-built agents do continuously.</td><td><a href="rung-4.html">Rung 4</a></td></tr>
+<tr><td><strong>Persistent memory</strong></td><td>Storage <em>across</em> turns and sessions, outside the window entirely. Memory is across windows; context is within one.</td><td><a href="rung-4.html">Rung 4</a></td></tr>
+</tbody>
+</table>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); margin-top: 14px; text-align: justify; hyphens: auto;">One misconception to retire now: long context windows and RAG are <strong>complements, not competitors</strong>. A bigger desk does not remove the need to choose what goes on it; it changes the budget, not the job.</p>
+
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 20px 24px; margin: 26px 0; background: var(--color-bg);">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 8px;">Technical aside — safe to skip until rung 4</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; text-align: justify; hyphens: auto;">Attention cost is quadratic — doubling the context roughly quadruples the work. The model also builds a working structure called the <strong>KV cache</strong> that grows with context length and lives in GPU memory, which is why long contexts are slow and hardware-hungry. <strong>Prompt caching</strong> reuses that structure across requests, which is why re-sending the same long prefix can be fast and cheap while a fresh long context is neither. These three facts return in rung 4's vocabulary, where they start affecting real decisions.</p>
+</div>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 30px 0 10px;">The takeaway</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">You now hold the one job description that never changes across all five rungs: <strong>decide what deserves to be on the desk.</strong> At rung 1 you do it by hand, paste by paste. At rung 5 you do it by policy, deciding what an autonomous system may retrieve and retain. Same job. Different altitude.</p>
+
+<div style="display: flex; justify-content: flex-end; margin-top: 36px;">
+<a class="btn btn-primary" href="rung-1.html">Start climbing: Rung 1 — Chat →</a>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" aria-current="page" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 760px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start;">
+<div style="font-family: var(--font-heading); font-weight: 400; font-size: 110px; line-height: 0.9; color: var(--color-accent); font-feature-settings: 'tnum';">2</div>
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Rung two · The box is still sealed</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 8px 0 10px;">Prompt workflows</h1>
+<p style="font-family: var(--font-heading); font-style: italic; font-size: 21px; margin: 0 0 10px;">Your role: you chain the steps by hand.</p>
+<p style="font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 560px;">Rung 2 begins the moment you notice you are typing the same kind of request for the third time. The defining move: stop treating each chat as a one-off performance and start treating your prompts as <strong>reusable assets</strong> — templates you save, refine, and chain together.</p>
+</div>
+</div>
+</header>
+
+<section data-screen-label="The idea" style="max-width: 760px; margin: 0 auto; padding: 52px 24px 8px;">
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The box is still sealed. No tools, no reach into the world. What changes is not the model's capability but <em>your relationship to the task</em>: you decompose it into steps, build a template for each step, and run the steps in sequence — with you personally carrying the output of one step into the input of the next.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 30px 0 14px;">From performance to pipeline</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Three shifts happen at this rung, and together they are the difference between "using a chatbot" and "having a workflow":</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Decomposition.</strong> A recurring task stops being one big ask and becomes named stages. "Write my weekly summary" decomposes into <em>gather notes → summarize → format as email</em>. Each stage gets its own template, tuned to do one thing well. Small, single-purpose prompts beat one sprawling mega-prompt — a lesson that returns at rung 5, where it reappears as the reason multi-agent systems exist.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Templates.</strong> A prompt template is a saved prompt with blanks: the instructions, the role, the format spec, and the examples stay fixed; this week's material drops into the slot. Templates convert your rung-1 iteration from a cost you pay every time into an investment you make once. Every time you refine the template instead of the one-off answer, you are compounding.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Structured output.</strong> Once a prompt's output feeds another prompt, sloppiness stops being tolerable. You start demanding structure: "return exactly five bullets," "output a table with these three columns." Structured output is what makes chaining possible — step two can only consume step one's output reliably if step one's output has a reliable shape.</p></div>
+</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">The name for what you're now doing</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">There is a formal name for the skill you are building: <strong>context engineering</strong> — deliberately curating what goes on the model's desk, rather than wordsmithing individual requests. Your templates are context-engineering artifacts: each one is a considered decision about what the model needs to see, in what order, with what examples. The term was introduced in <a href="foundations.html#context-pillar">the Context pillar</a>; rung 2 is where it stops being theory and becomes your actual practice.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">You are the wiring — feel it</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">At rung 2 you are the wiring between every step: copy out of step one, paste into step two, copy out of step two, paste into the email. Every Friday. By hand.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Do not rush past this friction — it is load-bearing for the whole ladder. The copy-paste tedium you feel at rung 2 is the honest, felt-in-the-hands answer to a question that matters enormously at rung 3: <em>why would anyone give an AI tools?</em> Not because tools are futuristic — because <strong>you are currently doing, by hand, mechanical transport that contains no judgment</strong>. Moving text between boxes is not judgment. Noticing that is what makes the next rung legible.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">Judgment at this rung</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Judgment moves up one level: from evaluating each answer to <strong>designing the pipeline</strong> — deciding how the task decomposes, what each stage's template demands, what structure flows between stages. You still verify outputs (that instinct never retires), but you now also judge the <em>system</em> that produces them.</p>
+</section>
+
+<section data-screen-label="In practice" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">In practice</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 18px;">The weekly summary at rung 2</h2>
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 18px 22px; display: grid; grid-template-columns: 150px 1fr; row-gap: 10px; column-gap: 16px; font-size: 14px; margin-bottom: 26px;">
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Tools</div><div>None — the box is still sealed</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">What it looks like</div><div>A saved, reusable template pipeline; you still paste in and copy out</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Who fires each action</div><div style="color: var(--color-accent-700);">You — you are the wiring between every step</div>
+</div>
+<h3 style="font-weight: 600; font-size: 22px; margin: 0 0 10px;">The week, narrated</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">It's Friday again, but this Friday is different: you're not composing prompts from scratch. Three weeks ago you noticed you were writing the same requests every week, and you did rung 2's defining move — you saved them. You now have three templates in a notes file:</p>
+<ol style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.65;">
+<li><strong>Summarize</strong> — <em>"You are preparing a weekly field update for a busy team. Summarize the following articles into exactly five bullets. Lead with what changed this week. Every bullet must name its source article. Articles: [PASTE HERE]"</em></li>
+<li><strong>Prioritize</strong> — <em>"Here are five bullets. Rank them by likely impact on a team like ours, and cut any that a reader could safely skip: [PASTE HERE]"</em></li>
+<li><strong>Format</strong> — <em>"Turn these bullets into a short friendly email. Subject line included. No preamble. Bullets: [PASTE HERE]"</em></li>
+</ol>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The Friday routine: find the articles (still you — sealed box), paste into template 1. Copy the five bullets, paste into template 2. Copy the ranked bullets, paste into template 3. Copy the finished email into your mail client, address it, send it.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Each template is better than anything you'd improvise, because each has absorbed weeks of refinements. When the summary bullets came out vague two weeks ago, you didn't just fix that answer — you added "every bullet must name its source article" to the template. The fix is permanent. That's the compounding.</p>
+<h3 style="font-weight: 600; font-size: 22px; margin: 26px 0 10px;">What to notice</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>The demand for structure appeared on its own.</strong> "Exactly five bullets" isn't fussiness — template 2 <em>consumes</em> template 1's output, and chaining only works when the handoff has a fixed shape. The moment prompts feed prompts, structured output stops being optional.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>You are the wiring.</strong> Count the copy-pastes: article text in, bullets out, bullets in, ranked bullets out, ranked bullets in, email out, email into the mail client. Seven manual transfers, every week, none of which involve a decision. The judgment in this task — is the summary accurate? is the ranking sensible? should this go to the team? — is maybe two minutes of it. The wiring is the rest. Sit with that imbalance. Rung 3 exists because of it.</p>
+</section>
+
+<section data-screen-label="Competencies and gate" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Competencies</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Operating at this rung means you can</h2>
+<ul style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.7;">
+<li><strong>Decompose recurring tasks.</strong> Break a repeated task into named stages, each simple enough for one focused prompt to handle well.</li>
+<li><strong>Build reusable templates.</strong> Maintain saved prompts with slots for this-time material; improve the template, not just the answer, when output disappoints.</li>
+<li><strong>Chain by hand.</strong> Run a multi-step pipeline where each step's output feeds the next, with you as the transport between steps.</li>
+<li><strong>Demand structured output.</strong> Specify exact formats — counts, columns, sections — so that downstream steps (and downstream humans) can consume output reliably.</li>
+</ul>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">A concrete benchmark for the rung: a saved template pipeline for a real recurring task of yours (on the order of <em>notes → summary → formatted email</em>), run end-to-end manually, that produces better output than improvising ever did.</p>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 20px 0; margin: 26px 0;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The gate out of rung 2</div>
+<p style="margin: 0 0 10px; font-family: var(--font-heading); font-style: italic; font-size: 24px; line-height: 1.35;">You reuse instead of rewriting — and you feel the copy-paste friction.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">Two halves, both required. The first half is the capability: your refinements accumulate somewhere permanent. If every week starts from a blank chat, you are still at rung 1 with good habits. The second half is the judgment — and it is the unusual one, because it is a <em>feeling</em>. You should be able to look at your Friday routine and point precisely at which parts are judgment (evaluating, deciding, approving) and which parts are mechanical transport that happens to pass through your hands. If the routine feels perfectly fine and complete, you are not ready for rung 3, because you will not understand what problem tools solve. The friction is the tuition; make sure you actually paid it.</p>
+</div>
+</section>
+
+<section data-screen-label="Vocabulary" style="max-width: 760px; margin: 0 auto; padding: 32px 24px 24px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Vocabulary</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Terms that first matter here</h2>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Prompt template.</strong> A saved prompt with slots: fixed instructions, role, format spec, and examples, plus a blank where this time's material goes. The unit of reuse — refinements go into the template and compound, instead of evaporating with the chat.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Decomposition.</strong> Breaking a recurring task into named stages, each handled by its own focused prompt. Small single-purpose prompts outperform one sprawling mega-prompt — a principle that echoes all the way up to rung 5's multi-agent designs.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Prompt chaining.</strong> Feeding one prompt's output into the next prompt's input to run a multi-step pipeline. At this rung the chain's connective tissue is you, copying and pasting.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Structured output.</strong> Output in a demanded, exact shape — "exactly five bullets," a fixed-column table, a fill-in template. What makes chaining reliable: a step can only consume the previous step's output if that output has a predictable form.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Context engineering.</strong> The real name for the discipline you are now practicing: deliberately curating what goes on the model's desk — which instructions, which examples, which material, in what order — rather than wordsmithing one-off requests. Successor to "prompt engineering." Introduced conceptually in <a href="foundations.html#context-pillar">the Context pillar</a>; made concrete by your templates.</p></div>
+</div>
+</section>
+
+<div style="max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; display: flex; justify-content: space-between; gap: 12px;">
+<a class="btn btn-secondary" href="rung-1.html">← Rung 1 — Chat</a>
+<a class="btn btn-primary" href="rung-3.html">Rung 3 — Supervised action →</a>
+</div>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

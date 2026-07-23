@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" aria-current="page" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 760px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start;">
+<div style="font-family: var(--font-heading); font-weight: 400; font-size: 110px; line-height: 0.9; color: var(--color-accent); font-feature-settings: 'tnum';">1</div>
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Rung one · The box is sealed</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 8px 0 10px;">Chat</h1>
+<p style="font-family: var(--font-heading); font-style: italic; font-size: 21px; margin: 0 0 10px;">Your role: you drive every turn.</p>
+<p style="font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 560px;">Rung 1 is where nearly everyone starts and where most people currently live: a chat window, a model, and you. You ask; it answers; you ask again. Every single exchange is initiated, steered, and evaluated by you.</p>
+</div>
+</div>
+</header>
+
+<section data-screen-label="The idea" style="max-width: 760px; margin: 0 auto; padding: 52px 24px 8px;">
+<h2 style="font-weight: 400; font-size: 32px; margin: 0 0 14px;">The sealed box</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">At this rung the model is a <strong>sealed box</strong>. It has no tools — no web search, no email, no files, no reach into the world of any kind. The only things it knows about your situation are the things you paste into the chat, and the only way its output affects the world is that you carry it somewhere.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">This is worth stating so plainly because the sealed box is rung 1 <em>and</em> rung 2's defining constraint, and because noticing the box is what eventually makes rung 3 make sense. Every real-world step of any task — finding the inputs, delivering the outputs — is yours. You are the model's hands, eyes, and courier.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">What there is to get good at</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The box being sealed does not make the rung trivial. Rung 1 has real skills, and they compound at every rung above:</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Iteration.</strong> The first draft of the model's answer is a starting position, not a verdict. Skilled rung-1 use looks like a short deliberate loop: ask, inspect, adjust the request, ask again. People who treat the first answer as final get a fraction of the value.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Context-rich prompting.</strong> Recall the desk from <a href="foundations.html#context-pillar">the Context pillar</a>: the model knows only what is in the window. A prompt that includes the background, the audience, the format you need, and the constraints you are under will beat a bare question every time — not because of magic phrasing, but because you put more of reality on the desk.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Steering with examples and roles.</strong> Showing the model one or two examples of the output you want (<em>few-shot</em> prompting) steers it harder than paragraphs of description. Assigning it a role ("you are an editor reviewing this for a general audience") reliably shifts tone and depth. These are the two cheapest steering levers that exist.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Spotting confident-but-wrong.</strong> The sealed box can only sound right — it cannot check anything. Some fraction of fluent, specific, confident output is false. The rung-1 judgment skill is treating fluency as zero evidence of truth, and verifying anything factual against a source outside the model before relying on it.</p></div>
+</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">Judgment at this rung</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The Judge Ladder's claim is that your remaining job at every rung is judgment. At rung 1, judgment is applied at maximum frequency: <strong>every sentence of every answer</strong> passes through you before it touches anything real. That sounds burdensome, and it is — but it is also the safest possible place to build the verification instinct, because nothing happens without you.</p>
+</section>
+
+<section data-screen-label="In practice" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">In practice</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 6px;">The weekly summary at rung 1</h2>
+<p style="font-style: italic; font-size: 14.5px; color: var(--color-neutral-700); margin-bottom: 18px;">The running example, one rung at a time: "Produce a weekly summary of what's happening in our field and send it to the team."</p>
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 18px 22px; display: grid; grid-template-columns: 150px 1fr; row-gap: 10px; column-gap: 16px; font-size: 14px; margin-bottom: 26px;">
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Tools</div><div>None</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">What it looks like</div><div>Paste three articles into the chat, get a summary out</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Who fires each action</div><div style="color: var(--color-accent-700);">You — every real-world step is yours</div>
+</div>
+<h3 style="font-weight: 600; font-size: 22px; margin: 0 0 10px;">The week, narrated</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">It's Friday. You open a browser and spend twenty minutes finding this week's three most relevant articles — the model can't search, so the finding is yours. You copy the text of each article and paste all three into the chat with a request: <em>"Summarize these three articles into five bullets for a busy team. Lead with what changed this week."</em></p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The model returns five bullets. Two are good. One is bland, so you ask it to sharpen that one with a number from the second article. One bullet contains a claim you don't remember reading — you go back to the article and check. It's there, slightly overstated; you ask for a more careful phrasing. That's iteration and verification, the whole rung-1 skillset, in one pass.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Satisfied, you copy the bullets out of the chat, open your email client, paste them in, write a subject line, pick the recipients, and hit send.</p>
+<h3 style="font-weight: 600; font-size: 22px; margin: 26px 0 10px;">What to notice</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Count what you did versus what the model did. You: found the articles, selected them, pasted them in, judged the output, verified a claim, copied the result out, addressed the email, sent it. The model: turned pasted text into other text — once per request, on your command.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The model touched nothing real. Every point of contact between this task and the world — inbound and outbound — was you. Hold onto that picture: from here to rung 5, the <em>task</em> never changes. Only which of those points of contact you hand over, and what you demand in exchange.</p>
+</section>
+
+<section data-screen-label="Competencies and gate" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Competencies</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Operating at this rung means you can</h2>
+<ul style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.7;">
+<li><strong>Iterate deliberately.</strong> Treat the first answer as a draft; run a tight loop of inspect → adjust → re-ask, and know when to stop.</li>
+<li><strong>Write context-rich prompts.</strong> Include background, audience, format, and constraints — put reality on the desk instead of hoping the model guesses it.</li>
+<li><strong>Steer with examples and roles.</strong> Use one or two examples (few-shot) to pin down format and tone; use role assignment to shift register and depth.</li>
+<li><strong>Spot confident-but-wrong output and verify it.</strong> Treat fluency as zero evidence of truth; check factual claims against a source outside the model before relying on them.</li>
+</ul>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">A concrete benchmark for the rung: given three pasted articles, produce a clean five-bullet summary you would actually stand behind — iterated into shape, factually checked.</p>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 20px 0; margin: 26px 0;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The gate out of rung 1</div>
+<p style="margin: 0 0 10px; font-family: var(--font-heading); font-style: italic; font-size: 24px; line-height: 1.35;">You instinctively verify factual output.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">Note what the gate is <em>not</em>: it is not prompting skill. Prompting skill is the capability of the rung; the gate is the judgment. Someone who writes brilliant prompts but forwards unverified claims has not cleared rung 1 — they have merely gotten faster at producing polished uncertainty. The gate is passed when checking has stopped being a step you remember and become a reflex you'd have to suppress. That reflex is the foundation everything above sits on: at rung 3 it becomes checking citations, at rung 4 reviewing an agent's output, at rung 5 reading audit trails. Same muscle, built here.</p>
+</div>
+</section>
+
+<section data-screen-label="Vocabulary" style="max-width: 760px; margin: 0 auto; padding: 32px 24px 24px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Vocabulary</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 6px;">Terms that first matter here</h2>
+<p style="font-size: 13.5px; color: var(--color-neutral-600); margin-bottom: 14px;">Foundational terms — LLM, prompt, token, context window, hallucination, verification, and the rest — live in <a href="foundations.html">Foundations</a>.</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Iteration.</strong> The deliberate loop of ask → inspect → adjust → re-ask. The single biggest behavioral difference between people who get value from chat AI and people who don't. The first answer is a starting position.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Zero-shot / few-shot.</strong> Zero-shot: asking for something with no examples, just a description. Few-shot: including one or more examples of the output you want in the prompt. Few-shot is the cheapest reliable way to control format and tone — an example outweighs a paragraph of instructions.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Persona / role prompting.</strong> Assigning the model a role — "you are an editor," "you are explaining this to someone new to the field" — to shift tone, depth, and what it chooses to emphasize. Not magic; just a compact way of putting a lot of implicit context on the desk in a few words.</p></div>
+</div>
+</section>
+
+<div style="max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; display: flex; justify-content: space-between; gap: 12px;">
+<a class="btn btn-secondary" href="foundations.html">← Foundations</a>
+<a class="btn btn-primary" href="rung-2.html">Rung 2 — Prompt workflows →</a>
+</div>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html" aria-current="page">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 40px;">
+<div style="max-width: 900px; margin: 0 auto;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Reference</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 10px 0 14px;">The framework, on one page</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; margin-top: 18px;">
+<a href="#one-pager">The one-pager</a><span style="color: var(--color-divider);">·</span>
+<a href="#glossary">Glossary</a><span style="color: var(--color-divider);">·</span>
+<a href="#comparison">How it relates to other frameworks</a>
+</div>
+</div>
+</header>
+
+<section id="one-pager" data-screen-label="One pager" style="max-width: 900px; margin: 0 auto; padding: 52px 24px 8px; scroll-margin-top: 70px;">
+<p style="font-family: var(--font-heading); font-style: italic; font-size: 22px; line-height: 1.45; max-width: 720px;">Five rungs, one moving part: where the human sits relative to the loop. At every rung, the remaining human job is judgment; each rung moves where judgment is applied.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 34px 0 14px;">The ladder</h2>
+<div style="overflow-x: auto;">
+<table class="table" style="min-width: 720px;">
+<thead><tr><th style="width: 6%;">Rung</th><th style="width: 20%;">Name</th><th style="width: 22%;">Your role</th><th style="width: 22%;">Judgment applied to</th><th>The gate to stand here</th></tr></thead>
+<tbody>
+<tr><td style="font-feature-settings: 'tnum';">1</td><td><a href="rung-1.html">Chat</a></td><td>Drive every turn</td><td>Every sentence</td><td>You instinctively verify factual output</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">2</td><td><a href="rung-2.html">Prompt workflows</a></td><td>Chain the steps by hand</td><td>The pipeline design</td><td>You reuse instead of rewriting — and feel the copy-paste friction</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">3</td><td><a href="rung-3.html">Supervised action</a></td><td>Approve each action</td><td>Each real-world action</td><td>You act safely AND can state where your data goes</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">4</td><td><a href="rung-4.html">Single-purpose agent</a></td><td>Set the goal, review the result</td><td>The handoff and the review</td><td>You trust the gate enough not to watch — but still review</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">5</td><td><a href="rung-5.html">Autonomous / multi-agent</a></td><td>Set guardrails, audit after</td><td>The system's boundaries</td><td>You can recognize and govern (building optional)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 40px 0 8px;">One task up the ladder</h2>
+<p style="font-style: italic; font-size: 14.5px; color: var(--color-neutral-700); margin-bottom: 14px;">"Produce a weekly summary of what's happening in our field and send it to the team."</p>
+<div style="overflow-x: auto;">
+<table class="table" style="min-width: 720px;">
+<thead><tr><th style="width: 6%;">Rung</th><th style="width: 18%;">Tools</th><th style="width: 46%;">What it looks like</th><th>Who fires each action</th></tr></thead>
+<tbody>
+<tr><td style="font-feature-settings: 'tnum';">1</td><td>None</td><td>Paste 3 articles in, get summary; you find and send everything</td><td>You — every real-world step</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">2</td><td>None</td><td>Saved reusable templates; you still paste in and copy out</td><td>You — you are the wiring between steps</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">3</td><td>Web search, email</td><td>AI searches → you approve → drafts → offers to send → you approve</td><td>You, each action</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">4</td><td>Same tools</td><td>"Every Friday, compile the summary" — runs its own searches, reads last week's notes, drafts</td><td>The AI; you set the goal, review before send</td></tr>
+<tr><td style="font-feature-settings: 'tnum';">5</td><td>Same tools</td><td>Runs Friday alone — gather, fact-check, format/send agents; you see it after, or on a guardrail trip</td><td>The AI runs the loop; you set boundaries, audit</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); margin-top: 14px; text-align: justify; hyphens: auto;"><strong>Read the table vertically:</strong> rungs 1–2 have zero tools (a sealed box). The same tools appear at rung 3 and never change through rung 5. The only column that keeps moving is the last one — <em>whose hand is on the trigger</em>. That is the entire framework.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0;">
+<div>
+<h3 style="font-weight: 600; font-size: 21px; margin: 0 0 10px;">Three structural facts</h3>
+<ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.65;">
+<li><strong>Rungs 1–2 are a sealed box</strong> — no tools; the model knows only what's pasted in; you are its hands and courier.</li>
+<li><strong>The box opens at rung 3, and the tools never leave</strong> — nothing new is bolted on above rung 3.</li>
+<li><strong>Rung 3 → 4 is the pivot:</strong> you stop approving each action and start approving the goal.</li>
+</ol>
+</div>
+<div>
+<h3 style="font-weight: 600; font-size: 21px; margin: 0 0 10px;">The two pairs to remember</h3>
+<ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.65;">
+<li><strong>Human-IN-the-loop (r3) vs. human-ON-the-loop (r5).</strong> Approval inside the loop vs. supervision around it. The whole autonomy story in two prepositions.</li>
+<li><strong>Grounding vs. hallucination.</strong> A sealed model can only sound right; a tool-equipped model can check. The reason tools exist.</li>
+</ul>
+</div>
+</div>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 20px 0; margin-bottom: 24px;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The standing job description</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;">The model is stateless and its attention rots — so at every rung, your job includes deciding what deserves to be on its desk. By hand at rung 1 (prompting); by design at rung 2 (templates); by retrieval at rung 3 (RAG); by memory and compaction at rung 4; by policy at rung 5.</p>
+</div>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;"><strong>Applying it:</strong> pick one recurring task from your own work. Rebuild the second table for it, rung by rung — <a href="worksheet.html">the worksheet</a> is the blank. Climb only when a rung's gate is true of you, and remember that every gate is a restraint: verify, reuse, account, review, audit. Capability and judgment climb together, or the ladder tips.</p>
+</section>
+
+<section id="glossary" data-screen-label="Glossary" style="border-top: 1px solid var(--color-divider); background: var(--color-surface); scroll-margin-top: 70px;">
+<div style="max-width: 900px; margin: 0 auto; padding: 56px 24px 64px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Never abridged</div>
+<h2 style="font-weight: 400; font-size: 42px; margin: 10px 0 10px;">Glossary</h2>
+<p style="font-size: 14.5px; line-height: 1.7; color: var(--color-neutral-700); max-width: 640px; text-align: justify; hyphens: auto;">Every term in the framework, grouped by the rung where it first matters. Elsewhere on this site, terms appear only when needed; here, everything appears, defined completely, whatever your role or reading path.</p>
+<sc-for list="{{ glossary }}" as="grp" hint-placeholder-count="6">
+<div style="margin-top: 34px;">
+<h3 style="font-weight: 600; font-size: 22px; margin: 0 0 4px; color: var(--color-accent-700);">{{ grp.title }}</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 32px;">
+<sc-for list="{{ grp.terms }}" as="t" hint-placeholder-count="6">
+<div style="border-top: 1px solid var(--color-divider); padding: 12px 0;"><p style="margin: 0; font-size: 13.5px; line-height: 1.65;"><strong style="font-family: var(--font-heading); font-size: 15.5px;">{{ t.term }}</strong> {{ t.def }}</p></div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
+<div class="card" style="background: var(--color-bg);">
+<div class="card-kicker">The escalating terms</div>
+<p class="card-body" style="font-size: 13.5px;">Several ideas deliberately reappear up the ladder in stronger forms: <strong>logging</strong> (r3) → <strong>observability / audit log</strong> (r5); <strong>prompt injection</strong> (r3) → <strong>indirect prompt injection</strong> (r4); <strong>context window</strong> (foundations) → <strong>context engineering</strong> (r2) → <strong>RAG</strong> (r3) → <strong>memory, compaction, caching</strong> (r4).</p>
+</div>
+<div class="card" style="background: var(--color-bg);">
+<div class="card-kicker">The two load-bearing pairs</div>
+<p class="card-body" style="font-size: 13.5px;">If you remember only two things: <strong>human-in-the-loop vs. human-on-the-loop</strong> — the whole autonomy story in two prepositions — and <strong>grounding vs. hallucination</strong> — the reason tools exist. Everything else in this glossary hangs off one of those two.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="comparison" data-screen-label="Framework comparison" style="max-width: 900px; margin: 0 auto; padding: 56px 24px 56px; scroll-margin-top: 70px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">"Is there a standard for this?"</div>
+<h2 style="font-weight: 400; font-size: 42px; margin: 10px 0 10px;">How the ladder relates to other frameworks</h2>
+<p style="font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 700px;">Reasonable question; short answer: there are several public framings, none of which does the Judge Ladder's specific job — describing <strong>an individual's changing role</strong> relative to the task loop. Here is how the ladder sits against the ones you are most likely to encounter.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 32px 0 10px;">OpenAI's five levels — organizational scale, not individual practice</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">OpenAI has described a five-level progression: <strong>Chatbots → Reasoners → Agents → Innovators → Organizations.</strong> It is the framing you will most often meet in the press. The essential difference: OpenAI's levels describe <strong>what AI systems can do</strong>, culminating in AI operating at the scale of whole organizations. The Judge Ladder describes <strong>what one person does</strong> — where a single worker's hand and judgment sit as they delegate one task. The frameworks answer different questions, and both questions are real.</p>
+<table class="table" style="max-width: 640px; margin: 16px 0;">
+<thead><tr><th>Judge Ladder</th><th>OpenAI levels</th></tr></thead>
+<tbody>
+<tr><td>Rung 1 (Chat), Rung 2 (Prompt workflows)</td><td>L1 "Chatbots" (with L2 "Reasoners" as the improving engine underneath)</td></tr>
+<tr><td>Rung 3 (Supervised action)</td><td>L3 "Agents"</td></tr>
+<tr><td>Rung 4 (Single-purpose agent)</td><td>L3 "Agents"</td></tr>
+<tr><td>Rung 5 (Autonomous / multi-agent)</td><td>No clean equivalent</td></tr>
+</tbody>
+</table>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Rungs 3 and 4 both land on OpenAI's "Agents."</strong> Their L3 does not distinguish approving-each-action from delegating-the-goal. The Judge Ladder splits exactly there — because that is precisely where individuals get confused, and where the practical experience of using AI changes most. The ladder is deliberately more granular exactly where people need granularity. That is a feature, not a disagreement.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Rung 5 maps to nothing.</strong> OpenAI's L4 ("Innovators") and L5 ("Organizations") describe model capabilities that do not yet exist in anyone's hands. Rung 5 describes a <em>practice</em> that exists today: multi-agent pipelines running under guardrails with humans on the loop. A capability forecast and a practice description simply pass each other at that altitude.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 32px 0 10px;">Dan Shapiro's five levels — closest in spirit, scoped to coding</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Shapiro's five-level model of AI-assisted software development (consciously modeled on the NHTSA driving-autonomy levels, running to a fully "Dark Factory" end state) is the framework closest to the ladder in spirit: it is organized around <strong>the human's changing role</strong>, not the machine's capability, and its narration of how each level <em>feels</em> to the person living it is excellent. The difference is scope: Shapiro's levels are specifically about writing software. The Judge Ladder generalizes the same instinct to any recurring knowledge task. If you are a developer, read his levels as a domain-specific companion piece.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 32px 0 10px;">The "five asks" list — an orthogonal axis, not a sixth rung</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">A list circulates widely on LinkedIn in several variants: use AI to <em>do this for me / do this with me / help me think / find my blind spots / challenge my thinking</em>. It doesn't fit on the ladder — and that is the interesting thing about it. The five asks classify <strong>the type of intellectual work</strong> you request; the ladder classifies <strong>the autonomy arrangement</strong> you delegate under. The axes are orthogonal, and every combination is real: you can ask "challenge my thinking" of a sealed rung-1 chat, and a rung-5 pipeline can exist whose entire job is finding blind spots in your team's weekly output. Used as a cross-cutting lens, the list is genuinely useful at any rung. Just never mistake it for a level: it is a second dimension, not a higher rung.</p>
+
+<h3 style="font-weight: 600; font-size: 23px; margin: 32px 0 12px;">Summary</h3>
+<div style="overflow-x: auto;">
+<table class="table" style="min-width: 680px;">
+<thead><tr><th>Framework</th><th>Organizing principle</th><th>Scope</th><th>Relation to the ladder</th></tr></thead>
+<tbody>
+<tr><td><strong>Judge Ladder</strong></td><td>Where the human sits relative to the loop</td><td>Any individual's recurring task</td><td>—</td></tr>
+<tr><td>OpenAI five levels</td><td>AI capability</td><td>Field-wide / organizational</td><td>Vocabulary bridge; rungs 3–4 both = their "Agents"; rung 5 has no equivalent</td></tr>
+<tr><td>Shapiro's five levels</td><td>The human's changing role</td><td>Software development</td><td>Closest in spirit; domain-specific companion</td></tr>
+<tr><td>"Five asks" list</td><td>Type of intellectual work</td><td>Any single request</td><td>Orthogonal axis; a lens for every rung, never a rung</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const GLOSSARY = [
+  { title: 'Foundations (before rung 1)', terms: [
+    ['LLM (large language model).', 'An AI model trained on enormous amounts of text that produces text in response to text. The engine inside chatbots, assistants, and agents alike.'],
+    ['Model.', 'The trained artifact that turns input into output. Distinct from the app wrapped around it.'],
+    ['Inference.', 'Running the model: input in, output out. Training happens once, in advance; inference happens every time you press enter.'],
+    ['Prompt.', 'The entire input sent to the model in a turn — instructions, question, examples, pasted material, all of it.'],
+    ['Token.', 'The unit models read and write; roughly three-quarters of an English word. Context sizes and usage costs are measured in tokens.'],
+    ['Context window.', "The model's fixed-size working area, in tokens. Everything the model can consider in a turn must fit in it; anything outside it does not exist for the model."],
+    ['System prompt.', "Standing instructions given to the model before the user's message, usually invisible in products. Why the same model behaves differently in different apps."],
+    ['Hallucination.', 'Confident, fluent, wrong output — a structural property of models, not a glitch. A sealed model cannot check anything; it can only produce plausible text, and some plausible text is false.'],
+    ['Verification.', 'Checking factual output against something outside the model before relying on it. The first judgment skill of the ladder and the muscle behind every later gate.'],
+  ]},
+  { title: 'The Context pillar', terms: [
+    ['Stateless model.', 'The model has no memory. Every turn it wakes with amnesia and re-reads everything; its context window is its entire reality for that turn.'],
+    ['Context engineering.', 'Deliberately curating what goes into the context window — the successor discipline to prompt engineering. Named formally at rung 2, practiced (under different names) at every rung.'],
+    ['Context rot.', 'Output quality degrades as context grows, well below the advertised window size. Chroma technical report (Hong, Troynikov & Huber, July 2025): 18 frontier models tested, all degrade non-uniformly, sometimes 30–50%. A fuller desk is a worse desk.'],
+    ['Lost in the middle.', 'Attention is U-shaped — strong at the start and end of context, weak in the middle. Liu et al. (Stanford, TACL 2024): 30%+ accuracy drop when the key fact sits mid-context.'],
+    ['Distractor interference.', 'Similar-but-irrelevant content actively misleads the model — the specific reason "dump everything in" backfires.'],
+    ['Effective vs. advertised context.', 'The context size at which a model stays reliably accurate is far below the marketed limit — think ~150–400K effective tokens on models advertising 2M. Budget to the effective number.'],
+    ['Truncation / eviction.', 'When a conversation outgrows the window, the oldest material silently falls off — why long chats forget their beginnings.'],
+  ]},
+  { title: 'Rung 1 — Chat', terms: [
+    ['Iteration.', 'The deliberate loop of ask → inspect → adjust → re-ask. The first answer is a draft.'],
+    ['Zero-shot / few-shot.', 'Asking without examples vs. including one or more examples of the desired output. Few-shot is the cheapest reliable way to control format and tone.'],
+    ['Persona / role prompting.', 'Assigning the model a role to shift tone, depth, and emphasis — a compact way to load implicit context.'],
+  ]},
+  { title: 'Rung 2 — Prompt workflows', terms: [
+    ['Prompt template.', "A saved prompt with slots: fixed instructions and examples, a blank for this time's material. The unit of reuse."],
+    ['Decomposition.', 'Breaking a recurring task into named stages, each handled by a focused prompt. Reappears at rung 5 as the logic of multi-agent design.'],
+    ['Prompt chaining.', "Feeding one prompt's output into the next prompt's input; at rung 2, the human is the connective tissue."],
+    ['Structured output.', 'Output demanded in an exact shape (counts, columns, formats) so downstream steps can consume it reliably.'],
+  ]},
+  { title: 'Rung 3 — Supervised action', terms: [
+    ['Tool / function calling.', 'The mechanism by which a model requests that an external tool be run and incorporates the result. Shared by rungs 3–5; supervision, not mechanism, is what varies.'],
+    ['Grounding.', 'Tying output to retrieved, checkable sources. The reason tools exist; paired against hallucination.'],
+    ['Retrieval / RAG.', "Fetching relevant documents onto the model's desk before answering — context management, per question. Complement to long context, not competitor."],
+    ['Connector / integration.', 'A configured link between an AI and a real service. Every connector is a capability and a data pathway at once.'],
+    ['Human-in-the-loop.', 'A human approval inside the action loop; nothing fires without a person. Paired against human-on-the-loop (rung 5).'],
+    ['Citation.', 'A pointer from claim to source. A citation is a claim, not proof — follow it.'],
+    ['Closed weights (cloud/API).', 'Model as a service; you never hold the model; data round-trips to the provider.'],
+    ['Open weights.', 'Published model weights anyone can download and run. Open weights ≠ open source.'],
+    ['Cloud / SaaS.', "Software consumed as someone else's hosted service."],
+    ['On-prem / self-hosted.', 'Software (including models) run on machines you control.'],
+    ['Local inference.', 'Running a model on your own device; data never leaves it.'],
+    ['Quantization.', 'Compressing a model to run on smaller hardware at some quality cost; what makes local inference practical.'],
+    ['Data residency / sovereignty.', 'Where data physically and legally lives, and whose law applies.'],
+    ['Prompt injection.', 'Hostile instructions embedded in content the model reads. Escalates at rung 4 to indirect injection.'],
+    ['Data poisoning.', "Corrupting a model's training data or a retrieval source it depends on."],
+    ['Jailbreak.', 'A user crafting input to push a model past its safety rules. Distinct from injection (third-party content subverting the model against its user).'],
+    ['Data exfiltration / leakage.', 'Data leaving where it belongs — via the wrong tool, a log, or an attack.'],
+    ['Credentials / secrets management.', 'Handling passwords, tokens, and keys. Minimum standard: never in a chat; narrowest grants everywhere.'],
+    ['Container (Docker/Podman).', 'A packaged, portable unit of software plus dependencies.'],
+    ['Endpoint.', 'An address where a service accepts requests.'],
+    ['Environment (dev/staging/prod).', 'Separated copies of a system for experimenting, rehearsing, and running for real.'],
+    ['Deployment.', 'Putting a new version live.'],
+    ['Rollback.', 'Reverting to the previous version when a deployment goes wrong.'],
+    ['Version control (Git).', 'Tracked, reversible change history — for code, prompts, and configurations.'],
+    ['Logging / monitoring.', 'Recording what a system did; watching for problems. Grows into observability/audit trails at rung 5.'],
+  ]},
+  { title: 'Rung 4 — Single-purpose agent', terms: [
+    ['Agent.', 'A tool-using AI whose actions fire on its own decision in pursuit of a goal you set. Same tools as rung 3; the trigger hand moved.'],
+    ['Agent loop (plan → act → observe).', 'The repeating cycle of a running agent. At rung 3 a human sits inside it; at rung 4 it closes without one.'],
+    ['Orchestration.', 'Coordinating steps (rung 4) or multiple agents (rung 5) into a coherent run.'],
+    ['Persistent memory.', 'Storage read and written across runs. Memory is across windows; context is within one. Exists because the model is stateless and context rots.'],
+    ['Compaction / summarization.', 'An agent condensing its own history to keep its context useful over a long run.'],
+    ['Autonomy (gated / bounded).', 'Free action within set boundaries, stopping at a kept human checkpoint.'],
+    ['Approval gate.', 'The deliberately retained human checkpoint, placed where actions become hard to reverse.'],
+    ['MCP (Model Context Protocol).', 'A standard for connecting AI to tools and data — "a USB port for agent tools": build once, plug into anything that speaks it.'],
+    ['Least privilege.', 'Grant the narrowest access that does the job; unneeded permissions are pure attack surface.'],
+    ['Sandboxing.', 'Running an agent in a contained space where its mistakes stay contained.'],
+    ['Indirect prompt injection.', 'Injection via content an autonomous agent reads with no human watching. The realistic failure mode of agents.'],
+    ['KV cache.', '(Technical track.) The working structure a model builds over its context during one generation; grows with context, lives in GPU memory. Why long context is slow and hardware-hungry.'],
+    ['Prompt caching.', '(Technical track.) Reusing the KV cache across requests sharing a long prefix. A first-order cost lever for agent loops.'],
+  ]},
+  { title: 'Rung 5 — Autonomous / multi-agent', terms: [
+    ['Multi-agent system.', 'Cooperating single-purpose agents composed into a pipeline — decomposition, promoted from prompts to agents.'],
+    ['Orchestrator / supervisor.', 'The component coordinating a multi-agent run: sequencing, routing, failure handling.'],
+    ['Handoff.', 'The structured transfer of work from one agent to the next.'],
+    ['Guardrails.', 'Hard limits enforced by the system rather than a watching human — an approval gate, written down and automated.'],
+    ['Autonomy matrix / policy.', 'The explicit mapping of actions to permissions: may do alone / must escalate / must never.'],
+    ['Human-on-the-loop.', 'Supervision after and around the loop rather than inside it: monitor the record, intervene on escalation.'],
+    ['Observability / audit log.', 'The complete record of what a system did. The final form of rung-3 logging; the medium of on-the-loop supervision.'],
+    ['Drift.', 'Behavior sliding away from intent across runs with no single run visibly wrong. Visible only to someone reading across the record.'],
+    ['Self-correction / feedback loop.', "Agents checking and repairing each other's work within a run. Raises average quality; does not replace external audit."],
+    ['Escalation.', 'The designed path by which a system (or a person) stops and hands a decision up to someone with the authority to make it.'],
+  ]},
+];
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      glossary: GLOSSARY.map(g => ({ title: g.title, terms: g.terms.map(t => ({ term: t[0], def: t[1] })) })),
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>

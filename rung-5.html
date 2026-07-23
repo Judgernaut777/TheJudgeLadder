@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/styles.css">
+<script src="_ds/classical-5f257498-4081-40d4-8710-f0c98b4d6d30/_ds_bundle.js"></script>
+<style>
+body{margin:0}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+body.jl-dark{--color-bg:#1c1a17;--color-surface:#262320;--color-text:#ece9e4;--color-divider:color-mix(in srgb,#ece9e4 18%,transparent);--color-neutral-100:#262320;--color-neutral-200:#2e2b27;--color-neutral-300:#3b372f;--color-neutral-400:#57524a;--color-neutral-500:#7d786e;--color-neutral-600:#a29c8f;--color-neutral-700:#c2bcb0;--color-neutral-800:#d9d4c9;--color-neutral-900:#ece9e4;--color-accent:#c99a52;--color-accent-100:#3a270d;--color-accent-200:#5a3b0a;--color-accent-600:#d8b070;--color-accent-700:#e1ad66;--color-accent-800:#facb8d;--shadow-sm:0 1px 2px rgba(0,0,0,.5);--shadow-md:0 3px 10px rgba(0,0,0,.5);--shadow-lg:0 12px 32px rgba(0,0,0,.6)}
+body.jl-dark a{color:var(--color-accent-700)}
+</style>
+<script>if(localStorage.getItem('jl-theme')!=='light')document.body.classList.add('jl-dark')</script>
+</helmet>
+<nav class="nav" style="position: sticky; top: 0; z-index: 50; background: var(--color-bg); padding: 13px 28px; flex-wrap: wrap;">
+<a href="index.html" style="display: flex; align-items: center; gap: 11px; margin-right: auto;">
+<svg width="16" height="36" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="3.5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="2"></line></svg>
+<span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; color: var(--color-text);">The Judge Ladder<span style="font-size: 9px; vertical-align: super;">™</span></span>
+</a>
+<span style="display: inline-flex; gap: 5px; align-items: center;">
+<a href="foundations.html" title="Rung 0 — Foundations" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">0</a>
+<a href="rung-1.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">1</a>
+<a href="rung-2.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">2</a>
+<a href="rung-3.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">3</a>
+<a href="rung-4.html" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: var(--radius-md); font-size: 12.5px;">4</a>
+<a href="rung-5.html" aria-current="page" style="display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-size: 12.5px;">5</a>
+</span>
+<a href="worksheet.html">Worksheet</a>
+<a href="reference.html">Reference</a>
+<a href="tracks.html">Tracks</a>
+<a href="about.html">About</a>
+<button class="btn btn-icon btn-secondary" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode">
+<sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+<sc-if value="{{ light }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+</button>
+</nav>
+
+<header style="border-bottom: 1px solid var(--color-divider); padding: 64px 24px 48px;">
+<div style="max-width: 760px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start;">
+<div style="font-family: var(--font-heading); font-weight: 400; font-size: 110px; line-height: 0.9; color: var(--color-accent); font-feature-settings: 'tnum';">5</div>
+<div>
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Rung five · The top of the ladder</div>
+<h1 style="font-weight: 400; font-size: 52px; margin: 8px 0 10px;">Autonomous / multi-agent</h1>
+<p style="font-family: var(--font-heading); font-style: italic; font-size: 21px; margin: 0 0 10px;">Your role: you set guardrails, audit after.</p>
+<p style="font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto; max-width: 560px;">At rung 4 you kept one hand on the system: the approval gate. Rung 5 removes that last synchronous touch. The system runs on its own schedule, end to end — and instead of approving outputs before they ship, you <strong>set the boundaries in advance and inspect the record afterward</strong>.</p>
+</div>
+</div>
+</header>
+
+<section data-screen-label="The idea" style="max-width: 760px; margin: 0 auto; padding: 52px 24px 8px;">
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">The preposition flips here: rung 3 was human-<strong>in</strong>-the-loop; rung 5 is human-<strong>on</strong>-the-loop. You are no longer a component the loop passes through. You are the supervisor it reports to.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 30px 0 14px;">Why "multi-agent"</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Work at this rung is typically decomposed across several cooperating agents rather than one. The weekly-summary pipeline becomes: a <strong>gather</strong> agent that finds and reads sources, a <strong>fact-check</strong> agent that verifies the draft's claims against its citations, a <strong>format-and-send</strong> agent that produces and dispatches the email. An <strong>orchestrator</strong> coordinates them, passing work from one to the next in <strong>handoffs</strong>.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">This should feel familiar rather than exotic — it is rung 2's decomposition lesson, promoted. Back then you learned that small single-purpose prompts beat one mega-prompt; the same logic, applied to agents, says small single-purpose agents beat one do-everything agent. Each stays focused, each keeps a small desk (the Context pillar never stops applying), and — critically — each can hold a <em>different perspective</em>: a fact-check agent whose entire job is doubting the gather agent's draft is structurally more skeptical than one agent grading its own homework.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">And to say it one final time: these agents use the <strong>same tools that appeared at rung 3</strong>. Search, email. Five rungs, one tool set, and the only thing that ever moved was the hand on the trigger.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">What replaces the gate</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Removing the human checkpoint does not mean removing control. It means control changes tense — from <em>before</em> (approve this) to <em>around</em> (operate inside this) and <em>after</em> (account for what you did):</p>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Guardrails.</strong> Hard limits enforced by the system, not by a watching human: only send to the team list; never exceed N sources; if fact-check confidence is low, stop. A guardrail is your rung-4 gate, written down and automated.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Autonomy policy.</strong> The explicit decision, action by action, of what the system may do alone, what it must escalate to a human, and what it must never do. At rung 4 this lived in one gate; at rung 5 it becomes a written matrix, because nobody is present to improvise the answer.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Escalation on trip.</strong> When a guardrail trips, the system stops and a human gets pulled in. The design goal of rung 5 is not "no humans ever" — it is "humans exactly when the boundaries say so."</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Observability and the audit trail.</strong> The record of everything the system did: what it retrieved, what each agent decided, what tripped, what shipped. This is rung 3's humble "logging" grown into its final form — and it is where <em>your</em> remaining work lives. On-the-loop supervision <em>is</em> reading this record well: skimming normal runs, drilling into anomalies, noticing <strong>drift</strong> — the slow slide of behavior away from intent that no single run makes obvious.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 15px 0;"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 17px;">Self-correction.</strong> Well-built rung-5 systems check and repair their own work — the fact-check agent bouncing a bad draft back to the gather agent. This raises average quality; it does not replace the audit. A system that grades its own homework still needs someone reading the gradebook.</p></div>
+</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">Shown, not built</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">An honest framing note: <strong>most people should aim to recognize and govern rung-5 systems, not to construct them.</strong> Building multi-agent pipelines is real engineering. But systems like this are rapidly becoming things ordinary workers <em>encounter</em> — a pipeline someone else built, running in your workplace, touching your work.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">For that reason the bar at this rung is deliberately different from the rungs below. Rungs 1–4 asked you to <em>do</em>. Rung 5 asks you to <em>judge from outside</em>: read an autonomy policy and see what it actually permits; read an audit trail and reconstruct what happened; look at an output that arrived with no human in its history and know which questions to ask. That is not a consolation prize — at this rung, governing well <em>is</em> the scarce skill.</p>
+<h2 style="font-weight: 400; font-size: 32px; margin: 36px 0 14px;">Judgment at this rung</h2>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Judgment reaches its final altitude: <strong>the boundaries of the system itself.</strong> Are the guardrails the right guardrails? Is the autonomy policy drawn where reversibility and stakes say it should be? Does the audit trail actually capture what you'd need to catch drift? Nothing about the day-to-day output passes through you anymore — which is precisely why the quality of the boundaries, and the discipline of the after-the-fact review, is everything. The Judge's job was never to turn every screw. It was to make sure the machine answers to someone.</p>
+</section>
+
+<section data-screen-label="In practice" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">In practice</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 18px;">The weekly summary at rung 5</h2>
+<div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 18px 22px; display: grid; grid-template-columns: 150px 1fr; row-gap: 10px; column-gap: 16px; font-size: 14px; margin-bottom: 26px;">
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Tools</div><div>Same as rungs 3–4 — web search, email. Still nothing new.</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">What it looks like</div><div>Runs Friday on its own — gather agent, fact-check agent, format/send agent; you see it after the fact, or when a guardrail trips</div>
+<div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-600);">Who fires each action</div><div style="color: var(--color-accent-700);">The AI runs the loop; you set the boundaries and audit the record</div>
+</div>
+<h3 style="font-weight: 600; font-size: 22px; margin: 0 0 10px;">The system, described once</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Three agents and an orchestrator, configured with a written autonomy policy:</p>
+<ul style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.65;">
+<li><strong>Gather agent</strong> — searches the week, selects sources, drafts five cited bullets. May: search freely, read freely. May not: touch email.</li>
+<li><strong>Fact-check agent</strong> — takes the draft, follows every citation, verifies each bullet against its source. May: re-search to verify. Must: bounce mismatches back to the gather agent (self-correction), and <em>stop the pipeline</em> if a bullet still fails verification after one bounce — that's a guardrail trip.</li>
+<li><strong>Format/send agent</strong> — formats the approved draft and sends it. May send <strong>only</strong> to the team list; any other recipient is a hard guardrail stop. This is also the only agent with send rights — least privilege, now distributed across the pipeline.</li>
+<li><strong>Escalation rule:</strong> any trip pauses the run and messages you with the audit trail attached.</li>
+</ul>
+<h3 style="font-weight: 600; font-size: 22px; margin: 26px 0 10px;">The week, narrated</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Friday, 8:00 a.m. You are on vacation. The pipeline runs: gather drafts, fact-check follows all five citations, one bullet overstates its source, bounce, redraft, verify clean, format, send. The team gets its summary at 8:14. You were asleep. <strong>You see nothing, and nothing needed you</strong> — that is the designed normal.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Tuesday, back at your desk, you do your rung-5 work: fifteen minutes with the audit trails from the last two runs. You skim the normal one. In Friday's you notice the bounce — read what the fact-checker caught, agree with its call. You also notice the gather agent has cited the same publication in nine of the last ten runs. No rule broken. But that's <strong>drift</strong> — the summary is quietly becoming a single-source digest — and no individual run would ever have shown it. You adjust the gather agent's instructions to require source diversity. That adjustment <em>is</em> on-the-loop supervision: a boundary tightened because the record was actually read.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;">Three Fridays later, your phone buzzes: <strong>guardrail trip.</strong> The gather agent picked up an article that — buried mid-page — contained instruction-shaped text asking the reader to forward the summary to an outside address. The injected instruction survived into the draft's metadata; the format/send agent hit the recipients-must-be-team-list guardrail and the pipeline froze. You read the trail, confirm the injection attempt, drop the source from the allowed pool, and restart the run. The email that would have leaked was never sent — not because you were watching, but because the boundary you wrote eight months ago was.</p>
+<h3 style="font-weight: 600; font-size: 22px; margin: 26px 0 10px;">What to notice</h3>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Your absence is the feature; your boundaries are the control.</strong> Every safety property in Friday's saves — the verification bounce, the recipient stop, the escalation to your phone — was authored by you, in advance, in the autonomy policy. Rung 5 doesn't remove human judgment; it <em>front-loads</em> it.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>The audit is real work, and it caught what no gate could.</strong> The drift toward a single source would have sailed through any per-run review — each individual summary was fine. Only the pattern across runs showed it, and only because someone read across runs. That reading is the rung-5 skill.</p>
+<p style="font-size: 15px; line-height: 1.75; text-align: justify; hyphens: auto;"><strong>Count the humans in the loop: zero. Count the humans on the loop: one. That one matters.</strong></p>
+</section>
+
+<section data-screen-label="Competencies and gate" style="max-width: 760px; margin: 0 auto; padding: 40px 24px 8px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Competencies</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Operating at this rung means you can</h2>
+<ul style="margin: 0 0 18px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.7;">
+<li><strong>Read a multi-agent design.</strong> Look at a pipeline of cooperating agents and identify the decomposition: which agent does what, what each is permitted, where the handoffs are, which agent holds which privileges.</li>
+<li><strong>Write (or critique) guardrails and an autonomy policy.</strong> State, action by action, what a system may do alone, what it must escalate, and what it must never do — with the boundaries drawn where stakes and irreversibility say they belong.</li>
+<li><strong>Supervise on-the-loop.</strong> Read audit trails as a practice: skim normal runs, drill into anomalies, and catch cross-run drift that no single run reveals.</li>
+<li><strong>Judge an autonomous output from outside.</strong> When work arrives with no human in its history, know the questions: what system produced this, under what policy, with what verification, and where is the record?</li>
+</ul>
+<p style="font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">A concrete benchmark for the rung: a pipeline that runs a full cycle of the recurring task with humans touched only on guardrail trips — and, for most people, the ability to <em>specify and audit</em> such a pipeline matters more than the ability to assemble it.</p>
+<div style="border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); padding: 20px 0; margin: 26px 0;">
+<div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); margin-bottom: 6px;">The gate at the top</div>
+<p style="margin: 0 0 10px; font-family: var(--font-heading); font-style: italic; font-size: 24px; line-height: 1.35;">For most people: recognize and govern — not build.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; color: var(--color-neutral-700); text-align: justify; hyphens: auto;">This is the only rung whose gate is explicitly split by role. Builders exist, and for them the bar includes construction. But the framework's claim is that the scarce, broadly-needed skill at rung 5 is <strong>governance</strong>: the ability to look at an autonomous system and determine whether it is answerable — right guardrails, sane autonomy policy, legible audit trail, drift being caught. The restraint pattern of every gate reaches its endpoint here. Rung 1's gate was verifying a sentence; rung 4's was reviewing a result; rung 5's is auditing a system. Each time, capability grew and the gate demanded that judgment grow to match. A person who clears this gate can sit in front of the most autonomous configuration this framework describes and still answer the question the whole ladder has been building toward: <em>who is judging this, and how?</em> — with, ultimately, their own name.</p>
+</div>
+</section>
+
+<section data-screen-label="Vocabulary" style="max-width: 760px; margin: 0 auto; padding: 32px 24px 24px;">
+<div style="font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent);">Vocabulary</div>
+<h2 style="font-weight: 400; font-size: 32px; margin: 10px 0 14px;">Terms that first matter here</h2>
+<div style="display: flex; flex-direction: column;">
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Multi-agent system.</strong> Several cooperating agents, each with a narrow job, composed into a pipeline. Rung 2's decomposition lesson promoted: smaller desks, clearer permissions, and structurally independent perspectives.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Orchestrator / supervisor.</strong> The component that coordinates a multi-agent run: sequencing agents, routing work between them, handling failures, enforcing the run's structure.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Handoff.</strong> The transfer of work from one agent to the next — the gather agent's draft passing to the fact-checker. Handoffs are where structure lives in a multi-agent system, and where structured output (rung 2) pays off one more time.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Guardrails.</strong> Hard limits enforced by the system rather than a watching human: allowed recipients, allowed sources, stop-conditions. A rung-4 approval gate, written down and automated.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Autonomy matrix / policy.</strong> The explicit, written mapping of actions to permissions: may do alone / must escalate / must never. Rung 5's core governance artifact — it exists because no human is present to improvise the answer.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Human-on-the-loop.</strong> The rung-5 supervision mode: the system runs without per-action or per-output human approval; a human monitors the record and intervenes on escalation. Completes the load-bearing pair with rung 3's human-<em>in</em>-the-loop.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Observability / audit log.</strong> The complete record of what the system did: retrievals, decisions, handoffs, trips, sends. The final form of the escalating idea that began as "logging" at rung 3. On-the-loop supervision is, concretely, the practice of reading this well.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Drift.</strong> The slow slide of a system's behavior away from intent — no rule broken, every run individually fine, the pattern wrong. Visible only across runs, which is why the audit practice exists.</p></div>
+<div style="border-top: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Self-correction / feedback loop.</strong> Agents checking and repairing each other's work inside the run — the fact-checker bouncing a bad draft for redrafting. Raises average quality; does not replace external audit.</p></div>
+<div style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 14px 0;"><p style="margin: 0; font-size: 14.5px; line-height: 1.7; text-align: justify; hyphens: auto;"><strong style="font-family: var(--font-heading); font-size: 16.5px;">Escalation.</strong> The designed path by which the system stops and summons a human — the guardrail trip's other half. The goal of rung 5 autonomy is not "no humans"; it is "humans exactly when the boundaries say so."</p></div>
+</div>
+</section>
+
+<div style="max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; display: flex; justify-content: space-between; gap: 12px;">
+<a class="btn btn-secondary" href="rung-4.html">← Rung 4 — Single-purpose agent</a>
+<a class="btn btn-primary" href="worksheet.html">Apply it: the worksheet →</a>
+</div>
+
+<footer style="border-top: 1px solid var(--color-divider);">
+<div style="max-width: 1060px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-600);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="11" height="24" viewBox="0 0 34 76" fill="none"><line x1="6" y1="2" x2="6" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="28" y1="2" x2="28" y2="74" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="10" x2="28" y2="10" stroke="#b68235" stroke-width="5"></line><line x1="6" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="38" x2="28" y2="38" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="52" x2="28" y2="52" stroke="currentColor" stroke-width="3"></line><line x1="6" y1="66" x2="28" y2="66" stroke="currentColor" stroke-width="3"></line></svg>
+<span><em>The Judge Ladder</em>™ is a trademark of Matthew Judge.</span>
+</div>
+<div>© 2026 Matthew Judge · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> · <a href="mailto:Matthew@cyberexperts.org">Matthew@cyberexperts.org</a></div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: true };
+  componentDidMount() { const d = localStorage.getItem('jl-theme') !== 'light'; document.body.classList.toggle('jl-dark', d); this.setState({ dark: d }); }
+  renderVals() {
+    return { dark: this.state.dark, light: !this.state.dark,
+      toggleTheme: () => { const d = !this.state.dark; document.body.classList.toggle('jl-dark', d); localStorage.setItem('jl-theme', d ? 'dark' : 'light'); this.setState({ dark: d }); } };
+  }
+}
+</script>
+</body>
+</html>
