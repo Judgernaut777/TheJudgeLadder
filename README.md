@@ -4,7 +4,6 @@
 
 Maybe you've never used an AI chatbot. Maybe you've tried one once and weren't sure what the fuss was about. Maybe you use one daily but suspect there's more. Wherever you're starting, this repo is a map of the whole journey — from your first conversation with an AI to confidently overseeing AI that does real work for you.
 
-
 ## The one idea behind everything
 
 Working with AI is a ladder with five rungs. What changes at each rung is **not the AI — it's you**: how much of the work you hand over, and where you apply your judgment. That's why it's called the Judge Ladder: at every rung, your job is judgment. Climbing just changes *where* you apply it.
@@ -25,7 +24,7 @@ Read these in order. The first two take about twenty minutes together.
 
 1. **[Foundations](00-foundations/README.md)** — the nine terms you need before anything else, in plain English.
 2. **[The Context pillar](00-foundations/the-context-pillar.md)** — the one big idea about how AI "remembers" (and doesn't). Ten minutes that will save you months of confusion.
-3. **[Rung 1: Chat](01-chat/README.md)** — open a free AI chat tool and actually begin.
+3. **[Rung 1: Chat](01-chat/README.md)** — open an AI chat tool and actually begin.
 4. **[The worksheet](worksheet.md)** — pick one recurring task from your own work. You'll carry it up the ladder with you; it's how the framework becomes real.
 
 Then climb: [rung 2](02-prompt-workflows/README.md) → [rung 3](03-supervised-action/README.md) → [rung 4](04-single-purpose-agent/README.md) → [rung 5](05-autonomous-multi-agent/README.md). Rungs 1–3 are where most of the value is for most people — don't rush past them. Each rung ends with a "gate": a short test of whether you're truly ready for the next one.
