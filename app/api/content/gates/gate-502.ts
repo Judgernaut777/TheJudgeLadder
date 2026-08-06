@@ -1,0 +1,91 @@
+// SERVER ONLY — contains answer keys. Never import from frontend code.
+import type { CourseGate } from "./gate-101-201";
+
+export const gate502: CourseGate = {
+  mcBank: [
+    { id: "502-mc-1", question: "Rung 5+ asks the question Rung 5 deferred:", options: ["How do we make it faster?", "Can the system account for itself — can the record it emits answer for what it did?", "Can we remove the remaining humans?", "How do we certify the vendor?"], answer: 1 },
+    { id: "502-mc-2", question: "A record 'accounts for itself' when:", options: ["It is stored securely", "A reviewer who was not present can reconstruct what happened, on what inputs, under which policy, and who intervened", "It is timestamped", "It is exported to a dashboard"], answer: 1 },
+    { id: "502-mc-3", question: "Logging outcomes without inputs is a defect because:", options: ["It wastes storage", "The decision cannot be reconstructed — you know what happened but not what it was based on", "Inputs are private", "Outcomes matter more"], answer: 1 },
+    { id: "502-mc-4", question: "Append-only, tamper-evident storage matters because:", options: ["It is cheaper", "A record that can be quietly edited after an incident is worse than no record — it manufactures confidence", "Regulators prefer it aesthetically", "It speeds queries"], answer: 1 },
+    { id: "502-mc-5", question: "A human override logged without a reason field:", options: ["Is fine — the override is what matters", "Breaks accountability — the intervention cannot be audited for judgment, only for existence", "Is the standard pattern", "Protects the human"], answer: 1 },
+    { id: "502-mc-6", question: "Deleting logs after a short retention window:", options: ["Is good data hygiene", "Destroys the system's ability to account for itself across the period incidents are actually discovered", "Is required by privacy law in all cases", "Only matters for large systems"], answer: 1 },
+    { id: "502-mc-7", question: "Each record should link to the policy version in force because:", options: ["It fills the schema", "Policy changes over time — a decision is judgeable only against the rules that governed it at the time", "Auditors like metadata", "It helps debugging"], answer: 1 },
+    { id: "502-mc-8", question: "Self-check results that are recorded but never reviewed are:", options: ["A working control", "Governance theater — the audit loop is open, and an open loop detects nothing", "The team's responsibility, not the system's", "Sufficient for certification"], answer: 1 },
+    { id: "502-mc-9", question: "PII appearing unredacted in operational logs is:", options: ["Unavoidable", "A data-handling defect — the audit trail itself becomes a leak path", "Fine internally", "The DPO's problem only"], answer: 1 },
+    { id: "502-mc-10", question: "Replaying a sample of records against current policy detects:", options: ["Performance regressions only", "Drift — behavior that satisfied old rules but would violate today's, or vice versa", "Storage corruption", "Billing errors"], answer: 1 },
+    { id: "502-mc-11", question: "Timestamps synchronized across components matter because:", options: ["Clocks are unreliable generally", "Reconstruction across components is impossible if their clocks tell different stories", "It is a compliance checkbox", "It reduces latency"], answer: 1 },
+    { id: "502-mc-12", question: "The record must capture model and prompt versions because:", options: ["Vendors require attribution", "The same input can yield different outputs across versions — accountability requires knowing which mind made the decision", "It aids marketing", "Versions never actually change behavior"], answer: 1 },
+    { id: "502-mc-13", question: "An audit trail that answers 'what' but not 'why' or 'under whose authority':", options: ["Passes the 5+ gate", "Fails — the gate requires the record to account for itself, not merely to exist", "Is acceptable for low-stakes systems under the gate", "Needs only a dashboard"], answer: 1 },
+    { id: "502-mc-14", question: "The 5+ gate certifies you can:", options: ["Pass a security audit", "Design the record a supervised system must emit, and judge whether a described record can answer for the system", "Write compliance policy from scratch", "Operate any audit tool"], answer: 1 },
+    { id: "502-mc-15", question: "The pairing in the 5+ gate is:", options: ["Speed and accuracy", "The capability to build supervised autonomy, and the accountability to make it answerable for itself", "Reading and writing logs", "Policy and marketing"], answer: 1 },
+  ],
+  practicals: [
+    {
+      kind: "defectHunt",
+      id: "502-gate-practical-a",
+      title: "Audit-trail architecture review",
+      instructions:
+        "Below is the audit-trail design for a hiring-screening agent. Ten spots are marked. For each: defective or clean, with the defect class if defective. Over-flagging sound design fails the gate as surely as missing a real gap.",
+      artifactTitle: "Audit trail design — hiring-screening agent",
+      artifact: [
+        { type: "paragraph", text: "[s1] Every decision is logged with the model version and prompt template used. [s2] Logs record outcomes but not the inputs the decisions were based on. [s3] Records are stored append-only and tamper-evident. [s4] Recruiter overrides are logged, with no reason field. [s5] Logs rotate and are deleted after 7 days to save storage. [s6] Each record links the decision to the policy version in force at the time. [s7] Candidate PII appears unredacted in the log analysts browse daily. [s8] The agent's self-check results are recorded; nobody is assigned to review them. [s9] Timestamps are synchronized across all components. [s10] Quarterly, a sample of records is replayed against the current policy." },
+      ],
+      spots: [
+        { id: "s1", label: "s1 — model + prompt version logged" },
+        { id: "s2", label: "s2 — outcomes logged, inputs not" },
+        { id: "s3", label: "s3 — append-only, tamper-evident" },
+        { id: "s4", label: "s4 — overrides without reason field" },
+        { id: "s5", label: "s5 — 7-day log deletion" },
+        { id: "s6", label: "s6 — decision linked to policy version" },
+        { id: "s7", label: "s7 — unredacted PII in analyst log" },
+        { id: "s8", label: "s8 — self-checks never reviewed" },
+        { id: "s9", label: "s9 — synchronized timestamps" },
+        { id: "s10", label: "s10 — quarterly policy replay" },
+      ],
+      categories: [
+        { id: "recon", label: "Reconstruction gap — the decision cannot be rebuilt from the record" },
+        { id: "acct", label: "Accountability gap — interventions exist without attributable judgment" },
+        { id: "retain", label: "Retention gap — the record does not survive long enough to answer" },
+        { id: "data", label: "Data handling — the trail itself leaks" },
+        { id: "review", label: "Open loop — records exist but nobody reviews them" },
+      ],
+      key: {
+        s1: { defective: false },
+        s2: { defective: true, category: "recon" },
+        s3: { defective: false },
+        s4: { defective: true, category: "acct" },
+        s5: { defective: true, category: "retain" },
+        s6: { defective: false },
+        s7: { defective: true, category: "data" },
+        s8: { defective: true, category: "review" },
+        s9: { defective: false },
+        s10: { defective: false },
+      },
+    },
+    {
+      kind: "booleanSet",
+      id: "502-gate-practical-b",
+      title: "Can the record answer?",
+      instructions:
+        "Given the exact record specification, decide for each question whether the record can answer it. Answer only from the specification — not from what a record 'should' contain.",
+      display: "yesno",
+      contextTitle: "Record specification — contract-review agent",
+      context: [
+        { type: "paragraph", text: "Each run record contains: the final output; a timestamp; the model version; the list of tools called with their parameters; and the ID of the policy in force. It does NOT contain: the input documents; the operator on duty; or the run's cost." },
+      ],
+      subjects: [
+        { id: "q1", label: "What did the system output?" },
+        { id: "q2", label: "When did it happen?" },
+        { id: "q3", label: "Which model version produced it?" },
+        { id: "q4", label: "Which tools were called, with what parameters?" },
+        { id: "q5", label: "Which policy governed the run?" },
+        { id: "q6", label: "What inputs was the decision based on?" },
+        { id: "q7", label: "Who was responsible on duty that day?" },
+        { id: "q8", label: "What did the run cost?" },
+        { id: "q9", label: "Which prompt template was used?" },
+        { id: "q10", label: "Which policy version, specifically?" },
+      ],
+      key: { q1: true, q2: true, q3: true, q4: true, q5: true, q6: false, q7: false, q8: false, q9: false, q10: true },
+    },
+  ],
+};

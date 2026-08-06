@@ -1,0 +1,158 @@
+// SERVER ONLY — contains answer keys. Never import from frontend code.
+import type { CourseGate } from "./gate-101-201";
+
+export const gate501: CourseGate = {
+  mcBank: [
+    { id: "501-mc-1", question: "Rung 5 begins when:", options: ["You buy an autonomy platform", "Systems act without a human in each loop — and someone must design the boundaries they act within", "The model passes an exam", "Agents become legal persons"], answer: 1 },
+    { id: "501-mc-2", question: "Autonomy is best understood as:", options: ["A switch — on or off", "A gradient — per action class, from may-do-alone through must-escalate to must-never", "A vendor setting", "A legal status"], answer: 1 },
+    { id: "501-mc-3", question: "The three bands of the autonomy gradient are:", options: ["Fast, slow, stopped", "May do alone, must escalate, must never do", "Read, write, delete", "Draft, review, publish"], answer: 1 },
+    { id: "501-mc-4", question: "Where a policy is silent on an action class, the disciplined default is:", options: ["Allow it — silence is consent", "Escalate — the unwritten case goes to a human until it is written", "Refuse permanently", "Let the agent decide"], answer: 1 },
+    { id: "501-mc-5", question: "Accountability in an autonomous system:", options: ["Transfers to the vendor", "Stays with named humans — the gradient is a delegation of action, never of ownership", "Belongs to the model", "Dissolves at scale"], answer: 1 },
+    { id: "501-mc-6", question: "A system that adjusts its own heuristics without review is:", options: ["Self-improving — the goal of autonomy", "Governance-free drift — change without a check, in whatever direction the data pushes", "Impossible in practice", "A vendor feature to enable"], answer: 1 },
+    { id: "501-mc-7", question: "Drift in an autonomous system means:", options: ["The model getting slower", "Behavior migrating away from policy as data and context change — often gradually, always eventually", "Users changing their minds", "Prices changing"], answer: 1 },
+    { id: "501-mc-8", question: "The audit question an autonomous system must always be able to answer is:", options: ["How much did we save?", "What did it do, on what basis, under which policy — reconstructable after the fact", "Is the model the latest?", "Who built it?"], answer: 1 },
+    { id: "501-mc-9", question: "A kill switch or suspension authority is:", options: ["A sign of distrust in the team", "A structural requirement — named, empowered, and able to act before an incident, not after", "Optional for small deployments", "The vendor's feature"], answer: 1 },
+    { id: "501-mc-10", question: "The must-never band exists because:", options: ["Some actions are illegal", "Some consequences cannot be undone or owned — no expected value justifies delegating them", "Vendors require it", "It simplifies the policy"], answer: 1 },
+    { id: "501-mc-11", question: "Reviewing an autonomy policy, 'the agent monitors its own compliance' is:", options: ["A strong control", "No control at all — self-attestation is not oversight", "Standard practice", "A legal requirement"], answer: 1 },
+    { id: "501-mc-12", question: "Logging every action is necessary but not sufficient because:", options: ["Logs are expensive", "A record nobody reviews is governance theater — the audit loop must close", "Logs can be deleted", "Actions matter more than records"], answer: 1 },
+    { id: "501-mc-13", question: "The strongest justification for widening the may-do-alone band is:", options: ["The system has been lucky so far", "Evidence from reviewed runs under the current band, with consequences still bounded", "A vendor's benchmark", "Pressure to save time"], answer: 1 },
+    { id: "501-mc-14", question: "The Rung 5 gate certifies you can:", options: ["Build fully autonomous companies", "Design the boundaries inside which a system may act alone — and say where it must not", "Predict model behavior", "Replace governance with technology"], answer: 1 },
+    { id: "501-mc-15", question: "'Capability paired with accountability' at Rung 5 means:", options: ["You deploy autonomy and write the policy that survives contact with it", "You deploy or you write policy — not both", "Legal signs a waiver", "You document the model card"], answer: 0 },
+  ],
+  practicals: [
+    {
+      kind: "matrix",
+      id: "501-gate-practical-a",
+      title: "The autonomy gradient",
+      instructions:
+        "Apply the stated policy exactly. Classify each action as may-do-alone, must-escalate, or must-never. Where the policy is silent, escalate — silence is not consent.",
+      contextTitle: "Support agent policy",
+      context: [
+        { type: "paragraph", text: "Refunds of $50 or less: automatic. Refunds over $50: escalate to a human. Account deletions: never — no exception exists. Password resets: automatic only after the identity check passes. Public statements of any kind: never. Internal ticket notes: automatic. The policy says nothing about exporting customer data." },
+      ],
+      actions: [
+        { id: "a1", label: "Refund $30" },
+        { id: "a2", label: "Refund $120" },
+        { id: "a3", label: "Delete a dormant account" },
+        { id: "a4", label: "Password reset, identity check passed" },
+        { id: "a5", label: "Password reset, identity check failed" },
+        { id: "a6", label: "Post an apology on the public status page" },
+        { id: "a7", label: "Add an internal note to a resolved ticket" },
+        { id: "a8", label: "Refund $50 exactly" },
+        { id: "a9", label: "Email a customer their complete account history" },
+        { id: "a10", label: "Change the public pricing page" },
+      ],
+      levels: [
+        { id: "alone", label: "May do alone" },
+        { id: "escalate", label: "Must escalate" },
+        { id: "never", label: "Must never do" },
+      ],
+      key: { a1: "alone", a2: "escalate", a3: "never", a4: "alone", a5: "escalate", a6: "never", a7: "alone", a8: "alone", a9: "escalate", a10: "never" },
+    },
+    {
+      kind: "classification",
+      id: "501-gate-practical-b",
+      title: "Permission determination",
+      instructions:
+        "Read the merchandising agent's autonomy policy, then decide for each proposed behavior whether the written policy permits it. 'Permitted' means the policy as written affirmatively allows it — including where it allows more than its authors probably intended. Prohibited, beyond stated scope, or unaddressed all count as not permitted.",
+      contextTitle: "MerchBot autonomy policy (full text)",
+      context: [
+        { type: "paragraph", text: "MerchBot may reprice clearance items up to 20% off without approval; repricing applies to clearance items only. MerchBot cannot issue refunds. All actions are logged with timestamps. MerchBot reviews its own performance weekly and adjusts its pricing heuristics accordingly. Escalation path: none specified. No drift monitoring is in place. The CFO may suspend MerchBot at any time." },
+      ],
+      items: [
+        { id: "b1", text: "Reprice a clearance item 18% off without approval" },
+        { id: "b2", text: "Reprice a clearance item 24% off" },
+        { id: "b3", text: "Reprice a full-price item 5% off" },
+        { id: "b4", text: "Reprice every clearance item 20% off at once — and again every hour, indefinitely" },
+        { id: "b5", text: "Issue a $10 refund to a complaining customer" },
+        { id: "b6", text: "Change its own pricing heuristic from 'slow movers' to 'all items with stock'" },
+        { id: "b7", text: "Log an action without a timestamp" },
+        { id: "b8", text: "Delete its own oldest action logs to save storage" },
+        { id: "b9", text: "The CFO suspends MerchBot after a pricing incident" },
+        { id: "b10", text: "Email customers announcing the new clearance prices" },
+      ],
+      categories: [
+        { id: "perm", label: "Permitted by the policy" },
+        { id: "notp", label: "Not permitted (prohibited, beyond scope, or unaddressed)" },
+      ],
+      key: { b1: "perm", b2: "notp", b3: "notp", b4: "perm", b5: "notp", b6: "perm", b7: "notp", b8: "notp", b9: "perm", b10: "notp" },
+    },
+    {
+      kind: "classification",
+      id: "501-gate-practical-c",
+      title: "Audit series — reconstruct the runs",
+      timeHintMinutes: 15,
+      instructions:
+        "You are auditing ClearanceBot, an autonomous repricing agent. Its written policy: reprice clearance items up to 20% off without approval; anything above 20% trips a guardrail that blocks the change and escalates to a human. Each run record shows: date, item class, discount the agent attempted, guardrail trips, escalation, and outcome. From the record alone, determine what happened in each run.",
+      contextTitle: "ClearanceBot run records — Series A",
+      context: [
+        { type: "paragraph", text: "Run A1 — 2026-04-06 — item class: clearance — discount attempted: 8% — guardrail trips: none — escalation: none — outcome: price updated." },
+        { type: "paragraph", text: "Run A2 — 2026-04-13 — item class: clearance — discount attempted: 11% — guardrail trips: none — escalation: none — outcome: price updated." },
+        { type: "paragraph", text: "Run A3 — 2026-04-20 — item class: clearance — discount attempted: 14% — guardrail trips: none — escalation: none — outcome: price updated." },
+        { type: "paragraph", text: "Run A4 — 2026-04-27 — item class: clearance — discount attempted: 17% — guardrail trips: none — escalation: none — outcome: price updated." },
+        { type: "paragraph", text: "Run A5 — 2026-05-04 — item class: clearance — discount attempted: 21% — guardrail trips: 1 (cap exceeded) — escalation: to human — outcome: blocked, no price change." },
+        { type: "paragraph", text: "Run A6 — 2026-05-11 — item class: clearance — discount attempted: 19% — guardrail trips: none — escalation: none — outcome: price updated." },
+      ],
+      items: [
+        { id: "a1", text: "Run A1 — 2026-04-06" },
+        { id: "a2", text: "Run A2 — 2026-04-13" },
+        { id: "a3", text: "Run A3 — 2026-04-20" },
+        { id: "a4", text: "Run A4 — 2026-04-27" },
+        { id: "a5", text: "Run A5 — 2026-05-04" },
+        { id: "a6", text: "Run A6 — 2026-05-11" },
+      ],
+      categories: [
+        { id: "shipped", label: "Shipped — repricing applied, no guardrail trip" },
+        { id: "blocked", label: "Blocked — guardrail tripped, escalated, no change shipped" },
+      ],
+      key: { a1: "shipped", a2: "shipped", a3: "shipped", a4: "shipped", a5: "blocked", a6: "shipped" },
+    },
+    {
+      kind: "booleanSet",
+      id: "501-gate-practical-d",
+      title: "Audit series — adjudicate the record",
+      display: "yesno",
+      yesLabel: "Answerable from this record",
+      noLabel: "Not answerable from this record",
+      instructions:
+        "Same record — ClearanceBot Series A (runs A1–A6 above). For each question an auditor might ask, mark whether the record alone can answer it. A record that cannot answer for itself is a governance finding.",
+      subjects: [
+        { id: "q1", label: "Which discount did the system attempt on 2026-04-20?" },
+        { id: "q2", label: "Why did the system raise its attempted discount from week to week?" },
+        { id: "q3", label: "Did any run change a price after its guardrail tripped?" },
+        { id: "q4", label: "Which human received the 2026-05-04 escalation, and what did they decide?" },
+        { id: "q5", label: "How many runs attempted a discount above the 20% cap?" },
+        { id: "q6", label: "Was the 2026-04-27 item a clearance item or a full-price item?" },
+        { id: "q7", label: "Did customers complain about the price changes?" },
+        { id: "q8", label: "After the 2026-05-04 escalation, did attempted discounts return below the cap?" },
+      ],
+      key: { q1: true, q2: false, q3: true, q4: false, q5: true, q6: true, q7: false, q8: true },
+    },
+    {
+      kind: "classification",
+      id: "501-gate-practical-e",
+      title: "Audit series — drift determination",
+      instructions:
+        "Two series of run records from two autonomous systems. For each series, determine whether drift is present and, if so, which pattern it matches — reading across the runs, not within any single one. Some series contain no drift; reporting drift reflexively fails this gate as surely as missing it. Series A is the ClearanceBot record above. Series B is below.",
+      contextTitle: "InvoiceDrafter run records — Series B (policy: send payment reminders at 7 and 14 days overdue using the fixed tone template; never send threats; escalate any invoice over 30 days to a human)",
+      context: [
+        { type: "paragraph", text: "Run B1 — 2026-04-07 — invoice 7 days overdue — action: reminder sent, standard template — trips: none — outcome: sent." },
+        { type: "paragraph", text: "Run B2 — 2026-04-14 — invoice 14 days overdue — action: reminder sent, standard template — trips: none — outcome: sent." },
+        { type: "paragraph", text: "Run B3 — 2026-04-21 — invoice 7 days overdue — action: reminder sent, standard template — trips: none — outcome: sent." },
+        { type: "paragraph", text: "Run B4 — 2026-05-02 — invoice 31 days overdue — action: escalated to human, no message sent — trips: none — outcome: escalated." },
+      ],
+      items: [
+        { id: "sa", text: "Series A — ClearanceBot (runs A1–A6 above)" },
+        { id: "sb", text: "Series B — InvoiceDrafter (runs B1–B4)" },
+      ],
+      categories: [
+        { id: "creep", label: "Drift — boundary creep: behavior migrates outward from the written limit" },
+        { id: "seep", label: "Drift — scope seep: actions spread into task types never assigned" },
+        { id: "silent", label: "Drift — silent escalation failure: trips that should escalate stop escalating" },
+        { id: "cadence", label: "Drift — cadence decay: required checks happen less often than specified" },
+        { id: "nodrift", label: "No drift present" },
+      ],
+      key: { sa: "creep", sb: "nodrift" },
+    },
+  ],
+};

@@ -1,0 +1,92 @@
+// SERVER ONLY — contains answer keys. Never import from frontend code.
+import type { CourseGate } from "./gate-101-201";
+
+export const gate402: CourseGate = {
+  mcBank: [
+    { id: "402-mc-1", question: "Prompt injection is:", options: ["A bug in the model's code", "Instructions smuggled into content the agent reads, which the agent may then obey", "A jailbreak of the chat interface", "A type of hallucination"], answer: 1 },
+    { id: "402-mc-2", question: "Indirect injection differs from direct injection because:", options: ["It is always harmless", "The hostile instructions arrive inside data — email, web pages, documents — not from the operator", "It requires physical access", "It only affects old models"], answer: 1 },
+    { id: "402-mc-3", question: "The fundamental defense against injection is:", options: ["A stronger system prompt telling the agent to resist", "Architecture — least agency, tool gating, and treating all external content as data, never as instructions", "A more recent model version", "User training alone"], answer: 1 },
+    { id: "402-mc-4", question: "Blast radius means:", options: ["The model's context size", "The total damage an agent could do if it were fully subverted — everything it can touch", "The cost of a run", "The number of users affected by an outage"], answer: 1 },
+    { id: "402-mc-5", question: "Least agency is the agent-era version of:", options: ["Least privilege — grant the minimum reach the task requires, and no more", "Zero trust networking", "Code review", "Rate limiting"], answer: 0 },
+    { id: "402-mc-6", question: "An agent that can read the inbox AND send email as the user is dangerous because:", options: ["It might send typos", "It is a complete exfiltration path — injected content can instruct it to mail out anything it can read", "Sending email is always wrong", "It uses too many tokens"], answer: 1 },
+    { id: "402-mc-7", question: "The correct treatment of content the agent reads from outside is:", options: ["Trusted if the sender looks familiar", "Data to be processed — never instructions to be followed, regardless of how it is phrased", "Trusted if it comes from a colleague", "Safe after a virus scan"], answer: 1 },
+    { id: "402-mc-8", question: "'The CFO says so in this email' should be treated by the agent as:", options: ["Authorization", "A claim inside untrusted content — authority must come through the handoff's channels, not through content", "A priority boost", "A reason to escalate automatically"], answer: 1 },
+    { id: "402-mc-9", question: "A hardcoded API token in a repository is a defect because:", options: ["It is untidy", "Credentials in code leak to anyone with repo access and to the model providers the code passes through", "Tokens expire anyway", "It slows the build"], answer: 1 },
+    { id: "402-mc-10", question: "Unmediated external actions (send, post, purchase) require:", options: ["Faster models", "A human or policy gate between the agent's proposal and the action's execution", "A disclaimer in the email", "Nothing extra — the system prompt covers it"], answer: 1 },
+    { id: "402-mc-11", question: "Forwarding attachments to an external service 'when needed' is:", options: ["A reasonable optimization", "An exfiltration path — data leaves the boundary through a channel nobody adjudicated", "Fine if the service is popular", "The vendor's responsibility"], answer: 1 },
+    { id: "402-mc-12", question: "Containment is assessed by assuming:", options: ["The model behaves perfectly", "The agent is fully subverted — then asking what it could reach. Whatever it could reach is the true blast radius", "Attackers are unskilled", "Injection is rare"], answer: 1 },
+    { id: "402-mc-13", question: "A read-only connection for lookups is good containment because:", options: ["Reads are free", "It removes the write path — a subverted agent cannot alter what it can only read", "It is faster", "It avoids logging"], answer: 1 },
+    { id: "402-mc-14", question: "The 4+ gate's pairing of capability with accountability means:", options: ["You must build agents before reviewing them", "You can both extend an agent's reach and map every path by which that reach can be abused", "You carry insurance", "You document incidents after launch"], answer: 1 },
+    { id: "402-mc-15", question: "Which is a genuine mitigation rather than a hope?", options: ["A system prompt that says 'ignore malicious instructions'", "Tool gating — the dangerous tool simply is not connected", "Asking the agent to be careful", "Monitoring vendor status pages"], answer: 1 },
+  ],
+  practicals: [
+    {
+      kind: "defectHunt",
+      id: "402-gate-practical-a",
+      title: "Containment review",
+      instructions:
+        "Below is the design for 'Mailbot', an inbox-triage agent. Ten spots are marked. For each: defective or clean, and the defect class if defective. Over-flagging clean design fails this gate as surely as missing a real hole.",
+      artifactTitle: "Mailbot design document",
+      artifact: [
+        { type: "paragraph", text: "[s1] Mailbot reads all incoming mail — including from external senders — and executes links and instructions found in email bodies. [s2] It has write access to the entire shared drive, though its filing duties cover only the receipts folder. [s3] It runs under its own service account scoped, least-privilege, to the receipts folder. [s4] It can send email as the user with no approval step. [s5] Every action is written to an append-only log. [s6] When its built-in OCR fails, it forwards attachments to an external OCR service. [s7] Instructions appearing to come from executives are treated as authorization. [s8] After three consecutive errors it halts and pages a human. [s9] Its API token is hardcoded in the project repository. [s10] Lookups use a separate read-only connection." },
+      ],
+      spots: [
+        { id: "s1", label: "s1 — executes instructions found in emails" },
+        { id: "s2", label: "s2 — write access to entire drive" },
+        { id: "s3", label: "s3 — least-privilege service account" },
+        { id: "s4", label: "s4 — sends email as user, no approval" },
+        { id: "s5", label: "s5 — append-only action log" },
+        { id: "s6", label: "s6 — attachments forwarded externally" },
+        { id: "s7", label: "s7 — executive emails treated as authorization" },
+        { id: "s8", label: "s8 — halts and pages after 3 errors" },
+        { id: "s9", label: "s9 — API token hardcoded in repo" },
+        { id: "s10", label: "s10 — read-only lookup connection" },
+      ],
+      categories: [
+        { id: "inj", label: "Injection — untrusted content treated as instructions or authority" },
+        { id: "scope", label: "Blast radius — reach beyond the task's need" },
+        { id: "exfil", label: "Exfiltration path — data can leave through an unadjudicated channel" },
+        { id: "creds", label: "Credential handling — secrets exposed" },
+      ],
+      key: {
+        s1: { defective: true, category: "inj" },
+        s2: { defective: true, category: "scope" },
+        s3: { defective: false },
+        s4: { defective: true, category: "exfil" },
+        s5: { defective: false },
+        s6: { defective: true, category: "exfil" },
+        s7: { defective: true, category: "inj" },
+        s8: { defective: false },
+        s9: { defective: true, category: "creds" },
+        s10: { defective: false },
+      },
+    },
+    {
+      kind: "booleanSet",
+      id: "402-gate-practical-b",
+      title: "Blast-radius map",
+      instructions:
+        "Assume the agent 'Ledger' is fully subverted. For each asset: is it inside Ledger's blast radius — reachable given its exact granted capabilities? Answer from the grant list, not from assumptions about what the agent would 'normally' do.",
+      display: "yesno",
+      contextTitle: "Ledger's granted capabilities",
+      context: [
+        { type: "paragraph", text: "Ledger can: read the invoices mailbox; write to the /receipts folder; call the accounting API in read-only mode; post to the #finance Slack channel. It has no other permissions, credentials, or network paths." },
+      ],
+      yesLabel: "Reachable",
+      noLabel: "Not reachable",
+      subjects: [
+        { id: "b1", label: "The invoices mailbox" },
+        { id: "b2", label: "The /receipts folder" },
+        { id: "b3", label: "Accounting records (via the API)" },
+        { id: "b4", label: "The #finance Slack channel" },
+        { id: "b5", label: "The payroll system" },
+        { id: "b6", label: "The HR mailbox" },
+        { id: "b7", label: "The production database" },
+        { id: "b8", label: "The #general Slack channel" },
+        { id: "b9", label: "Outbound email to external addresses" },
+        { id: "b10", label: "The /contracts folder" },
+      ],
+      key: { b1: true, b2: true, b3: true, b4: true, b5: false, b6: false, b7: false, b8: false, b9: false, b10: false },
+    },
+  ],
+};
