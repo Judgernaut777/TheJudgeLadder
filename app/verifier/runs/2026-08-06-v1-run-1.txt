@@ -1,0 +1,71 @@
+PASS  8 courses present — 101,201,301,302,401,402,501,502
+PASS  course 101 has modules/lessons — 4 modules, 11 lessons
+PASS  course 101 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 101 practice keyed — all practice instruments keyed
+PASS  course 101 MC bank >= 15 — 16 items
+PASS  course 101 has practicals with keys — 1 practicals
+PASS  course 201 has modules/lessons — 3 modules, 8 lessons
+PASS  course 201 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 201 practice keyed — all practice instruments keyed
+PASS  course 201 MC bank >= 15 — 15 items
+PASS  course 201 has practicals with keys — 1 practicals
+PASS  course 301 has modules/lessons — 3 modules, 11 lessons
+PASS  course 301 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 301 practice keyed — all practice instruments keyed
+PASS  course 301 MC bank >= 15 — 15 items
+PASS  course 301 has practicals with keys — 2 practicals
+PASS  course 302 has modules/lessons — 3 modules, 10 lessons
+PASS  course 302 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 302 practice keyed — all practice instruments keyed
+PASS  course 302 MC bank >= 15 — 15 items
+PASS  course 302 has practicals with keys — 2 practicals
+PASS  course 401 has modules/lessons — 5 modules, 10 lessons
+PASS  course 401 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 401 practice keyed — all practice instruments keyed
+PASS  course 401 MC bank >= 15 — 15 items
+PASS  course 401 has practicals with keys — 2 practicals
+PASS  course 402 has modules/lessons — 5 modules, 10 lessons
+PASS  course 402 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 402 practice keyed — all practice instruments keyed
+PASS  course 402 MC bank >= 15 — 15 items
+PASS  course 402 has practicals with keys — 2 practicals
+PASS  course 501 has modules/lessons — 5 modules, 9 lessons
+PASS  course 501 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 501 practice keyed — all practice instruments keyed
+PASS  course 501 MC bank >= 15 — 15 items
+PASS  course 501 has practicals with keys — 2 practicals
+PASS  course 502 has modules/lessons — 5 modules, 8 lessons
+PASS  course 502 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 502 practice keyed — all practice instruments keyed
+PASS  course 502 MC bank >= 15 — 15 items
+PASS  course 502 has practicals with keys — 2 practicals
+PASS  MC threshold 85%
+PASS  Practical threshold 90%
+PASS  scoring enforces BOTH thresholds
+PASS  no American 'Judgment' in product name
+PASS  302 revised gate
+PASS  402 revised gate
+PASS  502 revised gate
+PASS  build artifact: dist/public/index.html
+PASS  build artifact: dist/boot.js
+PASS  exists: Dockerfile
+PASS  exists: docker-compose.yml
+PASS  exists: api/scoring.ts
+PASS  exists: api/local-auth.ts
+PASS  exists: db/schema.ts
+PASS  schema table: lessonProgress
+PASS  schema table: gateAttempts
+PASS  schema table: certificates
+PASS  schema table: localCredentials
+PASS  migrations run at boot
+PASS  compose: mysql service
+PASS  compose: LOCAL_AUTH wired
+PASS  migration SQL generated
+
+ALL CHECKS PASSED
+
+--- Run metadata ---
+Date: 2026-08-06
+Criteria: verifier/v1/CRITERIA.md (with same-day amendments section)
+Commands: npm run check (0 errors) · npx vitest run (8/8 passed) · npm run build (dist/public + dist/boot.js) · node verifier/v1/check.mjs (exit 0, ALL CHECKS PASSED)
+Notes: docker daemon unavailable in this sandbox — Dockerfile/docker-compose.yml verified statically; their build steps mirror the exact commands run and passed here (npm ci, npm run build, boot-time migrate). Live DB integration (privatelink MySQL) not reachable from the sandbox; DB paths are type-checked and unit-tested, migrations generated offline (db/migrations/0000_*.sql) and applied automatically at server boot.
