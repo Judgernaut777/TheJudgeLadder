@@ -6,8 +6,10 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci
+# package*.json picks up package-lock.json when present (source exports
+# may omit it); prefer the reproducible npm ci path when it is.
+COPY package*.json ./
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 COPY . .
 # Produces dist/public (frontend) and dist/boot.js (fully bundled API server).
