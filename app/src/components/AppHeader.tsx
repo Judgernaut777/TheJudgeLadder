@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import { PROGRAM_NAME } from "@contracts/content";
+import { FRAMEWORK_SITE_URL, PROGRAM_NAME } from "@contracts/content";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -39,6 +39,14 @@ export function AppHeader() {
               {item.label}
             </NavLink>
           ))}
+          <a
+            href={FRAMEWORK_SITE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="px-2.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/60 hover:text-foreground"
+          >
+            Framework ↗
+          </a>
         </nav>
         <div className="flex items-center gap-3">
           {isLoading ? null : isAuthenticated ? (
