@@ -1,0 +1,47 @@
+# AIJL — local deployment: app + MySQL, no external services required.
+#
+#   docker compose up --build
+#
+# Then open http://localhost:3000 and create an account (LOCAL_AUTH mode).
+# Data persists in the `db_data` volume across restarts and rebuilds.
+
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: aijl
+      MYSQL_USER: aijl
+      MYSQL_PASSWORD: aijl-local-password
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uaijl", "-paijl-local-password"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      DATABASE_URL: "mysql://aijl:aijl-local-password@db:3306/aijl"
+      # Username/password accounts stored in this database (no Kimi OAuth).
+      LOCAL_AUTH: "true"
+      # Session signing secret — CHANGE THIS for any real deployment.
+      APP_SECRET: "change-me-to-a-long-random-string"
+      # Unused in LOCAL_AUTH mode; required present by the server config.
+      APP_ID: "local"
+      KIMI_AUTH_URL: "http://localhost:3000/unused-local-auth"
+      KIMI_OPEN_URL: "http://localhost:3000/unused-local-auth"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
