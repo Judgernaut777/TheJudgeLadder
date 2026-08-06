@@ -1,0 +1,5 @@
+Run: 2026-08-06 v2 run 2
+Criteria: verifier/v2/CRITERIA.md (superset of v1)
+Scope: "The Register" visual redesign — no content/structure changes; confirm criteria still green.
+Steps: npm run check (tsc 0 errors) | npm run test (24/24 pass) | npm run build (7.05s OK) | node verifier/v2/check.mjs
+Result: PASS
