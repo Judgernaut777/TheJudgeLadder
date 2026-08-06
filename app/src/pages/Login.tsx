@@ -1,136 +1,160 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
-import { PROGRAM_NAME } from "@contracts/content";
-import { AppHeader } from "@/components/AppHeader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/hooks/useAuth";
+import { Label } from "@/components/ui/label";
 import { trpc } from "@/providers/trpc";
 
-export default function Login() {
-  const [mode, setMode] = useState<"signin" | "register">("signin");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-  const { isAuthenticated, isLoading, refresh } = useAuth();
+function getOAuthUrl() {
+  const kimiAuthUrl = import.meta.env.VITE_KIMI_AUTH_URL;
+  const appID = import.meta.env.VITE_APP_ID;
+  const redirectUri = `${window.location.origin}/api/oauth/callback`;
+  // base64url: standard base64 can contain "+", which URL query decoding
+  // turns into a space, corrupting the redirect URI on the way back.
+  const state = btoa(redirectUri)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 
+  const url = new URL(`${kimiAuthUrl}/api/oauth/authorize`);
+  url.searchParams.set("client_id", appID);
+  url.searchParams.set("redirect_uri", redirectUri);
+  url.searchParams.set("response_type", "code");
+  url.searchParams.set("scope", "profile");
+  url.searchParams.set("state", state);
+
+  return url.toString();
+}
+
+/** Local (Docker) deployments: username/password against the app's own
+ *  database instead of Kimi OAuth. */
+function LocalLoginForm() {
   const utils = trpc.useUtils();
-  const signIn = trpc.localAuth.signIn.useMutation({
-    onSuccess: async () => {
-      await utils.invalidate();
-      await refresh();
-      navigate("/dashboard");
-    },
-    onError: (e) => setError(e.message),
-  });
-  const register = trpc.localAuth.register.useMutation({
-    onSuccess: async () => {
-      await utils.invalidate();
-      await refresh();
-      navigate("/dashboard");
-    },
-    onError: (e) => setError(e.message),
-  });
+  const [mode, setMode] = useState<"login" | "register">("login");
+  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  if (!isLoading && isAuthenticated) {
-    navigate("/dashboard");
-    return null;
-  }
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    if (mode === "signin") {
-      signIn.mutate({ username, password });
-    } else {
-      register.mutate({ username, password, name: name || undefined });
-    }
+  const onSuccess = async () => {
+    await utils.invalidate();
+    window.location.href = "/";
   };
+  const onError = (e: { message: string }) => setError(e.message);
 
-  const pending = signIn.isPending || register.isPending;
+  const loginMutation = trpc.localAuth.login.useMutation({ onSuccess, onError });
+  const registerMutation = trpc.localAuth.register.useMutation({ onSuccess, onError });
+  const pending = loginMutation.isPending || registerMutation.isPending;
 
   return (
-    <div className="min-h-screen bg-background">
-      <AppHeader />
-      <main className="ledger-frame max-w-md py-16">
-        <div className="double-rule-t double-rule-b py-8">
-          <p className="micro-label mb-2 text-center text-muted-foreground">
-            {PROGRAM_NAME}
+    <CardContent className="space-y-4">
+      <div className="grid grid-cols-2 gap-2">
+        <Button
+          type="button"
+          variant={mode === "login" ? "default" : "outline"}
+          onClick={() => setMode("login")}
+        >
+          Sign in
+        </Button>
+        <Button
+          type="button"
+          variant={mode === "register" ? "default" : "outline"}
+          onClick={() => setMode("register")}
+        >
+          Create account
+        </Button>
+      </div>
+      <form
+        className="space-y-3"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setError(null);
+          if (mode === "login") {
+            loginMutation.mutate({ username, password });
+          } else {
+            registerMutation.mutate({ username, password, displayName: displayName || undefined });
+          }
+        }}
+      >
+        <div className="space-y-1">
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            autoComplete="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        {mode === "register" && (
+          <div className="space-y-1">
+            <Label htmlFor="displayName">Display name (optional)</Label>
+            <Input
+              id="displayName"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+            />
+          </div>
+        )}
+        <div className="space-y-1">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            autoComplete={mode === "login" ? "current-password" : "new-password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {mode === "register" && (
+            <p className="text-xs text-muted-foreground">At least 8 characters.</p>
+          )}
+        </div>
+        {error && <p className="border border-crimson/60 bg-destructive/10 p-2 text-sm">{error}</p>}
+        <Button className="w-full" size="lg" type="submit" disabled={pending}>
+          {pending ? "Working…" : mode === "login" ? "Sign in" : "Create account"}
+        </Button>
+      </form>
+    </CardContent>
+  );
+}
+
+export default function Login() {
+  const modeQuery = trpc.localAuth.mode.useQuery(undefined, { staleTime: Infinity });
+
+  return (
+    <div
+      className="flex min-h-screen items-center justify-center bg-sage px-4 text-ink"
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(0deg, hsl(60 11% 11% / 0.05) 0 1px, transparent 1px 26px)",
+      }}
+    >
+      <Card className="double-rule-t w-full max-w-sm border-ink/40 bg-card">
+        <CardHeader className="text-center">
+          <p className="micro-label mb-1 text-muted-foreground">
+            AIJL · Examination register
           </p>
-          <h1 className="mb-8 text-center font-display text-3xl font-semibold tracking-tight">
-            {mode === "signin" ? "Sign in" : "Register"}
-          </h1>
-          <form onSubmit={submit} className="space-y-4">
-            {mode === "register" && (
-              <div className="space-y-1.5">
-                <label className="micro-label" htmlFor="name">
-                  Display name
-                </label>
-                <Input
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="As it should appear on certificates"
-                  autoComplete="name"
-                />
-              </div>
-            )}
-            <div className="space-y-1.5">
-              <label className="micro-label" htmlFor="username">
-                Username
-              </label>
-              <Input
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete="username"
-                required
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label className="micro-label" htmlFor="password">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                required
-              />
-            </div>
-            {error && (
-              <p className="border border-crimson/60 bg-destructive/10 p-3 text-sm">
-                {error}
-              </p>
-            )}
-            <Button type="submit" className="w-full" disabled={pending}>
-              {pending
-                ? "Working…"
-                : mode === "signin"
-                  ? "Sign in"
-                  : "Create account"}
-            </Button>
-          </form>
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline underline-offset-4 hover:text-foreground"
+          <CardTitle className="font-display text-2xl font-semibold tracking-tight">
+            Sign the register
+          </CardTitle>
+        </CardHeader>
+        {modeQuery.data?.local ? (
+          <LocalLoginForm />
+        ) : (
+          <CardContent>
+            <Button
+              className="w-full"
+              size="lg"
               onClick={() => {
-                setMode(mode === "signin" ? "register" : "signin");
-                setError(null);
+                window.location.href = getOAuthUrl();
               }}
             >
-              {mode === "signin"
-                ? "No account? Register"
-                : "Have an account? Sign in"}
-            </button>
-          </div>
-        </div>
-      </main>
+              Sign in with Kimi
+            </Button>
+          </CardContent>
+        )}
+      </Card>
     </div>
   );
 }
