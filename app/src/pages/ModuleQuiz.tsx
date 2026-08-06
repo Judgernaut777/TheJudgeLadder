@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
-import { getCourse, getModule } from "@contracts/content";
+import { getCourse } from "@contracts/content";
 import { AppHeader } from "@/components/AppHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,33 +9,36 @@ import { cn } from "@/lib/utils";
 import { trpc } from "@/providers/trpc";
 import NotFound from "./NotFound";
 
+/** Auto-scored module knowledge check. Practice-grade: scoring is local and
+ *  immediate; the best score is persisted for signed-in users. */
 export default function ModuleQuizPage() {
   const { slug, moduleId } = useParams<{ slug: string; moduleId: string }>();
   const course = slug ? getCourse(slug) : undefined;
-  const module = course && moduleId ? getModule(course, moduleId) : undefined;
+  const module = course?.modules.find((m) => m.id === moduleId);
   const { isAuthenticated } = useAuth();
+  const utils = trpc.useUtils();
 
   const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [checked, setChecked] = useState(false);
+  const [scored, setScored] = useState(false);
 
-  const recordMutation = trpc.progress.recordQuizScore.useMutation();
+  const recordMutation = trpc.progress.recordQuizScore.useMutation({
+    onSuccess: async () => {
+      await utils.progress.myOverview.invalidate();
+    },
+  });
 
-  if (!course || !module || !module.quiz || module.quiz.length === 0) {
-    return <NotFound />;
-  }
+  const quiz = useMemo(() => module?.quiz ?? [], [module]);
 
-  const quiz = module.quiz;
-  const correctCount = quiz.filter((q) => answers[q.id] === q.answerIndex).length;
-  const fraction = quiz.length ? correctCount / quiz.length : 1;
+  if (!course || !module || quiz.length === 0) return <NotFound />;
 
-  const check = () => {
-    setChecked(true);
+  const correctCount = quiz.filter((q) => answers[q.id] === q.answer).length;
+  const score = correctCount / quiz.length;
+  const allAnswered = quiz.every((q) => answers[q.id] !== undefined);
+
+  const submit = () => {
+    setScored(true);
     if (isAuthenticated) {
-      recordMutation.mutate({
-        courseCode: course.code,
-        moduleId: module.id,
-        score: fraction,
-      });
+      recordMutation.mutate({ courseCode: course.code, moduleId: module.id, score });
     }
   };
 
@@ -43,30 +46,32 @@ export default function ModuleQuizPage() {
     <div className="min-h-screen bg-background">
       <AppHeader />
       <main className="ledger-frame max-w-3xl py-10">
-        <p className="micro-label mb-2 text-muted-foreground">
-          <Link to={`/course/${course.slug}`} className="hover:text-foreground">
-            AIJL {course.code}
-          </Link>{" "}
-          · {module.title}
-        </p>
-        <h1 className="mb-2 font-display text-3xl font-semibold tracking-tight">
-          Knowledge check
-        </h1>
-        <p className="mb-8 text-sm text-muted-foreground">
-          Practice-grade. Your best score is kept; nothing here unlocks or blocks the
-          gate.
-        </p>
+        <div className="mb-8 space-y-2">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+            <Link to={`/course/${course.slug}`} className="hover:text-foreground hover:underline underline-offset-4">
+              AIJL {course.code} — {course.title}
+            </Link>
+            <span>/</span>
+            <span>{module.title}</span>
+          </div>
+          <h1 className="font-display text-3xl font-semibold tracking-tight">Knowledge check</h1>
+          <p className="text-sm text-muted-foreground">
+            Auto-scored, ungraded. This checks recall; the gate checks judgment — and it
+            will not show you which items were wrong until after you submit.
+          </p>
+        </div>
 
         <div className="space-y-4">
           {quiz.map((item, idx) => {
             const chosen = answers[item.id];
-            const wrong = checked && chosen !== item.answerIndex;
+            const wrong = scored && chosen !== item.answer;
+            const right = scored && chosen === item.answer;
             return (
               <Card
                 key={item.id}
                 className={cn(
-                  checked && chosen === item.answerIndex && "border-pass/50 bg-sage/20",
                   wrong && "border-crimson/60 bg-destructive/10",
+                  right && "border-pass/60 bg-sage/20",
                 )}
               >
                 <CardContent className="space-y-3 pt-5">
@@ -83,7 +88,7 @@ export default function ModuleQuizPage() {
                         className={cn(
                           "flex cursor-pointer items-start gap-2 rounded-sm border border-foreground/25 p-2 text-sm",
                           chosen === oi && "border-foreground bg-sage/20",
-                          checked && oi === item.answerIndex && "border-pass bg-sage/30",
+                          scored && "cursor-default",
                         )}
                       >
                         <input
@@ -91,18 +96,17 @@ export default function ModuleQuizPage() {
                           name={item.id}
                           className="mt-0.5"
                           checked={chosen === oi}
-                          onChange={() => {
-                            setAnswers((prev) => ({ ...prev, [item.id]: oi }));
-                            setChecked(false);
-                          }}
+                          disabled={scored}
+                          onChange={() => setAnswers((prev) => ({ ...prev, [item.id]: oi }))}
                         />
                         <span>{option}</span>
                       </label>
                     ))}
                   </div>
-                  {checked && (
-                    <p className="border-t border-ink/20 pt-2 text-xs leading-relaxed text-muted-foreground">
-                      {item.explanation}
+                  {scored && (
+                    <p className="text-sm text-muted-foreground">
+                      {wrong ? "Incorrect. " : "Correct. "}
+                      {item.explanation ?? `Answer: ${item.options[item.answer]}`}
                     </p>
                   )}
                 </CardContent>
@@ -111,20 +115,32 @@ export default function ModuleQuizPage() {
           })}
         </div>
 
-        <div className="double-rule-t mt-8 flex items-center justify-between pt-6">
-          <Button variant="secondary" onClick={check}>
-            Check answers
+        <div className="double-rule-t mt-10 flex flex-wrap items-center justify-between gap-3 pt-6">
+          <Button asChild variant="outline">
+            <Link to={`/course/${course.slug}`}>Back to course</Link>
           </Button>
-          {checked && (
-            <span
-              className={cn(
-                "font-mono text-xs font-semibold uppercase tracking-[0.1em]",
-                fraction === 1 ? "text-pass" : "text-crimson",
-              )}
-            >
-              {correctCount} of {quiz.length} correct
-            </span>
-          )}
+          <div className="flex items-center gap-3">
+            {scored && (
+              <span className={`font-mono text-sm font-semibold tabular-nums ${score >= 0.85 ? "text-pass" : "text-muted-foreground"}`}>
+                {correctCount}/{quiz.length} · {Math.round(score * 100)}%
+              </span>
+            )}
+            {scored ? (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setAnswers({});
+                  setScored(false);
+                }}
+              >
+                Try again
+              </Button>
+            ) : (
+              <Button onClick={submit} disabled={!allAnswered}>
+                Check answers
+              </Button>
+            )}
+          </div>
         </div>
       </main>
     </div>
