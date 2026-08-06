@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# AIJL Academy — The Judge Ladder webapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Self-paced web delivery of the AIJL (Artificial Intelligence Judgement Ladder)
+curriculum: 8 courses (101, 201, 301, 302, 401, 402, 501, 502), 33 modules,
+auto-scored module quizzes, auto-scored gate practicals, the AIPAB placement
+battery, progress tracking, and verifiable certificates.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui
+- **Backend**: Hono + tRPC 11 + Drizzle ORM
+- **Database**: MySQL (platform-managed online; Docker MySQL locally)
+- **Auth**: Kimi OAuth online; username/password (`LOCAL_AUTH=true`) for
+  self-hosted Docker runs
 
-## React Compiler
+## Run locally (Docker, batteries included)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+docker compose up --build
+# open http://localhost:3000 and create an account
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+App + MySQL 8.4 in one compose file; migrations apply automatically at boot;
+data persists in the `db_data` volume.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Run locally (dev server)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install        # regenerates package-lock.json if absent
+npm run dev        # http://localhost:3000
 ```
+
+Dev mode needs a MySQL `DATABASE_URL` in `.env` (see `.env.example`).
+
+## Scripts
+
+| Command            | Purpose                                  |
+| ------------------ | ---------------------------------------- |
+| `npm run dev`      | Vite dev server + API (port 3000)        |
+| `npm run build`    | Frontend bundle + bundled API server     |
+| `npm run check`    | TypeScript typecheck                     |
+| `npm run test`     | Vitest unit tests (scoring, instruments) |
+| `npm run db:generate` | Generate Drizzle migrations offline   |
+
+## Verifier
+
+`verifier/` holds the internal acceptance harness: versioned criteria
+(`v1/`, `v2/`), an append-only run index (`README.md`), and timestamped run
+records (`runs/`). Run `node verifier/v2/check.mjs` to validate the content
+and wiring contracts (v2 is a superset that executes v1 first).
+
+## Notes
+
+- `package-lock.json` is not included in this source export; `npm install`
+  (or the Dockerfile's fallback) regenerates it.
+- Gate and AIPAB answer keys are server-only (`api/content/`,
+  `api/scoring.ts`); the client receives sanitized instruments.
+- `.env` contains deployment secrets and is never committed; use
+  `.env.example` as the template.
