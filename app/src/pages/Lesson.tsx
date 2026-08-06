@@ -1,9 +1,12 @@
-import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
-import { getCourse, getLesson, getModule, lessonCount } from "@contracts/content";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router";
+import { allLessons, getCourse, getLesson } from "@contracts/content";
 import { AppHeader } from "@/components/AppHeader";
 import { ContentBlocks } from "@/components/ContentBlocks";
-import { InstrumentPlayer, type InstrumentValue } from "@/components/instruments/InstrumentPlayer";
+import {
+  InstrumentPlayer,
+  type InstrumentValue,
+} from "@/components/instruments/InstrumentPlayer";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/providers/trpc";
@@ -12,125 +15,129 @@ import NotFound from "./NotFound";
 export default function LessonPage() {
   const { slug, lessonId } = useParams<{ slug: string; lessonId: string }>();
   const course = slug ? getCourse(slug) : undefined;
-  const lesson = course && lessonId ? getLesson(course, lessonId) : undefined;
-  const module = course && lesson ? getModule(course, lesson.moduleId) : undefined;
+  const found = course && lessonId ? getLesson(course, lessonId) : undefined;
   const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
   const utils = trpc.useUtils();
 
-  const [answers, setAnswers] = useState<Record<string, InstrumentValue>>({});
-  const [completed, setCompleted] = useState(false);
-
+  const progress = trpc.progress.courseProgress.useQuery(
+    { courseCode: course?.code ?? "" },
+    { enabled: isAuthenticated && !!course },
+  );
   const completeMutation = trpc.progress.completeLesson.useMutation({
     onSuccess: async () => {
-      setCompleted(true);
-      await utils.progress.courseProgress.invalidate();
-      await utils.progress.myOverview.invalidate();
+      if (course) {
+        await utils.progress.courseProgress.invalidate({ courseCode: course.code });
+        await utils.progress.myOverview.invalidate();
+      }
     },
   });
 
-  const flatLessons = useMemo(
-    () => (course ? course.modules.flatMap((m) => m.lessons) : []),
-    [course],
-  );
+  const [practiceAnswers, setPracticeAnswers] = useState<Record<string, InstrumentValue>>({});
 
-  if (!course || !lesson || !module) return <NotFound />;
+  useEffect(() => {
+    setPracticeAnswers({});
+  }, [lessonId]);
 
-  const idx = flatLessons.findIndex((l) => l.id === lesson.id);
-  const next = flatLessons[idx + 1];
-  const practice = lesson.practice ?? [];
+  const navigation = useMemo(() => {
+    if (!course || !lessonId) return { prev: undefined, next: undefined };
+    const flat = allLessons(course);
+    const idx = flat.findIndex((pair) => pair.lesson.id === lessonId);
+    return {
+      prev: idx > 0 ? flat[idx - 1].lesson : undefined,
+      next: idx >= 0 && idx < flat.length - 1 ? flat[idx + 1].lesson : undefined,
+    };
+  }, [course, lessonId]);
+
+  if (!course || !found) return <NotFound />;
+  const { lesson, module } = found;
+  const completed = (progress.data?.lessons ?? []).some((p) => p.lessonId === lesson.id);
 
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
-      <main className="ledger-frame max-w-4xl py-10">
-        <p className="micro-label mb-2 text-muted-foreground">
-          <Link to={`/course/${course.slug}`} className="hover:text-foreground">
-            AIJL {course.code}
-          </Link>{" "}
-          · {module.title} · Lesson {idx + 1} of {lessonCount(course)}
-        </p>
-        <h1 className="mb-8 font-display text-3xl font-semibold tracking-tight">
-          {lesson.title}
-        </h1>
+      <main className="ledger-frame max-w-3xl py-10">
+        <div className="mb-8 space-y-3">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+            <Link to={`/course/${course.slug}`} className="hover:text-foreground hover:underline underline-offset-4">
+              AIJL {course.code} — {course.title}
+            </Link>
+            <span>/</span>
+            <span>{module.title}</span>
+          </div>
+          <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight">
+            {lesson.title}
+          </h1>
+          {lesson.frameworkRef && (
+            <p className="micro-label text-muted-foreground">
+              Framework · {lesson.frameworkRef}
+            </p>
+          )}
+        </div>
 
-        {/* Reading */}
-        <article className="mb-10">
-          <ContentBlocks blocks={lesson.content} />
+        <article className="space-y-4">
+          <ContentBlocks blocks={lesson.blocks} />
         </article>
 
-        {/* Practice */}
-        {practice.length > 0 && (
-          <section className="mb-10 space-y-6">
-            <div className="double-rule-t pt-6">
-              <h2 className="mb-1 font-display text-2xl font-semibold tracking-tight">
+        {lesson.practice && lesson.practice.length > 0 && (
+          <section className="mt-12 space-y-6">
+            <div className="rule-ink-t pt-6">
+              <h2 className="font-display text-2xl font-semibold tracking-tight">
                 Practice
               </h2>
-              <p className="text-sm text-muted-foreground">
-                Self-check with keys. Nothing here counts toward the gate.
+              <p className="mt-1 text-sm text-muted-foreground">
+                Ungraded. Check your answers as often as you like — the gate will not
+                be this forgiving.
               </p>
             </div>
-            {practice.map((instrument) => (
+            {lesson.practice.map((instrument) => (
               <InstrumentPlayer
                 key={instrument.id}
                 instrument={instrument}
                 mode="practice"
-                value={answers[instrument.id] ?? {}}
-                onChange={(v) => setAnswers((prev) => ({ ...prev, [instrument.id]: v }))}
+                value={practiceAnswers[instrument.id] ?? {}}
+                onChange={(v) =>
+                  setPracticeAnswers((prev) => ({ ...prev, [instrument.id]: v }))
+                }
               />
             ))}
           </section>
         )}
 
-        {/* Completion + navigation */}
-        <div className="double-rule-t flex flex-wrap items-center justify-between gap-4 pt-6">
-          <div>
-            {isAuthenticated ? (
-              completed ? (
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-pass">
-                  ✓ Recorded complete
-                </p>
+        <div className="double-rule-t mt-12 flex flex-wrap items-center justify-between gap-3 pt-6">
+          <div className="flex gap-2">
+            {navigation.prev && (
+              <Button asChild variant="outline">
+                <Link to={`/course/${course.slug}/lesson/${navigation.prev.id}`}>
+                  ← Prev
+                </Link>
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center gap-3">
+            {isAuthenticated &&
+              (completed ? (
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-pass">
+                  ✓ Completed
+                </span>
               ) : (
                 <Button
-                  variant="secondary"
                   onClick={() =>
-                    completeMutation.mutate({
-                      courseCode: course.code,
-                      lessonId: lesson.id,
-                    })
+                    completeMutation.mutate({ courseCode: course.code, lessonId: lesson.id })
                   }
                   disabled={completeMutation.isPending}
                 >
-                  Mark lesson complete
+                  Mark complete
                 </Button>
-              )
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                <Link to="/login" className="underline underline-offset-4">
-                  Sign in
-                </Link>{" "}
-                to record completion.
-              </p>
-            )}
-          </div>
-          <div className="flex gap-2">
-            {module.quiz && module.quiz.length > 0 && (
-              <Button
-                variant="outline"
-                onClick={() =>
-                  navigate(`/course/${course.slug}/module/${module.id}/quiz`)
-                }
-              >
-                Knowledge check
-              </Button>
-            )}
-            {next ? (
-              <Button onClick={() => navigate(`/course/${course.slug}/lesson/${next.id}`)}>
-                Next lesson →
+              ))}
+            {navigation.next ? (
+              <Button asChild variant="outline">
+                <Link to={`/course/${course.slug}/lesson/${navigation.next.id}`}>
+                  Next →
+                </Link>
               </Button>
             ) : (
-              <Button onClick={() => navigate(`/course/${course.slug}/gate`)}>
-                To the gate →
+              <Button asChild>
+                <Link to={`/course/${course.slug}/gate`}>To the gate →</Link>
               </Button>
             )}
           </div>
