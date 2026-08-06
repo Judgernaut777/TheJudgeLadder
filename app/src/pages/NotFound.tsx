@@ -1,22 +1,21 @@
-import { Link } from "react-router";
-import { AppHeader } from "@/components/AppHeader";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-background">
-      <AppHeader />
-      <main className="ledger-frame py-24 text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-          No such entry
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="double-rule-t double-rule-b w-full max-w-sm py-8 text-center">
+        <p className="font-display text-6xl font-semibold tracking-tight">404</p>
+        <p className="micro-label mt-2 text-muted-foreground">
+          Not entered in the register
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight">
-          This page is not in the register.
-        </h1>
-        <Button asChild className="mt-8">
+        <p className="mt-4 text-sm text-muted-foreground">
+          This page does not exist — or has not been written yet.
+        </p>
+        <Button asChild className="mt-6">
           <Link to="/">Back to the register</Link>
         </Button>
-      </main>
+      </div>
     </div>
   );
 }
