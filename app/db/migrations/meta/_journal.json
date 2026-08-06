@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1785951508716,
+      "tag": "0000_pretty_marvel_zombies",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1785975328734,
+      "tag": "0001_modern_makkari",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1785976676631,
+      "tag": "0002_typical_butterfly",
+      "breakpoints": true
+    }
+  ]
+}
