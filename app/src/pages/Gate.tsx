@@ -2,267 +2,368 @@ import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { getCourse } from "@contracts/content";
 import { AppHeader } from "@/components/AppHeader";
-import { Seal } from "@/components/Seal";
 import {
   InstrumentPlayer,
   type InstrumentValue,
 } from "@/components/instruments/InstrumentPlayer";
 import { MCBank } from "@/components/instruments/MCBank";
-import { Badge } from "@/components/ui/badge";
+import { Seal } from "@/components/Seal";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/providers/trpc";
 import NotFound from "./NotFound";
 
+interface GateDetail {
+  mcWrong: string[];
+  practicalWrong: Record<string, string[]>;
+  practicalCorrect: number;
+  practicalTotal: number;
+}
+
+type Phase =
+  | { stage: "briefing" }
+  | {
+      stage: "sitting";
+      attemptId: number;
+      mcBank: Parameters<typeof MCBank>[0]["items"];
+      practicals: Parameters<typeof InstrumentPlayer>[0]["instrument"][];
+      thresholds: { mc: number; practical: number };
+    }
+  | {
+      stage: "result";
+      passed: boolean;
+      mcScore: number;
+      practicalScore: number;
+      thresholds: { mc: number; practical: number };
+      detail: GateDetail;
+      certificate?: { serial: string; confersLabel: string } | null;
+      mcBank: Parameters<typeof MCBank>[0]["items"];
+      practicals: Parameters<typeof InstrumentPlayer>[0]["instrument"][];
+    };
+
+function pct(x: number) {
+  return `${Math.round(x * 100)}%`;
+}
+
 export default function GatePage() {
   const { slug } = useParams<{ slug: string }>();
   const course = slug ? getCourse(slug) : undefined;
-  const { isAuthenticated, isLoading } = useAuth({ redirectOnUnauthenticated: true });
-  const utils = trpc.useUtils();
+  const { isAuthenticated, isLoading: authLoading } = useAuth({
+    redirectOnUnauthenticated: true,
+  });
 
-  const [attemptId, setAttemptId] = useState<number | null>(null);
+  const [phase, setPhase] = useState<Phase>({ stage: "briefing" });
   const [mcAnswers, setMcAnswers] = useState<Record<string, unknown>>({});
   const [practicalAnswers, setPracticalAnswers] = useState<Record<string, InstrumentValue>>({});
-  const [result, setResult] = useState<{
-    passed: boolean;
-    mcScore: number;
-    practicalScore: number;
-    wrongMc: Set<string>;
-    wrongUnits: Record<string, string[]>;
-    serial?: string;
-    confersLabel?: string;
-  } | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const gateQuery = trpc.gate.forCourse.useQuery(
-    { courseCode: course?.code ?? "" },
-    { enabled: !!course },
-  );
+  const utils = trpc.useUtils();
 
   const startMutation = trpc.gate.start.useMutation({
     onSuccess: (data) => {
-      setAttemptId(data.attemptId);
-      setResult(null);
+      setStartError(null);
       setMcAnswers({});
       setPracticalAnswers({});
-      setStartError(null);
+      setPhase({
+        stage: "sitting",
+        attemptId: data.attemptId,
+        mcBank: data.gate.mcBank,
+        practicals: data.gate.practicals,
+        thresholds: data.thresholds,
+      });
+      window.scrollTo({ top: 0 });
     },
-    onError: (e) => setStartError(e.message),
+    onError: (error) => setStartError(error.message),
   });
 
   const submitMutation = trpc.gate.submit.useMutation({
     onSuccess: async (data) => {
-      setResult({
+      if (phase.stage !== "sitting") return;
+      setPhase({
+        stage: "result",
         passed: data.passed,
         mcScore: data.mcScore,
         practicalScore: data.practicalScore,
-        wrongMc: new Set(data.wrongMc),
-        wrongUnits: data.wrongUnits,
-        serial: data.certificate?.serial,
-        confersLabel: data.certificate?.confersLabel,
+        thresholds: data.thresholds,
+        detail: data.detail as GateDetail,
+        certificate: data.certificate
+          ? { serial: data.certificate.serial, confersLabel: data.certificate.confersLabel }
+          : null,
+        mcBank: phase.mcBank,
+        practicals: phase.practicals,
       });
+      window.scrollTo({ top: 0 });
       await utils.progress.myOverview.invalidate();
       await utils.gate.myAttempts.invalidate();
       await utils.certs.mine.invalidate();
     },
-    onError: (e) => setSubmitError(e.message),
   });
 
   if (!course) return <NotFound />;
-  if (isLoading || !isAuthenticated) return null;
-
-  const gate = gateQuery.data;
-  const pct = (f: number) => `${Math.round(f * 100)}%`;
+  if (authLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background">
+        <AppHeader />
+        <main className="mx-auto max-w-3xl px-4 py-16 text-muted-foreground">Loading…</main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
-      <main className="ledger-frame max-w-4xl py-10">
-        <p className="micro-label mb-1 text-muted-foreground">
-          <Link to={`/course/${course.slug}`} className="hover:text-foreground">
-            AIJL {course.code}
-          </Link>{" "}
-          — the gate
-        </p>
-        <h1 className="mb-2 font-display text-3xl font-semibold tracking-tight">
-          {course.title}
-        </h1>
-
-        <div className="double-rule-t double-rule-b my-6 py-5">
-          <p className="font-display text-lg italic leading-snug">“{course.gateText}”</p>
-          <p className="micro-label mt-2 text-muted-foreground">
-            Score ≥85% on knowledge and ≥90% on the demonstration. The register's word
-            is final.
-          </p>
+      <main className="ledger-frame max-w-3xl py-10">
+        <div className="mb-8 space-y-2">
+          <Link
+            to={`/course/${course.slug}`}
+            className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground"
+          >
+            ← AIJL {course.code} — {course.title}
+          </Link>
+          <h1 className="font-display text-3xl font-semibold tracking-tight">
+            The gate — AIJL {course.code}
+          </h1>
         </div>
 
-        {/* Before the sitting */}
-        {attemptId === null && result === null && (
-          <div className="space-y-4">
+        {phase.stage === "briefing" && (
+          <div className="double-rule-t double-rule-b space-y-5 py-6">
+            <div>
+              <p className="micro-label mb-1.5 text-muted-foreground">
+                Gate — {course.gateSource === "framework" ? "framework text" : "program-authored"}
+              </p>
+              <p className="font-display text-xl italic leading-snug">
+                “{course.gateText}”
+              </p>
+            </div>
+            <ul className="list-none space-y-2.5 text-sm leading-relaxed">
+              <li className="flex gap-3">
+                <span className="mt-[0.55em] inline-block size-1.5 shrink-0 bg-foreground/70" />
+                <span>
+                  Two parts, both auto-scored: multiple choice (pass at{" "}
+                  <strong>85%</strong> or better) and practical instruments (pass at{" "}
+                  <strong>90%</strong> or better). You must clear <strong>both</strong>.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55em] inline-block size-1.5 shrink-0 bg-foreground/70" />
+                <span>
+                  Instruments fail in two directions — a missed defect and a false alarm are
+                  the same kind of error.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55em] inline-block size-1.5 shrink-0 bg-foreground/70" />
+                <span>
+                  One submission per sitting. What you get back is which items you missed —
+                  never the keys. Retakes are unlimited; each retake is a fresh sitting.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55em] inline-block size-1.5 shrink-0 bg-foreground/70" />
+                <span>Passing issues your certificate: {course.confers}.</span>
+              </li>
+            </ul>
             {startError && (
-              <div className="border border-crimson/60 bg-destructive/10 p-3 text-sm">
+              <p className="rounded-sm border border-crimson/60 bg-destructive/10 p-3 text-sm">
                 {startError}
-              </div>
+              </p>
             )}
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {gate
-                ? `This sitting has ${gate.mcBank.length} questions and ${gate.practicals.length} demonstrations. Once you begin, finish in this session — there is no save-and-return.`
-                : "Loading the gate…"}
-            </p>
             <Button
               size="lg"
-              disabled={!gate || startMutation.isPending}
               onClick={() => startMutation.mutate({ courseCode: course.code })}
+              disabled={startMutation.isPending}
             >
-              {startMutation.isPending ? "Checking eligibility…" : "Begin the sitting"}
+              {startMutation.isPending ? "Preparing your sitting…" : "Begin the sitting"}
             </Button>
           </div>
         )}
 
-        {/* During the sitting */}
-        {attemptId !== null && result === null && gate && (
+        {phase.stage === "sitting" && (
           <div className="space-y-10">
-            <section className="space-y-4">
-              <h2 className="rule-ink-b pb-2 font-display text-2xl font-semibold tracking-tight">
-                Part 1 — Knowledge
-              </h2>
-              <MCBank items={gate.mcBank} value={mcAnswers} onChange={setMcAnswers} />
+            <section>
+              <div className="rule-ink-b mb-4 pb-2">
+                <h2 className="font-display text-2xl font-semibold tracking-tight">
+                  Part 1 — Multiple choice
+                </h2>
+                <p className="micro-label mt-1 text-muted-foreground">
+                  {phase.mcBank.length} questions · pass at {pct(phase.thresholds.mc)} or better
+                </p>
+              </div>
+              <MCBank items={phase.mcBank} value={mcAnswers} onChange={setMcAnswers} />
             </section>
-
             <section className="space-y-6">
-              <h2 className="rule-ink-b pb-2 font-display text-2xl font-semibold tracking-tight">
-                Part 2 — Demonstration
-              </h2>
-              {gate.practicals.map((practical) => (
+              <div className="rule-ink-b pb-2">
+                <h2 className="font-display text-2xl font-semibold tracking-tight">
+                  Part 2 — Practical
+                </h2>
+                <p className="micro-label mt-1 text-muted-foreground">
+                  {phase.practicals.length} instrument{phase.practicals.length === 1 ? "" : "s"} ·
+                  pass at {pct(phase.thresholds.practical)} or better across all scored items
+                </p>
+              </div>
+              {phase.practicals.map((instrument) => (
                 <InstrumentPlayer
-                  key={practical.id}
-                  instrument={practical}
+                  key={instrument.id}
+                  instrument={instrument}
                   mode="gate"
-                  value={practicalAnswers[practical.id] ?? {}}
+                  value={practicalAnswers[instrument.id] ?? {}}
                   onChange={(v) =>
-                    setPracticalAnswers((prev) => ({ ...prev, [practical.id]: v }))
+                    setPracticalAnswers((prev) => ({ ...prev, [instrument.id]: v }))
                   }
                 />
               ))}
             </section>
-
-            {submitError && (
-              <div className="border border-crimson/60 bg-destructive/10 p-3 text-sm">
-                {submitError}
+            <div className="sticky bottom-0 -mx-4 border-t bg-background/95 px-4 py-4 backdrop-blur">
+              <div className="mx-auto flex max-w-3xl items-center justify-between gap-4">
+                <p className="text-sm text-muted-foreground">
+                  Unanswered items score as wrong.
+                </p>
+                <Button
+                  size="lg"
+                  disabled={submitMutation.isPending}
+                  onClick={() => {
+                    if (phase.stage !== "sitting") return;
+                    if (
+                      window.confirm(
+                        "Submit this sitting for scoring? You cannot change answers afterwards.",
+                      )
+                    ) {
+                      submitMutation.mutate({
+                        attemptId: phase.attemptId,
+                        mcAnswers,
+                        practicalAnswers,
+                      });
+                    }
+                  }}
+                >
+                  {submitMutation.isPending ? "Scoring…" : "Submit for scoring"}
+                </Button>
               </div>
-            )}
-
-            <div className="double-rule-t flex items-center justify-between pt-6">
-              <Button variant="outline" onClick={() => setAttemptId(null)}>
-                Abandon this sitting
-              </Button>
-              <Button
-                size="lg"
-                disabled={submitMutation.isPending}
-                onClick={() =>
-                  submitMutation.mutate({
-                    attemptId,
-                    mcAnswers,
-                    practicalAnswers: practicalAnswers as Record<string, Record<string, unknown>>,
-                  })
-                }
-              >
-                {submitMutation.isPending ? "Scoring…" : "Submit the sitting"}
-              </Button>
+              {submitMutation.error && (
+                <p className="mt-2 text-sm text-red-600">{submitMutation.error.message}</p>
+              )}
             </div>
           </div>
         )}
 
-        {/* The verdict */}
-        {result && (
-          <div className="space-y-6">
-            <Card className={result.passed ? "border-pass/60 bg-sage/25" : "border-crimson/60 bg-destructive/10"}>
-              <CardContent className="space-y-4 pt-6">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="font-display text-3xl font-semibold tracking-tight">
-                      {result.passed ? "Go." : "No-Go."}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Knowledge {pct(result.mcScore)} · Demonstration{" "}
-                      {pct(result.practicalScore)}
-                    </p>
-                  </div>
-                  {result.passed && <Seal size={110} center="AIJL" sub="GATE PASSED" />}
+        {phase.stage === "result" && (
+          <div className="space-y-8">
+            <div className="double-rule-t double-rule-b space-y-5 py-6">
+              <div className="flex flex-wrap items-center gap-5">
+                {phase.passed ? (
+                  <>
+                    <Seal size={92} center="GO" sub="GATE PASSED" />
+                    <div>
+                      <p className="font-display text-3xl font-semibold tracking-tight text-pass">
+                        Go — gate passed
+                      </p>
+                      <p className="micro-label mt-1 text-muted-foreground">
+                        Entered in the register
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span className="flex size-[92px] -rotate-6 items-center justify-center border-[3px] border-crimson font-display text-xl font-bold uppercase tracking-widest text-crimson">
+                      No-Go
+                    </span>
+                    <div>
+                      <p className="font-display text-3xl font-semibold tracking-tight text-crimson">
+                        Gate not passed
+                      </p>
+                      <p className="micro-label mt-1 text-muted-foreground">
+                        Review the misses below · retake when ready
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="border border-ink/30 p-3">
+                  <p className="micro-label text-muted-foreground">Multiple choice</p>
+                  <p className="mt-1 font-mono text-2xl font-semibold">{pct(phase.mcScore)}</p>
+                  <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                    required {pct(phase.thresholds.mc)} ·{" "}
+                    {phase.mcScore >= phase.thresholds.mc ? "met" : "not met"}
+                  </p>
                 </div>
-                {result.passed && result.serial && (
-                  <div className="border-t border-ink/30 pt-4">
-                    <p className="micro-label mb-1 text-muted-foreground">Conferred</p>
-                    <p className="font-semibold">{result.confersLabel}</p>
-                    <p className="font-mono text-sm">Serial {result.serial}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Anyone can check this serial on the{" "}
-                      <Link to={`/verify/${result.serial}`} className="underline underline-offset-4">
+                <div className="border border-ink/30 p-3">
+                  <p className="micro-label text-muted-foreground">Practical</p>
+                  <p className="mt-1 font-mono text-2xl font-semibold">{pct(phase.practicalScore)}</p>
+                  <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                    required {pct(phase.thresholds.practical)} · {phase.detail.practicalCorrect}/
+                    {phase.detail.practicalTotal} scored items
+                  </p>
+                </div>
+              </div>
+              {phase.certificate && (
+                <div className="flex flex-wrap items-center justify-between gap-4 border border-pass/50 bg-sage/25 p-4">
+                  <div>
+                    <p className="font-display text-lg font-semibold">
+                      Certificate issued — {phase.certificate.confersLabel}
+                    </p>
+                    <p className="mt-1 font-mono text-xs tracking-[0.08em]">
+                      SERIAL <span className="font-semibold">{phase.certificate.serial}</span> —
+                      verifiable on the{" "}
+                      <Link to="/verify" className="underline underline-offset-4">
                         verification page
                       </Link>
-                      .
                     </p>
                   </div>
-                )}
-                {!result.passed && (
-                  <p className="text-sm">
-                    Missed answers are marked below. Review, rest, and sit again —
-                    attempt counts do not count against you.
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-
-            {gate && (
-              <div className="space-y-8 opacity-90">
-                <section className="space-y-4">
-                  <h2 className="rule-ink-b pb-2 font-display text-xl font-semibold tracking-tight">
-                    Knowledge — reviewed
-                  </h2>
-                  <MCBank
-                    items={gate.mcBank}
-                    value={mcAnswers}
-                    onChange={() => {}}
-                    wrongIds={result.wrongMc}
-                    disabled
-                  />
-                </section>
-                <section className="space-y-6">
-                  <h2 className="rule-ink-b pb-2 font-display text-xl font-semibold tracking-tight">
-                    Demonstration — reviewed
-                  </h2>
-                  {gate.practicals.map((practical) => (
-                    <InstrumentPlayer
-                      key={practical.id}
-                      instrument={practical}
-                      mode="gate"
-                      value={practicalAnswers[practical.id] ?? {}}
-                      onChange={() => {}}
-                      wrongIds={new Set(result.wrongUnits[practical.id] ?? [])}
-                    />
-                  ))}
-                </section>
-              </div>
-            )}
-
-            <div className="flex gap-2">
-              <Button asChild variant="outline">
-                <Link to={`/course/${course.slug}`}>Back to the course</Link>
-              </Button>
-              {!result.passed && (
-                <Button onClick={() => { setResult(null); setAttemptId(null); }}>
-                  Sit again
-                </Button>
+                  <Seal size={64} center="AIJL" sub="REGISTERED" />
+                </div>
               )}
+              {!phase.passed && (
+                <p className="text-sm text-muted-foreground">
+                  Review your misses below — wrong items are marked. Retake whenever you are
+                  ready; every retake is a fresh sitting.
+                </p>
+              )}
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setPhase({ stage: "briefing" });
+                    setStartError(null);
+                  }}
+                >
+                  {phase.passed ? "Back to briefing" : "Retake the gate"}
+                </Button>
+                <Button asChild variant="ghost">
+                  <Link to={`/course/${course.slug}`}>Back to course</Link>
+                </Button>
+              </div>
             </div>
+
+            <section>
+              <h2 className="rule-ink-b mb-4 pb-2 font-display text-xl font-semibold tracking-tight">
+                Your sitting — multiple choice
+              </h2>
+              <MCBank
+                items={phase.mcBank}
+                value={mcAnswers}
+                onChange={() => undefined}
+                wrongIds={new Set(phase.detail.mcWrong)}
+                disabled
+              />
+            </section>
+            <section className="space-y-6">
+              <h2 className="rule-ink-b pb-2 font-display text-xl font-semibold tracking-tight">
+                Your sitting — practical
+              </h2>
+              {phase.practicals.map((instrument) => (
+                <InstrumentPlayer
+                  key={instrument.id}
+                  instrument={instrument}
+                  mode="gate"
+                  value={practicalAnswers[instrument.id] ?? {}}
+                  onChange={() => undefined}
+                  wrongIds={new Set(phase.detail.practicalWrong[instrument.id] ?? [])}
+                />
+              ))}
+            </section>
           </div>
         )}
       </main>
     </div>
   );
 }
-
-// Badge kept imported for future per-part chips
-void Badge;
