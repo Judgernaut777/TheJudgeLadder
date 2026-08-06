@@ -1,0 +1,131 @@
+Verifier run record — v2, run 1
+Date: 2026-08-06 00:38:27 UTC
+Criteria: verifier/v2/CRITERIA.md (superset of v1)
+
+== npm run check ==
+> my-app@0.0.0 check
+> tsc -b
+
+check exit: 0
+
+== npm run test ==
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m24 passed[39m[22m[90m (24)[39m
+
+== npm run build ==
+✓ built in 7.22s
+  dist/boot.js  2.7mb ⚠️
+⚡ Done in 357ms
+
+== node verifier/v2/check.mjs ==
+── v1 criteria ──
+PASS  8 courses present — 101,201,301,302,401,402,501,502
+PASS  course 101 has modules/lessons — 4 modules, 11 lessons
+PASS  course 101 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 101 practice keyed — all practice instruments keyed
+PASS  course 101 MC bank >= 15 — 16 items
+PASS  course 101 has practicals with keys — 1 practicals
+PASS  course 201 has modules/lessons — 3 modules, 8 lessons
+PASS  course 201 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 201 practice keyed — all practice instruments keyed
+PASS  course 201 MC bank >= 15 — 15 items
+PASS  course 201 has practicals with keys — 2 practicals
+PASS  course 301 has modules/lessons — 3 modules, 11 lessons
+PASS  course 301 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 301 practice keyed — all practice instruments keyed
+PASS  course 301 MC bank >= 15 — 15 items
+PASS  course 301 has practicals with keys — 2 practicals
+PASS  course 302 has modules/lessons — 3 modules, 10 lessons
+PASS  course 302 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 302 practice keyed — all practice instruments keyed
+PASS  course 302 MC bank >= 15 — 15 items
+PASS  course 302 has practicals with keys — 2 practicals
+PASS  course 401 has modules/lessons — 5 modules, 10 lessons
+PASS  course 401 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 401 practice keyed — all practice instruments keyed
+PASS  course 401 MC bank >= 15 — 15 items
+PASS  course 401 has practicals with keys — 2 practicals
+PASS  course 402 has modules/lessons — 5 modules, 10 lessons
+PASS  course 402 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 402 practice keyed — all practice instruments keyed
+PASS  course 402 MC bank >= 15 — 15 items
+PASS  course 402 has practicals with keys — 2 practicals
+PASS  course 501 has modules/lessons — 5 modules, 9 lessons
+PASS  course 501 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 501 practice keyed — all practice instruments keyed
+PASS  course 501 MC bank >= 15 — 15 items
+PASS  course 501 has practicals with keys — 5 practicals
+PASS  course 502 has modules/lessons — 5 modules, 8 lessons
+PASS  course 502 no thin lessons — all lessons >= 2 paragraphs
+PASS  course 502 practice keyed — all practice instruments keyed
+PASS  course 502 MC bank >= 15 — 15 items
+PASS  course 502 has practicals with keys — 2 practicals
+PASS  MC threshold 85%
+PASS  Practical threshold 90%
+PASS  scoring enforces BOTH thresholds
+PASS  no American 'Judgment' in product name
+PASS  302 revised gate
+PASS  402 revised gate
+PASS  502 revised gate
+PASS  build artifact: dist/public/index.html
+PASS  build artifact: dist/boot.js
+PASS  exists: Dockerfile
+PASS  exists: docker-compose.yml
+PASS  exists: api/scoring.ts
+PASS  exists: api/local-auth.ts
+PASS  exists: db/schema.ts
+PASS  schema table: lessonProgress
+PASS  schema table: gateAttempts
+PASS  schema table: certificates
+PASS  schema table: localCredentials
+PASS  migrations run at boot
+PASS  compose: mysql service
+PASS  compose: LOCAL_AUTH wired
+PASS  migration SQL generated
+
+ALL CHECKS PASSED
+PASS  v1 suite
+── v2 criteria ──
+PASS  course 101: every module has a >=4-item keyed quiz — 4/4 modules
+PASS  course 201: every module has a >=4-item keyed quiz — 3/3 modules
+PASS  course 301: every module has a >=4-item keyed quiz — 3/3 modules
+PASS  course 302: every module has a >=4-item keyed quiz — 3/3 modules
+PASS  course 401: every module has a >=4-item keyed quiz — 5/5 modules
+PASS  course 402: every module has a >=4-item keyed quiz — 5/5 modules
+PASS  course 501: every module has a >=4-item keyed quiz — 5/5 modules
+PASS  course 502: every module has a >=4-item keyed quiz — 5/5 modules
+PASS  201 gate: >=2 practicals — tableFill,classification
+PASS  201 gate: 2A is tableFill with freeText over 5 inputs — rows: 5
+PASS  201 gate: all practicals keyed
+PASS  501 gate: >=4 practicals (2A x2 + 2B series) — 501-gate-practical-a,501-gate-practical-b,501-gate-practical-c,501-gate-practical-d,501-gate-practical-e
+PASS  501 gate: has matrix construct
+PASS  501 gate: 2A critique is permission determination
+PASS  501 gate: 2B includes answerability booleanSet
+PASS  501 gate: drift determination includes explicit no-drift category
+PASS  501 gate: all practicals keyed
+PASS  AIPAB: 8 sections in fixed order — 101,201,301,302,401,402,501,502
+PASS  AIPAB 101: >=8 keyed MC + keyed practical — 8 MC, practical: classification
+PASS  AIPAB 201: >=8 keyed MC + keyed practical — 8 MC, practical: classification
+PASS  AIPAB 301: >=8 keyed MC + keyed practical — 8 MC, practical: disposition
+PASS  AIPAB 302: >=8 keyed MC + keyed practical — 8 MC, practical: defectHunt
+PASS  AIPAB 401: >=8 keyed MC + keyed practical — 8 MC, practical: disposition
+PASS  AIPAB 402: >=8 keyed MC + keyed practical — 8 MC, practical: booleanSet
+PASS  AIPAB 501: >=8 keyed MC + keyed practical — 8 MC, practical: matrix
+PASS  AIPAB 502: >=8 keyed MC + keyed practical — 8 MC, practical: booleanSet
+PASS  AIPAB: 240-minute clock
+PASS  AIPAB: fixed section order constant
+PASS  AIPAB: 302 branch-lock rule
+PASS  AIPAB: placement substitutes prerequisites
+PASS  gate router consults placement for prerequisites
+PASS  schema table: quizScores
+PASS  schema table: aipabAttempts
+PASS  migration SQL covers quiz_scores + aipab_attempts
+PASS  tests: freeText normalization covered
+PASS  tests: AIPAB advancement/placement covered
+PASS  route: /aipab
+PASS  route: module quiz
+PASS  AIPAB page exists
+PASS  ModuleQuiz page exists
+
+ALL CHECKS PASSED (v1 + v2)
+verifier exit: 0
