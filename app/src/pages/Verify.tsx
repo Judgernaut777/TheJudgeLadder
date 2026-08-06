@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useParams } from "react-router";
 import { AppHeader } from "@/components/AppHeader";
 import { Seal } from "@/components/Seal";
 import { Button } from "@/components/ui/button";
@@ -7,73 +6,73 @@ import { Input } from "@/components/ui/input";
 import { trpc } from "@/providers/trpc";
 
 export default function Verify() {
-  const { serial: serialParam } = useParams<{ serial: string }>();
-  const [serial, setSerial] = useState(serialParam ?? "");
-  const [query, setQuery] = useState(serialParam ?? "");
+  const [serial, setSerial] = useState("");
+  const [submitted, setSubmitted] = useState<string | null>(null);
 
-  const lookup = trpc.certs.verify.useQuery(
-    { serial: query },
-    { enabled: query.trim().length > 0, retry: false },
+  const result = trpc.certs.verify.useQuery(
+    { serial: submitted ?? "" },
+    { enabled: !!submitted },
   );
-
-  const result = lookup.data;
 
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
-      <main className="ledger-frame max-w-2xl py-16">
-        <h1 className="mb-2 text-center font-display text-3xl font-semibold tracking-tight">
-          Verify a certificate
-        </h1>
-        <p className="mb-10 text-center text-sm text-muted-foreground">
-          Enter the serial printed on an AIJL certificate. No sign-in required.
+      <main className="ledger-frame max-w-2xl py-10">
+        <h1 className="mb-2 font-display text-3xl font-semibold tracking-tight">Verify a certificate</h1>
+        <p className="mb-8 text-sm text-muted-foreground">
+          Enter the serial printed on an AIJL certificate (e.g. AIJL-101-XXXXXXXX).
         </p>
         <form
-          className="flex gap-2"
+          className="mb-8 flex gap-2"
           onSubmit={(e) => {
             e.preventDefault();
-            setQuery(serial.trim());
+            if (serial.trim().length >= 4) setSubmitted(serial.trim());
           }}
         >
           <Input
             value={serial}
-            onChange={(e) => setSerial(e.target.value)}
-            placeholder="AIJL-201-…"
+            onChange={(e) => {
+              setSerial(e.target.value);
+              setSubmitted(null);
+            }}
+            placeholder="AIJL-101-…"
             className="font-mono"
           />
-          <Button type="submit" disabled={lookup.isFetching}>
-            Check
+          <Button type="submit" disabled={result.isFetching}>
+            {result.isFetching ? "Checking…" : "Verify"}
           </Button>
         </form>
 
-        {query && (
-          <div className="mt-10">
-            {lookup.isFetching ? (
-              <p className="text-center font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                Checking the register…
-              </p>
-            ) : result?.valid ? (
-              <div className="double-rule-t double-rule-b flex flex-wrap items-center justify-between gap-6 bg-card px-6 py-8">
-                <div className="space-y-1">
-                  <p className="micro-label text-pass">Verified — on the register</p>
-                  <h2 className="font-display text-2xl font-semibold tracking-tight">
-                    {result.holderName}
-                  </h2>
-                  <p className="text-sm font-medium">{result.confersLabel}</p>
-                  <p className="text-sm text-muted-foreground">{result.courseTitle}</p>
-                  <p className="pt-2 font-mono text-xs text-muted-foreground">
-                    {result.serial} · issued{" "}
-                    {new Date(result.issuedAt).toLocaleDateString()}
+        {submitted && result.data && (
+          <div className="double-rule-t double-rule-b py-6">
+            {result.data.found ? (
+              <div className="flex flex-wrap items-center justify-between gap-6">
+                <div className="space-y-1.5 text-sm">
+                  <p className="micro-label text-pass">Valid — entered in the register</p>
+                  <p className="font-mono text-xs">{submitted}</p>
+                  <p className="pt-2 font-display text-lg font-semibold">
+                    {result.data.confersLabel}
+                  </p>
+                  <p>
+                    <span className="text-muted-foreground">Holder:</span> {result.data.holderName}
+                  </p>
+                  <p>
+                    <span className="text-muted-foreground">Course:</span> AIJL{" "}
+                    {result.data.courseCode} — {result.data.courseTitle}
+                  </p>
+                  <p>
+                    <span className="text-muted-foreground">Issued:</span>{" "}
+                    {new Date(result.data.issuedAt).toLocaleDateString()}
                   </p>
                 </div>
                 <Seal size={96} center="AIJL" sub="VERIFIED" />
               </div>
             ) : (
-              <div className="double-rule-t double-rule-b px-6 py-8 text-center">
-                <p className="micro-label text-crimson">Not on the register</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  No certificate carries this serial. Check the characters and try
-                  again — or treat the claim as unverified.
+              <div>
+                <p className="micro-label text-crimson">Not found in the register</p>
+                <p className="mt-1 font-mono text-xs">{submitted}</p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  No certificate carries this serial. Check the characters and try again.
                 </p>
               </div>
             )}
